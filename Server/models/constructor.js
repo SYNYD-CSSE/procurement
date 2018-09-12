@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
 
 
-const contarctorSchema = new mongoose.Schema({
+const constructorSchema = new mongoose.Schema({
 
     employeeId: {
         type: String,
@@ -21,4 +21,4 @@ const contarctorSchema = new mongoose.Schema({
 
 UserSchema.plugin(mongooseUniqueValidator);
 
-module.exports = mongoose.model("Contractor", contarctorSchema);
+module.exports = mongoose.model("Constructor", constructorSchema);

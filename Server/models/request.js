@@ -8,6 +8,7 @@ const requestSchema = new mongoose.Schema({
     },
     orderDate: {
         type: String,
+        default: Date.now(),
         required: true
     },
     itemList: [{
@@ -18,17 +19,13 @@ const requestSchema = new mongoose.Schema({
             type: Number
         }
     }],
+
     status: {
-        approved: {
-            type: String
-        },
-        declined: {
-            type: String
-        },
-        placed: {
-            type: String
-        },
-    }
+        type: String,
+        required: true,
+        enum: ['Approved', 'Declined', 'Placed'],
+        default: 'Placed'
+    },
 });
 
 UserSchema.plugin(mongooseUniqueValidator);
