@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
 
-const supplierSchema = new mongoose.Schema({
+const supplierAccSchema = new mongoose.Schema({
     supplierId: {
         type: String,
         required: true
@@ -21,4 +21,4 @@ const supplierSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model("supplier", supplierSchema);
+module.exports = mongoose.model("supplierAcc", supplierAccSchema);
