@@ -3,8 +3,11 @@ const path = require("path");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const passport = require("passport");
+//const passport = require("passport");
 const config = require("./config/database");
+
+
+const Request = require("./routes/api/requestRoute")
 
 
 mongoose.connect(config.database);
@@ -19,7 +22,7 @@ mongoose.connection.on("error", err => {
 const app = express();
 
 //passport middleware
-app.use(passport.initialize());
+//app.use(passport.initialize());
 
 //passport config
 //  
@@ -33,6 +36,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
 
+
+app.use("/", Request);
 app.get("/sample", (req, res) => {
   res.send("Hello World");
 });

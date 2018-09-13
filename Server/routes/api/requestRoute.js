@@ -5,9 +5,12 @@ const Request = require("../../models/request");
 router.post("/order", (req, res, next) => {
 
     const request = new Request({
-        quantity: req.body.quantity,
-        name: req.body.name,
-        email: req.body.email,
+        orderId: req.body.orderId,
+        itemList: [{
+            quantity: req.body.quantity,
+            name: req.body.name
+        }],
+
         status: req.body.status
 
     });
@@ -27,18 +30,18 @@ router.post("/order", (req, res, next) => {
 
 
 
-router.get(
-    "/current",
-    passport.authenticate("jwt", {
-        session: false
-    }),
-    (req, res) => {
-        res.json({
-            id: req.user._id,
-            firstName: req.user.firstName,
-            email: req.user.email
-        });
-    }
-);
+// router.get(
+//     "/current",
+//     passport.authenticate("jwt", {
+//         session: false
+//     }),
+//     (req, res) => {
+//         res.json({
+//             id: req.user._id,
+//             firstName: req.user.firstName,
+//             email: req.user.email
+//         });
+//     }
+// );
 
 module.exports = router;

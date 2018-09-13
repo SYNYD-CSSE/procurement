@@ -19,6 +19,6 @@ const constructorSchema = new mongoose.Schema({
     }
 });
 
-UserSchema.plugin(mongooseUniqueValidator);
+// UserSchema.plugin(mongooseUniqueValidator);
 
 module.exports = mongoose.model("Constructor", constructorSchema);

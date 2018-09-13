@@ -28,6 +28,5 @@ const requestSchema = new mongoose.Schema({
     },
 });
 
-UserSchema.plugin(mongooseUniqueValidator);
 
 module.exports = mongoose.model("Request", requestSchema);
