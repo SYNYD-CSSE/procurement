@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const config = require("./config/database");
 
-const userRoutes = require("./routes/api/user");
 
 mongoose.connect(config.database);
 
