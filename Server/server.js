@@ -22,7 +22,7 @@ const app = express();
 app.use(passport.initialize());
 
 //passport config
-require("./config/passport")(passport);
+//  
 
 app.use(bodyParser.urlencoded({
   extended: false
