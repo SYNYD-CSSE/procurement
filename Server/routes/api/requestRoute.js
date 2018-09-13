@@ -5,9 +5,10 @@ const Request = require("../../models/request");
 router.post("/order", (req, res, next) => {
 
     const request = new Request({
-        itemList: req.body.orderDate,
-        lastName: req.body.lastName,
+        quantity: req.body.quantity,
+        name: req.body.name,
         email: req.body.email,
+        status: req.body.status
 
     });
     request.save((err, result) => {
@@ -18,7 +19,7 @@ router.post("/order", (req, res, next) => {
             });
         }
         res.status(201).json({
-            message: "User Created",
+            message: "Order Placed",
             obj: result
         });
     });
