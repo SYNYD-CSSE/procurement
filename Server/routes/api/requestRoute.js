@@ -30,24 +30,34 @@ router.post("/add/item", (req, res, next) => {
 
 
 
-router.post("/order", (req, res, next) => {
+router.put("/order/item/add", (req, res, next) => {
     try {
-        const request = new Request({
-            orderId: req.body.orderId,
-            itemList: request._id,
-            status: req.body.status
-        });
-        request.save((err, result) => {
+        Item.findOne({
+            _id: req.body.itemId
+        }, (err, item) => {
             if (err) {
                 return res.status(500).json({
                     title: "An error occured",
                     error: err
                 });
+            } else {
+                Request.update({
+                    _id: req.body.orderId
+                }, {
+                    $addToSet: {
+                        itemList: item._id
+                    }
+                }, (err, order) => {
+                    if (err) {
+                        return res.status(500).json({
+                            title: "An error occured",
+                            error: err
+                        });
+                    } else {
+                        res.send(order);
+                    }
+                });
             }
-            res.status(201).json({
-                message: "Order Placed",
-                obj: result
-            });
         });
     } catch (error) {
         console.log(error);
