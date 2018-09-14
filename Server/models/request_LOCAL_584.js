@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
-const ObjectId = mongoose.Schema.Types.ObjectId
 
 const requestSchema = new mongoose.Schema({
     orderId: {
@@ -13,8 +12,12 @@ const requestSchema = new mongoose.Schema({
         required: true
     },
     itemList: [{
-        type: ObjectId,
-        ref: "Item"
+        name: {
+            type: String
+        },
+        quantity: {
+            type: Number
+        }
     }],
 
     status: {
@@ -25,5 +28,6 @@ const requestSchema = new mongoose.Schema({
     },
 });
 
+UserSchema.plugin(mongooseUniqueValidator);
 
 module.exports = mongoose.model("Request", requestSchema);
