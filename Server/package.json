@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "client-install": "npm install --prefix client",
-    "start": "nodemon ./build/server.js",
-    "server": "nodemon server.js ",
+    "start": "tsc && node ./build/server.js",
+    "server": "nodemon ./build/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "prod": "npm run build && npm run start"
