@@ -1,12 +1,11 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+
 const path = require("path");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 //const passport = require("passport");
 const config = require("./config/database");
-
-
 const Request = require("./routes/api/requestRoute")
 
 
