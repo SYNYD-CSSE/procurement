@@ -1,12 +1,13 @@
-const express = require("express");
-const path = require("path");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const passport = require("passport");
-const config = require("./config/database");
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
 
-const userRoutes = require("./routes/api/user");
+const path = require("path");
+//const passport = require("passport");
+const config = require("./config/database");
+const Request = require("./routes/api/requestRoute")
+
 
 mongoose.connect(config.database);
 
@@ -20,10 +21,10 @@ mongoose.connection.on("error", err => {
 const app = express();
 
 //passport middleware
-app.use(passport.initialize());
+//app.use(passport.initialize());
 
 //passport config
-require("./config/passport")(passport);
+//  
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -34,6 +35,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
 
+
+app.use("/", Request);
 app.get("/sample", (req, res) => {
   res.send("Hello World");
 });
