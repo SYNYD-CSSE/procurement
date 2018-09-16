@@ -6,8 +6,8 @@ import mongoose from "mongoose";
 const path = require("path");
 //const passport = require("passport");
 const config = require("./config/database");
-const Request = require("./routes/api/requestRoute")
-
+const Order = require("./routes/api/orders");
+const Item = require("./routes/api/items");
 
 mongoose.connect(config.database);
 
@@ -24,19 +24,22 @@ const app = express();
 //app.use(passport.initialize());
 
 //passport config
-//  
+//
 
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
 
+app.use("/items", Item);
+app.use("/orders", Order);
 
-app.use("/", Request);
 app.get("/sample", (req, res) => {
   res.send("Hello World");
 });
