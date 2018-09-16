@@ -32,6 +32,7 @@ app.use(cors_1.default());
 app.use(express_1.default.static(path.join(__dirname, "public")));
 const port = 5000;
 app.use("/items", Item);
+app.use("/orders", Order);
 app.get("/sample", (req, res) => {
     res.send("Hello World");
 });

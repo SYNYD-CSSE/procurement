@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const port = 5000;
 
 app.use("/items", Item);
+app.use("/orders", Order);
 
 app.get("/sample", (req, res) => {
   res.send("Hello World");
