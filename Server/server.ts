@@ -6,7 +6,8 @@ import mongoose from "mongoose";
 const path = require("path");
 //const passport = require("passport");
 const config = require("./config/database");
-const Request = require("./routes/api/requestRoute")
+const Request = require("./routes/api/requestRoute");
+const Payment = require("./routes/api/paymentRoute");
 
 
 mongoose.connect(config.database);
@@ -37,8 +38,11 @@ const port = 5000;
 
 
 app.use("/", Request);
+app.use("/", Payment);
+
+
 app.get("/sample", (req, res) => {
-  res.send("Hello World");
+  res.send("hello World");
 });
 
 app.listen(port, () => {
