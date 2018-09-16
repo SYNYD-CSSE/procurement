@@ -10,7 +10,8 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const path = require("path");
 //const passport = require("passport");
 const config = require("./config/database");
-const Request = require("./routes/api/requestRoute");
+const Order = require("./routes/api/orders");
+const Item = require("./routes/api/items");
 mongoose_1.default.connect(config.database);
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
@@ -22,7 +23,7 @@ const app = express_1.default();
 //passport middleware
 //app.use(passport.initialize());
 //passport config
-//  
+//
 app.use(body_parser_1.default.urlencoded({
     extended: false
 }));
@@ -30,7 +31,8 @@ app.use(body_parser_1.default.json());
 app.use(cors_1.default());
 app.use(express_1.default.static(path.join(__dirname, "public")));
 const port = 5000;
-app.use("/", Request);
+app.use("/items", Item);
+app.use("/orders", Order);
 app.get("/sample", (req, res) => {
     res.send("Hello World");
 });
