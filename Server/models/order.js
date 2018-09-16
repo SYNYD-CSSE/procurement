@@ -4,11 +4,16 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 const orderSchema = new mongoose.Schema({
     orderId: {
         type: String,
-        //  required: true
+        required: true
+    },
+    constructorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Constructor",
+        // required: true
     },
     orderDate: {
         type: Date,
-        default: Date.now,
+        default: Date.now
         //    required: true
     },
     items: [{
@@ -26,8 +31,8 @@ const orderSchema = new mongoose.Schema({
     status: {
         type: String,
         //  required: true,
-        enum: ['Approved', 'Declined', 'Placed'],
-        default: 'Placed'
+        enum: ['Approved', 'Declined', 'Pending', 'Placed'],
+        default: 'Pending'
     },
 });
 

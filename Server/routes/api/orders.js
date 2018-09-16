@@ -4,7 +4,7 @@ const Order = require("../../models/order");
 const Item = require("../../models/item");
 
 
-
+//ADD ORDER
 router.post("/", (req, res, next) => {
     try {
         const order = new Order({
@@ -31,7 +31,7 @@ router.post("/", (req, res, next) => {
 });
 
 
-
+//GET ALL ORDERS
 router.get("/", (req, res, next) => {
 
     Order

@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Request = require("../../models/order");
 const Item = require("../../models/item");
 
 
-//GET ALL
+//GET ALL ITEMS
 router.get("/", (req, res, next) => {
     try {
-
-        Item.find(function (err, requset) {
+        Item.find((err, requset) => {
             if (err) return next(err);
             res.json(requset);
         });
@@ -18,7 +16,7 @@ router.get("/", (req, res, next) => {
 });
 
 
-
+//ADD ITEMS
 router.post("/", (req, res, next) => {
     try {
         const item = new Item({
