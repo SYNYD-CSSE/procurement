@@ -7,6 +7,20 @@ export default {
     },
     {
       title: true,
+      name: 'Procurement System',
+      wrapper: {            // optional wrapper object
+        element: '',        // required valid HTML5 element tag
+        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+      },
+      class: ''             // optional class names space delimited list for title item ex: "text-center"
+    },
+    {
+      name: 'Payment',
+      url: '/payment',
+      icon: 'icon-basket',
+    },
+    {
+      title: true,
       name: 'Theme',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag

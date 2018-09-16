@@ -1,19 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const Order = require("../../models/order");
+const Request = require("../../models/request");
 const Item = require("../../models/item");
 
 
 
-router.post("/", (req, res, next) => {
+router.post("/add/item", (req, res, next) => {
     try {
-        const order = new Order({
-            orderId: req.body.odrderId,
+        const item = new Item({
+            name: req.body.name,
             quantity: req.body.quantity,
-            status: req.body.status,
-            items: req.body.itemId
         });
-        order.save((err, result) => {
+        item.save((err, result) => {
             if (err) {
                 return res.status(500).json({
                     title: "An error occured",
@@ -32,20 +30,50 @@ router.post("/", (req, res, next) => {
 
 
 
-router.get("/", (req, res, next) => {
+router.put("/order/item/add", (req, res, next) => {
+    try {
+        Item.findOne({
+            _id: req.body.itemId
+        }, (err, item) => {
+            if (err) {
+                return res.status(500).json({
+                    title: "An error occured",
+                    error: err
+                });
+            } else {
+                Request.update({
+                    _id: req.body.orderId
+                }, {
+                    $addToSet: {
+                        itemList: item._id
+                    }
+                }, (err, order) => {
+                    if (err) {
+                        return res.status(500).json({
+                            title: "An error occured",
+                            error: err
+                        });
+                    } else {
+                        res.send(order);
+                    }
+                });
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
-    Order
-        .find()
-        .populate('items', '_id id name')
-        .then(result => {
-            res.status(200)
-                .json(result);
-        })
+router.get("/order", (req, res, next) => {
+    try {
 
-        .catch(error => {
-            console.log(error);
-        })
-
+        Request.find(function (err, requset) {
+            if (err) return next(err);
+            res.json(requset);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 
