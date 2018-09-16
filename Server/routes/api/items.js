@@ -40,4 +40,19 @@ router.post("/", (req, res, next) => {
     }
 });
 
+//Update Item
+
+
+
+//REMOVE ITEMS
+router.delete('/:id', (req, res, next) => {
+    Item.remove({
+        _id: req.params.id
+    }, (err, item) => {
+        if (err) return res.json(err);
+        res.json(item);
+    });
+});
+
+
 module.exports = router;
