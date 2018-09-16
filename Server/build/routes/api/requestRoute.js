@@ -1,10 +1,8 @@
+"use strict";
 const express = require("express");
 const router = express.Router();
 const Request = require("../../models/request");
 const Item = require("../../models/item");
-
-
-
 router.post("/add/item", (req, res, next) => {
     try {
         const item = new Item({
@@ -23,13 +21,11 @@ router.post("/add/item", (req, res, next) => {
                 result
             });
         });
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
     }
 });
-
-
-
 router.put("/order/item/add", (req, res, next) => {
     try {
         Item.findOne({
@@ -40,7 +36,8 @@ router.put("/order/item/add", (req, res, next) => {
                     title: "An error occured",
                     error: err
                 });
-            } else {
+            }
+            else {
                 Request.update({
                     _id: req.body.orderId
                 }, {
@@ -53,28 +50,29 @@ router.put("/order/item/add", (req, res, next) => {
                             title: "An error occured",
                             error: err
                         });
-                    } else {
+                    }
+                    else {
                         res.send(order);
                     }
                 });
             }
         });
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
     }
 });
-
 router.get("/order", (req, res, next) => {
     try {
-
         Request.find(function (err, requset) {
-            if (err) return next(err);
+            if (err)
+                return next(err);
             res.json(requset);
         });
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
     }
 });
-
-
 module.exports = router;
+//# sourceMappingURL=requestRoute.js.map

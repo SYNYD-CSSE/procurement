@@ -1,7 +1,6 @@
+"use strict";
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
-const ObjectId = mongoose.Schema.Types.ObjectId
-
 const requestSchema = new mongoose.Schema({
     orderId: {
         type: String,
@@ -13,10 +12,13 @@ const requestSchema = new mongoose.Schema({
         required: true
     },
     itemList: [{
-        type: ObjectId,
-        ref: "Item"
-    }],
-
+            name: {
+                type: String
+            },
+            quantity: {
+                type: Number
+            }
+        }],
     status: {
         type: String,
         required: true,
@@ -24,6 +26,6 @@ const requestSchema = new mongoose.Schema({
         default: 'Placed'
     },
 });
-
-
+UserSchema.plugin(mongooseUniqueValidator);
 module.exports = mongoose.model("Request", requestSchema);
+//# sourceMappingURL=request_LOCAL_584.js.map
