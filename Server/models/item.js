@@ -4,7 +4,7 @@ var autoIncrement = require('mongoose-auto-increment');
 
 const itemSchema = new mongoose.Schema({
 
-    id: {
+    itemId: {
         type: String,
         required: true
     },
@@ -26,7 +26,7 @@ const itemSchema = new mongoose.Schema({
 autoIncrement.initialize(mongoose.connection);
 itemSchema.plugin(autoIncrement.plugin, {
     model: 'Item',
-    field: 'id',
+    field: 'itemId',
     startAt: 1000,
     incrementBy: 1
 });

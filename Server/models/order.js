@@ -8,8 +8,8 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     constructorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Constructor",
+        type: Number,
+        default: 1
         // required: true
     },
     orderDate: {

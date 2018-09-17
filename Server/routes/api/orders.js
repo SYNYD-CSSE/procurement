@@ -8,7 +8,6 @@ const Item = require("../../models/item");
 router.post("/", (req, res, next) => {
     try {
         const order = new Order({
-            quantity: req.body.quantity,
             status: req.body.status,
             items: req.body.itemId
         });
@@ -35,7 +34,7 @@ router.get("/", (req, res, next) => {
 
     Order
         .find()
-        .populate('items', '_id id name')
+        .populate('items', 'id name quantity unit -_id')
         .then(result => {
             res.status(200)
                 .json(result);
