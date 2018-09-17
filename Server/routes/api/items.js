@@ -87,7 +87,7 @@ router.put('/:id', (req, res, next) => {
 
 //REMOVE ITEMS
 router.delete('/:id', (req, res, next) => {
-    Item.remove({
+    Item.findByIdAndRemove({
         _id: req.params.id
     }, (err, item) => {
         if (err) return res.json(err);
