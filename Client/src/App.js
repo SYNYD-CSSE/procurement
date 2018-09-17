@@ -17,7 +17,7 @@ import './scss/style.css'
 import { DefaultLayout } from './containers';
 // Pages
 import { Login, Page404, Page500, Register } from './views/Pages';
-import Payment  from './views/Payment/Payment';
+import Payment  from './views/Pages/Payment/Payment';
 
 // import { renderRoutes } from 'react-router-config';
 

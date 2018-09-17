@@ -185,7 +185,7 @@ const User = Loadable({
 });
 
 const Payment = Loadable({
-  loader: () => import('./views/Payment/Payment'),
+  loader: () => import('./views/Pages/Payment/Payment'),
   loading: Loading,
 });
 
