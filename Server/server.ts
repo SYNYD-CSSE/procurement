@@ -2,14 +2,14 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import passport from "passport";
 
 const path = require("path");
-//const passport = require("passport");
 const config = require("./config/database");
 const Request = require("./routes/api/requestRoute")
 
 
-mongoose.connect(config.database);
+mongoose.connect(config.database,{useNewUrlParser: true});
 
 mongoose.connection.on("connected", () => {
   console.log(`connected to database ${config.database}`);

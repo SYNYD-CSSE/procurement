@@ -8,10 +8,9 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const path = require("path");
-//const passport = require("passport");
 const config = require("./config/database");
 const Request = require("./routes/api/requestRoute");
-mongoose_1.default.connect(config.database);
+mongoose_1.default.connect(config.database, { useNewUrlParser: true });
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
 });
