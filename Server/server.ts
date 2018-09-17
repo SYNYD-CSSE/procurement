@@ -6,7 +6,11 @@ import passport from "passport";
 
 const path = require("path");
 const config = require("./config/database");
-const Request = require("./routes/api/requestRoute")
+
+const Order = require("./routes/api/orders");
+const Item = require("./routes/api/items");
+const Payment = require("./routes/api/paymentRoute");
+
 
 
 mongoose.connect(config.database,{useNewUrlParser: true});
@@ -24,21 +28,26 @@ const app = express();
 //app.use(passport.initialize());
 
 //passport config
-//  
+//
 
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
 
+app.use("/items", Item);
+app.use("/orders", Order);
+app.use("/", Payment);
 
-app.use("/", Request);
+
 app.get("/sample", (req, res) => {
-  res.send("Hello World");
+  res.send("hello World");
 });
 
 app.listen(port, () => {

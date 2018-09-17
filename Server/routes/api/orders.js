@@ -1,0 +1,52 @@
+const express = require("express");
+const router = express.Router();
+const Order = require("../../models/order");
+const Item = require("../../models/item");
+
+
+
+router.post("/", (req, res, next) => {
+    try {
+        const order = new Order({
+            orderId: req.body.odrderId,
+            quantity: req.body.quantity,
+            status: req.body.status,
+            items: req.body.itemId
+        });
+        order.save((err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    title: "An error occured",
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: "Item Added",
+                result
+            });
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
+router.get("/", (req, res, next) => {
+
+    Order
+        .find()
+        .populate('items', '_id id name')
+        .then(result => {
+            res.status(200)
+                .json(result);
+        })
+
+        .catch(error => {
+            console.log(error);
+        })
+
+});
+
+
+module.exports = router;
