@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../../models/order");
 const Item = require("../../models/item");
+//ADD ORDER
 router.post("/", (req, res, next) => {
     try {
         const order = new Order({
@@ -28,6 +29,7 @@ router.post("/", (req, res, next) => {
         console.log(error);
     }
 });
+//GET ALL ORDERS
 router.get("/", (req, res, next) => {
     Order
         .find()
