@@ -9,17 +9,10 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const path = require("path");
 const config = require("./config/database");
-<<<<<<< HEAD
-const Request = require("./routes/api/requestRoute");
-mongoose_1.default.connect(config.database, { useNewUrlParser: true });
-=======
-
 const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
 const Payment = require("./routes/api/paymentRoute");
-
-mongoose_1.default.connect(config.database);
->>>>>>> dev
+mongoose_1.default.connect(config.database, { useNewUrlParser: true });
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
 });
@@ -38,11 +31,9 @@ app.use(body_parser_1.default.json());
 app.use(cors_1.default());
 app.use(express_1.default.static(path.join(__dirname, "public")));
 const port = 5000;
-
 app.use("/items", Item);
 app.use("/orders", Order);
 app.use("/", Payment);
-
 app.get("/sample", (req, res) => {
     res.send("hello World");
 });
