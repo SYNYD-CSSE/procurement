@@ -36,5 +36,13 @@ const orderSchema = new mongoose.Schema({
     },
 });
 
+autoIncrement.initialize(mongoose.connection);
+orderSchema.plugin(autoIncrement.plugin, {
+    model: 'Order',
+    field: 'orderId',
+    startAt: 001,
+    incrementBy: 1
+});
+
 
 module.exports = mongoose.model("Order", orderSchema);
