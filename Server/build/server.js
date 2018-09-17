@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const generate_1 = __importDefault(require("./config/generate"));
 const path = require("path");
 const config = require("./config/database");
 const Order = require("./routes/api/orders");
@@ -39,5 +40,6 @@ app.get("/sample", (req, res) => {
 });
 app.listen(port, () => {
     console.log(`listning to port ${port}`);
+    console.log(generate_1.default.newID('E001').next().value);
 });
 //# sourceMappingURL=server.js.map

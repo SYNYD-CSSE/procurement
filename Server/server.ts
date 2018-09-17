@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import passport from "passport";
 
+import generate from "./config/generate";
+
 const path = require("path");
 const config = require("./config/database");
 
@@ -50,6 +52,11 @@ app.get("/sample", (req, res) => {
   res.send("hello World");
 });
 
+
+
 app.listen(port, () => {
   console.log(`listning to port ${port}`);
+  console.log(generate.newID('E001').next().value);
+
+  
 });

@@ -1,0 +1,43 @@
+import { model , Schema} from "mongoose";
+
+const employeeSchema :Schema  = new Schema({
+    
+    id :{
+        type     : String,
+        default  : 'E000',
+        required : true,
+        unique   : true
+     }, 
+
+    fisrtName :{
+        type     : String,
+        default  : '',
+        required : true
+     }, 
+
+    lastName :{
+        type     : String,
+        default  : '',
+        required : true
+     }, 
+
+    address :{
+        type     : String,
+        default  : ''
+     }, 
+
+    email :{
+        type     : String,
+        default  : ''
+     }, 
+
+    phone :{
+        type     : String,
+        default  : ''
+     }
+
+});
+
+const employee = model("employee",employeeSchema);
+
+export default employee;
