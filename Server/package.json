@@ -10,7 +10,8 @@
     "server": "nodemon ./build/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "prod": "npm run build && npm run start"
+    "prod": "npm run build && npm run start",
+    "begin": "concurrently --kill-others \"tsc -w\" \"nodemon build/server.js\""
   },
   "author": "Team Synyd",
   "license": "ISC",

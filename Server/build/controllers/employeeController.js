@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class employeeController {
     static getEmployees(req, res) {
+        res.send("Employee Comes Here").status(200);
+    }
+    static getEmployee(req, res) {
     }
     static insterEmployee(req, res) {
     }

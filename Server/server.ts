@@ -6,12 +6,13 @@ import passport from "passport";
 
 import generate from "./config/generate";
 
-const path = require("path");
-const config = require("./config/database");
+import path from "path";
+import config from "./config/database";
 
-const Order = require("./routes/api/orders");
-const Item = require("./routes/api/items");
-const Payment = require("./routes/api/paymentRoute");
+import employeeRoutes from "./routes/EmployeeRoutes";
+import Order from "./routes/api/orders";
+import Item from "./routes/api/items";
+import Payment from "./routes/api/paymentRoute";
 
 
 
@@ -46,6 +47,7 @@ const port = 5000;
 app.use("/items", Item);
 app.use("/orders", Order);
 app.use("/", Payment);
+app.use("/employees",employeeRoutes);
 
 
 app.get("/sample", (req, res) => {
@@ -56,7 +58,7 @@ app.get("/sample", (req, res) => {
 
 app.listen(port, () => {
   console.log(`listning to port ${port}`);
-  console.log(generate.newID('E001').next().value);
+  console.log(generate.newID('E000').next().value);
 
   
 });
