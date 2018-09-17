@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
+var autoIncrement = require('mongoose-auto-increment');
 
 const orderSchema = new mongoose.Schema({
     orderId: {
@@ -22,12 +23,6 @@ const orderSchema = new mongoose.Schema({
         required: true
     }],
 
-    quantity: {
-        type: Number,
-        default: 1,
-        min: 1
-    },
-
     status: {
         type: String,
         //  required: true,
@@ -40,7 +35,7 @@ autoIncrement.initialize(mongoose.connection);
 orderSchema.plugin(autoIncrement.plugin, {
     model: 'Order',
     field: 'orderId',
-    startAt: 001,
+    startAt: 1,
     incrementBy: 1
 });
 

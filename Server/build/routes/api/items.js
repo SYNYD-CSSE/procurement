@@ -34,7 +34,6 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
     try {
         const item = new Item({
-            id: req.body.id,
             name: req.body.name,
             unit: req.body.unit,
         });

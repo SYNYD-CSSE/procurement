@@ -7,7 +7,6 @@ const Item = require("../../models/item");
 router.post("/", (req, res, next) => {
     try {
         const order = new Order({
-            orderId: req.body.odrderId,
             quantity: req.body.quantity,
             status: req.body.status,
             items: req.body.itemId
