@@ -9,7 +9,8 @@ import generate from "./config/generate";
 import path from "path";
 import config from "./config/database";
 
-import employeeRoutes from "./routes/EmployeeRoutes";
+import EmployeeRoutes from "./routes/EmployeeRoutes";
+import UserRoutes from "./routes/userRoutes";
 import Order from "./routes/api/orders";
 import Item from "./routes/api/items";
 import Payment from "./routes/api/paymentRoute";
@@ -46,7 +47,8 @@ const port = 5000;
 app.use("/items", Item);
 app.use("/orders", Order);
 app.use("/payment", Payment);
-app.use("/employees",employeeRoutes);
+app.use("/employees",EmployeeRoutes);
+app.use("/user",UserRoutes);
 generate.initilize();
 
 app.get("/", (req, res) => {

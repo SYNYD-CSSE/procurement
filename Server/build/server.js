@@ -11,6 +11,7 @@ const generate_1 = __importDefault(require("./config/generate"));
 const path_1 = __importDefault(require("path"));
 const database_1 = __importDefault(require("./config/database"));
 const EmployeeRoutes_1 = __importDefault(require("./routes/EmployeeRoutes"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const orders_1 = __importDefault(require("./routes/api/orders"));
 const items_1 = __importDefault(require("./routes/api/items"));
 const paymentRoute_1 = __importDefault(require("./routes/api/paymentRoute"));
@@ -37,6 +38,7 @@ app.use("/items", items_1.default);
 app.use("/orders", orders_1.default);
 app.use("/payment", paymentRoute_1.default);
 app.use("/employees", EmployeeRoutes_1.default);
+app.use("/user", userRoutes_1.default);
 generate_1.default.initilize();
 app.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname + './../public/index.html'));
