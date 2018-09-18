@@ -59,6 +59,7 @@ app.get("/sample", (req, res) => {
 app.listen(port, () => {
   console.log(`listning to port ${port}`);
   console.log(generate.newID('E000').next().value);
+  generate.initilizedLastEmployeeID();
 
   
 });

@@ -2,7 +2,7 @@ import employee from "../models/employee";
 class generate {
     
     
-   // public static employeeID :IterableIterator<string>;
+   public static employeeID :IterableIterator<string>;
 
     constructor(){
         //let lastEmployeeID : string = employee.find({}).sort({x:1}).limit(1);
@@ -20,6 +20,15 @@ class generate {
         }
         
     };
+
+    public static initilizedLastEmployeeID = () =>{
+        let lastEmployeeID : string ;
+        employee.findOne({}).sort({id:-1}).limit(1).then((data)=>{
+            lastEmployeeID = JSON.stringify(data);
+            console.log(lastEmployeeID);
+        });
+
+    }
 
 }
 
