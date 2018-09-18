@@ -12,6 +12,8 @@ const path = require("path");
 const config = require("./config/database");
 const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
+const Supplier = require("./routes/api/suppliers");
+const InventroyItems = require("./routes/api/inventoryItems");
 mongoose_1.default.connect(config.database);
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
@@ -33,6 +35,8 @@ app.use(express_1.default.static(path.join(__dirname, "public")));
 const port = 5000;
 app.use("/items", Item);
 app.use("/orders", Order);
+app.use("/suppliers", Supplier);
+app.use("/invetoryItems", InventroyItems);
 app.get("/sample", (req, res) => {
     res.send("Hello World");
 });

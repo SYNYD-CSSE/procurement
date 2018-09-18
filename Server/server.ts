@@ -8,6 +8,8 @@ const path = require("path");
 const config = require("./config/database");
 const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
+const Supplier = require("./routes/api/suppliers");
+const InventroyItems = require("./routes/api/inventoryItems");
 
 mongoose.connect(config.database);
 
@@ -39,7 +41,8 @@ const port = 5000;
 
 app.use("/items", Item);
 app.use("/orders", Order);
-
+app.use("/suppliers", Supplier);
+app.use("/invetoryItems",InventroyItems);
 app.get("/sample", (req, res) => {
   res.send("Hello World");
 });
