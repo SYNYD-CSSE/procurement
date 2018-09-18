@@ -9,7 +9,7 @@ const employeeSchema :Schema  = new Schema({
         unique   : true
      }, 
 
-    fisrtName :{
+    firstName :{
         type     : String,
         default  : '',
         required : true

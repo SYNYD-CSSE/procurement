@@ -11,10 +11,10 @@ class EmployeeRoutes {
 
     routes(){
         this.router.get("/",employeeController.getEmployees);
-        this.router.get("/:id",employeeController.getEmployee);
-        this.router.post("/",employeeController.insterEmployee);
-        this.router.delete("/:id",employeeController.deleteEmployee);
-        this.router.put("/:id",employeeController.updateEmployee);
+        this.router.get("/:id",employeeController.getEmployeeByID);
+        this.router.post("/",employeeController.insertEmployee);
+        this.router.delete("/:id",employeeController.deleteEmployeeByID);
+        this.router.put("/:id",employeeController.updateEmployeeByID);
     }
 }
 
