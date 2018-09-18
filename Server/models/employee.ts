@@ -37,7 +37,7 @@ const employeeSchema :Schema  = new Schema({
      },
      role :{
         type: String,
-        enum : ['Regular','Constructor','SiteManager','Management'],
+        enum : ['Regular','Constructor','SiteManager','Management','Accountant'],
         default: 'Regular'
          
      },

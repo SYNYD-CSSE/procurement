@@ -3,12 +3,9 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import passport from "passport";
-
 import generate from "./config/generate";
-
 import path from "path";
 import config from "./config/database";
-
 import EmployeeRoutes from "./routes/EmployeeRoutes";
 import UserRoutes from "./routes/userRoutes";
 import Order from "./routes/api/orders";
