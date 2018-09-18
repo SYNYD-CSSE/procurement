@@ -5,6 +5,7 @@ import generate from "../config/generate";
 
 export default class employeeController {
 
+
     // GET ALL EMPLOYEES 
     public static getEmployees( req : Request , res : Response) :void {
 
@@ -73,8 +74,8 @@ export default class employeeController {
     // INSERT NEW EMPLOYEE
     public static insertEmployee( req : Request , res : Response) :void {
         try {
-
-            let newid = generate.newID('E001').next().value;
+            const empGen = generate.newID(generate.lastEmployeeID);
+            let newid = empGen.next().value;
             const employee = new Employee({
 
                 id          : newid,

@@ -43,7 +43,6 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
-
 app.use("/items", Item);
 app.use("/orders", Order);
 app.use("/", Payment);
@@ -51,15 +50,10 @@ app.use("/employees",employeeRoutes);
 
 
 app.get("/sample", (req, res) => {
-  res.send("hello World");
+  res.send("Hello World");
 });
-
 
 
 app.listen(port, () => {
   console.log(`listning to port ${port}`);
-  console.log(generate.newID('E000').next().value);
-  generate.initilizedLastEmployeeID();
-
-  
 });

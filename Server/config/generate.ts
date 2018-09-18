@@ -1,15 +1,14 @@
 import employee from "../models/employee";
 class generate {
     
-    
-   public static employeeID :IterableIterator<string>;
+
+    public static lastEmployeeID : string;
 
     constructor(){
-        //let lastEmployeeID : string = employee.find({}).sort({x:1}).limit(1);
-        //generate.employeeID = this.newID('E001');
+        generate.initilize();
     }
-    
-     public static * newID(lastID:String) {
+
+    public static * newID(lastID:String) {
 
         let id:number = parseInt( lastID.substring(1));
         let letter:string = lastID.charAt(0);
@@ -21,11 +20,14 @@ class generate {
         
     };
 
-    public static initilizedLastEmployeeID = () =>{
-        let lastEmployeeID : string ;
+    public static initilize = () =>{
+        generate.initilizeLastEmployeeID();
+    }
+
+    public static initilizeLastEmployeeID = () =>{
+
         employee.findOne({}).sort({id:-1}).limit(1).then((data)=>{
-            lastEmployeeID = JSON.stringify(data);
-            console.log(lastEmployeeID);
+            generate.lastEmployeeID =  (data==null)? null : data.id;
         });
 
     }
@@ -34,3 +36,4 @@ class generate {
 
 
 export default generate;
+
