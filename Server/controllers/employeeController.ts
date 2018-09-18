@@ -152,7 +152,7 @@ export default class employeeController {
         try {
 
             const id :string = req.params.id;
-            const employee = new Employee({
+            const employee = {
 
                 firstName   : req.body.firstName,
                 lastName    : req.body.lastName,
@@ -162,7 +162,7 @@ export default class employeeController {
                 role        : req.body.role,
                 siteID      : req.body.siteID
             
-            });
+            };
 
             Employee.findOneAndUpdate({id:id},employee).then((data)=>{
 
