@@ -34,6 +34,16 @@ const employeeSchema :Schema  = new Schema({
     phone :{
         type     : String,
         default  : ''
+     },
+     role :{
+        type: String,
+        enum : ['Regular','Constructor','SiteManager','Management'],
+        default: 'Regular'
+         
+     },
+     siteID : {
+         type : Number,
+         default : 0
      }
 
 });

@@ -83,7 +83,9 @@ export default class employeeController {
                 lastName    : req.body.lastName,
                 address     : req.body.address,
                 email       : req.body.email,
-                phone       : req.body.phone
+                phone       : req.body.phone,
+                role        : req.body.role,
+                siteID      : req.body.siteID
             
             });
 
@@ -156,7 +158,9 @@ export default class employeeController {
                 lastName    : req.body.lastName,
                 address     : req.body.address,
                 email       : req.body.email,
-                phone       : req.body.phone
+                phone       : req.body.phone,
+                role        : req.body.role,
+                siteID      : req.body.siteID
             
             });
 
