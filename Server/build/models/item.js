@@ -4,7 +4,7 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 var autoIncrement = require('mongoose-auto-increment');
 const itemSchema = new mongoose.Schema({
     itemId: {
-        type: String,
+        type: Number,
         required: true
     },
     name: {

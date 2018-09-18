@@ -46,5 +46,58 @@ router.get("/", (req, res, next) => {
 
 });
 
+//ORDER FIND BY ID
+
+router.get("/:id", (req, res, next) => {
+    try {
+        Order.findOne({
+            orderId: req.params.id
+        }, (err, result) => {
+            if (err) return next(err);
+            res.json(result);
+        });
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+
+//Update ORDER
+router.put('/:id', (req, res, next) => {
+    Order.findOneAndUpdate({
+            orderId: req.params.id
+        }, {
+            $set: {
+                status: req.body.status,
+                items: req.body.ItemId
+            }
+        },
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    title: "An error occured",
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: "Order Updated",
+                result
+            });
+        }
+    )
+})
+
+
+//REMOVE ORDER
+router.delete('/:oid', (req, res, next) => {
+    Order.remove({
+        OrderId: req.params.oid
+    }, (err, item) => {
+        if (err) return res.json(err);
+        res.json({
+            msg: "order deleted",
+        });
+    });
+});
 
 module.exports = router;

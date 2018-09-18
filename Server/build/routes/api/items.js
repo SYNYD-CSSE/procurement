@@ -19,7 +19,7 @@ router.get("/", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
     try {
         Item.findOne({
-            _id: req.params.id
+            itemId: req.params.id
         }, (err, result) => {
             if (err)
                 return next(err);
@@ -58,7 +58,7 @@ router.post("/", (req, res, next) => {
 //Update Item
 router.put('/:id', (req, res, next) => {
     Item.findOneAndUpdate({
-        _id: req.params.id
+        itemId: req.params.id
     }, {
         $set: {
             name: req.body.name,
@@ -78,9 +78,9 @@ router.put('/:id', (req, res, next) => {
     });
 });
 //REMOVE ITEMS
-router.delete('/:id', (req, res, next) => {
-    Item.findByIdAndRemove({
-        _id: req.params.id
+router.delete('/:pid', (req, res, next) => {
+    Item.remove({
+        itemId: req.params.pid
     }, (err, item) => {
         if (err)
             return res.json(err);

@@ -40,5 +40,55 @@ router.get("/", (req, res, next) => {
         console.log(error);
     });
 });
+//ORDER FIND BY ID
+router.get("/:id", (req, res, next) => {
+    try {
+        Order.findOne({
+            orderId: req.params.id
+        }, (err, result) => {
+            if (err)
+                return next(err);
+            res.json(result);
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+//Update ORDER
+router.put('/:id', (req, res, next) => {
+    Order.findOneAndUpdate({
+        orderId: req.params.id
+    }, {
+        $set: {
+            status: req.body.status,
+            unit: req.body.unit
+        }
+    }, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                title: "An error occured",
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: "Item Updated",
+            result
+        });
+    });
+});
+//REMOVE ORDER
+router.delete('/:id', (req, res, next) => {
+    Order.findByIdAndRemove({
+        OrderId: req.params.id
+    }, (err, item) => {
+        if (err)
+            return res.json(err);
+        res.json({
+            msg: "item deleted",
+            item: item
+        });
+    });
+});
 module.exports = router;
 //# sourceMappingURL=orders.js.map
