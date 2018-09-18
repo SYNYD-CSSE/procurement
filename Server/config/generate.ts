@@ -8,7 +8,7 @@ class generate {
         generate.initilize();
     }
 
-    public static * newID(lastID:String) {
+    public * newID(lastID:String) {
 
         let id:number = parseInt( lastID.substring(1));
         let letter:string = lastID.charAt(0);

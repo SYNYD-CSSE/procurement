@@ -74,8 +74,8 @@ export default class employeeController {
     // INSERT NEW EMPLOYEE
     public static insertEmployee( req : Request , res : Response) :void {
         try {
-            const empGen = generate.newID(generate.lastEmployeeID);
-            let newid = empGen.next().value;
+            const gen = new generate().newID(generate.lastEmployeeID);
+            let newid = gen.next().value;
             const employee = new Employee({
 
                 id          : newid,

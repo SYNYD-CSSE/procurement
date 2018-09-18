@@ -47,7 +47,7 @@ app.use("/items", Item);
 app.use("/orders", Order);
 app.use("/", Payment);
 app.use("/employees",employeeRoutes);
-
+generate.initilize();
 
 app.get("/sample", (req, res) => {
   res.send("Hello World");
