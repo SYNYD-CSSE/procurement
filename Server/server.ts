@@ -2,14 +2,21 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import passport from "passport";
 
-const path = require("path");
-//const passport = require("passport");
-const config = require("./config/database");
-const Order = require("./routes/api/orders");
-const Item = require("./routes/api/items");
+import generate from "./config/generate";
 
-mongoose.connect(config.database);
+import path from "path";
+import config from "./config/database";
+
+import employeeRoutes from "./routes/EmployeeRoutes";
+import Order from "./routes/api/orders";
+import Item from "./routes/api/items";
+import Payment from "./routes/api/paymentRoute";
+
+
+
+mongoose.connect(config.database,{useNewUrlParser: true});
 
 mongoose.connection.on("connected", () => {
   console.log(`connected to database ${config.database}`);
@@ -36,13 +43,16 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
-
 app.use("/items", Item);
 app.use("/orders", Order);
+app.use("/payment", Payment);
+app.use("/employees",employeeRoutes);
+generate.initilize();
 
-app.get("/sample", (req, res) => {
-  res.send("Hello World");
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + './../public/index.html'));
 });
+
 
 app.listen(port, () => {
   console.log(`listning to port ${port}`);
