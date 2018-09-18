@@ -45,12 +45,12 @@ app.use(express.static(path.join(__dirname, "public")));
 const port = 5000;
 app.use("/items", Item);
 app.use("/orders", Order);
-app.use("/", Payment);
+app.use("/payment", Payment);
 app.use("/employees",employeeRoutes);
 generate.initilize();
 
-app.get("/sample", (req, res) => {
-  res.send("Hello World");
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 
