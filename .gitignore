@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# build directory not nessery tsc command will generate the bild directory
+Server/build
