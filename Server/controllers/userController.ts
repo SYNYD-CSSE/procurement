@@ -3,6 +3,8 @@ import User from "./../models/user";
 import bodyParser from "body-parser";
 import generate from "../config/generate";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import config from "../config/database";
 
 export default class employeeController {
 
@@ -19,17 +21,21 @@ export default class employeeController {
 
             User.findOne({username: user.username},(err,data)=>{
                 const status = res.statusCode;
-                bcrypt.compare(user.password,(data as any).password,(err,isMatch)=>{
+                bcrypt.compare(user.password,(user as any).password,(err,isMatch)=>{
                     if(err){
                         throw err;
                     }
                     let message : string;
                     if(isMatch){
                         message = "Login success !";
+                        const token = jwt.sign(user, config.secretOrKey, {
+                            expiresIn : 8640 // One day
+                        });
                         res.json({
                             status,
                             message,
-                            data
+                            token: 'JWT '+token,
+                            user
                         });
                     } 
                     else {
