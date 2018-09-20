@@ -5,8 +5,7 @@ const userSchema :Schema  = new Schema({
     id :{
         type     : String,
         default  : 'E000',
-        required : true,
-        unique   : true
+        required : true
      }, 
 
     username :{

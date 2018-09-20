@@ -13,22 +13,24 @@ export default class employeeController {
     public static login( req : Request , res : Response) :void {
         try {
             
-            const user = {
+            const login = {
                 username    : req.body.username,
                 password    : req.body.password
             
             };
 
-            User.findOne({username: user.username},(err,data)=>{
+            User.findOne({username: login.username},(err,user)=>{
                 const status = res.statusCode;
-                bcrypt.compare(user.password,(user as any).password,(err,isMatch)=>{
+                bcrypt.compare(login.password,(user as any).password,(err,isMatch)=>{
+                    
+
                     if(err){
                         throw err;
                     }
                     let message : string;
                     if(isMatch){
                         message = "Login success !";
-                        const token = jwt.sign(user, config.secretOrKey, {
+                        const token = jwt.sign( login, config.secretOrKey, {
                             expiresIn : 8640 // One day
                         });
                         res.json({
@@ -100,10 +102,7 @@ export default class employeeController {
 
             bcrypt.genSalt(10,(err,salt)=>{
                 bcrypt.hash(user.password, salt, (err,hash)=>{
-                    console.log(user.password);
                     user.password = hash;
-                    console.log(hash);
-                    console.log(user.password);
                     const newUser = new User (user);
                     newUser.save().then((data)=>{
                         
