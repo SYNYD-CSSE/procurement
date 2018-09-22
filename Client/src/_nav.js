@@ -19,6 +19,42 @@ export default {
       url: '/payment',
       icon: 'icon-basket',
     },
+
+    // Samith's Functions Navigation Items
+    {
+      name: 'Employee',
+      url: '/employee',
+      icon: 'icon-people',
+      children: [
+        {
+          name: 'New Employee',
+          url: '/employee/new',
+          icon: 'icon-plus',
+        },
+        {
+          name: 'Employee List',
+          url: '/employee/list',
+          icon: 'icon-list',
+        }
+      ]
+    },
+    {
+      name: 'User',
+      url: '/user',
+      icon: 'icon-user',
+      children: [
+        {
+          name: 'New User',
+          url: '/user/new',
+          icon: 'icon-plus',
+        },
+        {
+          name: 'User List',
+          url: '/user/list',
+          icon: 'icon-list',
+        }
+      ]
+    },
     {
       title: true,
       name: 'Theme',
