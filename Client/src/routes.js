@@ -16,6 +16,15 @@ const EmployeesList = Loadable({
   loading: Loading,
 });
 
+const NewUser = Loadable({
+  loader: () => import('./views/User/NewUser'),
+  loading: Loading,
+});
+const UsersList = Loadable({
+  loader: () => import('./views/User/UsersList'),
+  loading: Loading,
+});
+
 const Breadcrumbs = Loadable({
   loader: () => import('./views/Base/Breadcrumbs'),
   loading: Loading,
@@ -206,6 +215,9 @@ const routes = [
 
   { path: '/employee/new', name: 'New Employee', component: NewEmployee },
   { path: '/employee/list', name: 'Employees List', component: EmployeesList },
+
+  { path: '/user/new', name: 'New User', component: NewUser },
+  { path: '/user/list', name: 'Users List', component: UsersList },
  
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
