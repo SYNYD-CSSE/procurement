@@ -42,7 +42,7 @@ class NewEmployee extends Component {
           <Col xs="12" md="6">
             <Card>
               <CardHeader>
-                <strong>Employee Register Form</strong> Add New Employee
+                <strong>Employee Register Form</strong> | Add New Employee
               </CardHeader>
               <CardBody>
                 <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
