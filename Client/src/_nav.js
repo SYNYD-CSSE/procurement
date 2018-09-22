@@ -1,4 +1,6 @@
-export default {
+const user = JSON.parse(localStorage.getItem('user'));
+
+let NavigationBar = {
   items: [
     {
       name: 'Dashboard',
@@ -305,3 +307,13 @@ export default {
     },
   ],
 };
+
+switch (user.role) {
+  case 'Management' : break;
+  case 'Accountant' : 
+            NavigationBar.items = NavigationBar.items.slice(0,3);
+            break;
+  default : NavigationBar = {items: []};
+}
+
+export default NavigationBar;
