@@ -40,58 +40,80 @@ class EmployeesList extends Component {
           <Col xs="12" lg="6">
               <Card>
                 <CardHeader>
-                  <i className="fa fa-align-justify"></i> Simple Table
+                  <i className="fa fa-align-justify"></i> List of Employees
                 </CardHeader>
                 <CardBody>
                   <Table responsive hover>
                     <thead>
                     <tr>
-                      <th>Username</th>
-                      <th>Date registered</th>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Email</th>
+                      <th>Phone</th>
                       <th>Role</th>
-                      <th>Status</th>
+                      <th>Site</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                      <td>Samppa Nori</td>
-                      <td>2012/01/01</td>
-                      <td>Member</td>
+                      <td>Samith Dilshan</td>
+                      <td>Katuawan Rd, Homagama</td>
+                      <td>samithdilsh@gmail.com</td>
+                      <td>0779955111</td>
                       <td>
-                        <Badge color="success">Active</Badge>
+                        <Badge color="success">Management</Badge>
                       </td>
+                      <td>Kollupitiya</td>
                     </tr>
                     <tr>
-                      <td>Estavan Lykos</td>
-                      <td>2012/02/01</td>
-                      <td>Staff</td>
+                      <td>Kirito Okazaki</td>
+                      <td>Kandy Rd, Battaramulla</td>
+                      <td>yasirutit1@gmail.com</td>
+                      <td>0778855222</td>
                       <td>
-                        <Badge color="danger">Banned</Badge>
+                        <Badge color="info">Site Manager</Badge>
                       </td>
+                      <td>Battaramulla</td>
                     </tr>
                     <tr>
-                      <td>Chetan Mohamed</td>
-                      <td>2012/02/01</td>
-                      <td>Admin</td>
+                      <td>Supun Dileepa</td>
+                      <td>Maharagama Rd, Horana</td>
+                      <td>supundileepa@gmail.com</td>
+                      <td>0772252575</td>
                       <td>
-                        <Badge color="secondary">Inactive</Badge>
+                        <Badge color="warning">Constructor</Badge>
                       </td>
+                      <td>Battaramulla</td>
                     </tr>
                     <tr>
-                      <td>Derick Maximinus</td>
-                      <td>2012/03/01</td>
-                      <td>Member</td>
+                      <td>Vimukthi Thenuka</td>
+                      <td>Awissawella Rd, Delgoda</td>
+                      <td>vimukthithenuka@gmail.com</td>
+                      <td>0772252575</td>
                       <td>
-                        <Badge color="warning">Pending</Badge>
+                        <Badge color="warning">Constructor</Badge>
                       </td>
+                      <td>Battaramulla</td>
                     </tr>
                     <tr>
-                      <td>Friderik Dávid</td>
-                      <td>2012/01/21</td>
-                      <td>Staff</td>
+                      <td>Bimali</td>
+                      <td>Diyathawa Rd, Badulla</td>
+                      <td>bimaliyapa@gmail.com</td>
+                      <td>0789985584</td>
                       <td>
-                        <Badge color="success">Active</Badge>
+                        <Badge color="warning">Constructor</Badge>
                       </td>
+                      <td>Kollupitiya</td>
+                    </tr>
+                    <tr>
+                      <td>Nirmal Senevirathna</td>
+                      <td>Kaduwela Rd, Battaramulla</td>
+                      <td>nirmalseneviratna@gmail.com</td>
+                      <td>0785774484</td>
+                      <td>
+                        <Badge color="danger">Accountant</Badge>
+                      </td>
+                      <td>Battaramulla</td>
                     </tr>
                     </tbody>
                   </Table>
