@@ -7,6 +7,15 @@ function Loading() {
   return <div>Loading...</div>;
 }
 
+const NewEmployee = Loadable({
+  loader: () => import('./views/Employee/NewEmployee'),
+  loading: Loading,
+});
+const EmployeesList = Loadable({
+  loader: () => import('./views/Employee/EmployeesList'),
+  loading: Loading,
+});
+
 const Breadcrumbs = Loadable({
   loader: () => import('./views/Base/Breadcrumbs'),
   loading: Loading,
@@ -194,6 +203,9 @@ const Payment = Loadable({
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+
+  { path: '/employee/new', name: 'New Employee', component: NewEmployee },
+  { path: '/employee/list', name: 'Employees List', component: EmployeesList },
  
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
