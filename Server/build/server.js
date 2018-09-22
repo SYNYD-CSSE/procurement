@@ -15,6 +15,8 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const orders_1 = __importDefault(require("./routes/api/orders"));
 const items_1 = __importDefault(require("./routes/api/items"));
 const paymentRoute_1 = __importDefault(require("./routes/api/paymentRoute"));
+const suppliers_1 = __importDefault(require("./routes/api/suppliers"));
+const inventoryItems_1 = __importDefault(require("./routes/api/inventoryItems"));
 mongoose_1.default.connect(database_1.default.database, { useNewUrlParser: true });
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${database_1.default.database}`);
@@ -39,6 +41,8 @@ app.use("/orders", orders_1.default);
 app.use("/payment", paymentRoute_1.default);
 app.use("/employees", EmployeeRoutes_1.default);
 app.use("/user", userRoutes_1.default);
+app.use("/suppliers", suppliers_1.default);
+app.use("/invetoryItems", inventoryItems_1.default);
 generate_1.default.initilize();
 app.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname + './../public/index.html'));

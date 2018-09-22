@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -11,7 +12,8 @@ import UserRoutes from "./routes/userRoutes";
 import Order from "./routes/api/orders";
 import Item from "./routes/api/items";
 import Payment from "./routes/api/paymentRoute";
-
+import Supplier from "./routes/api/suppliers";
+import InventroyItems from "./routes/api/inventoryItems";
 
 
 mongoose.connect(config.database,{useNewUrlParser: true});
@@ -46,6 +48,8 @@ app.use("/orders", Order);
 app.use("/payment", Payment);
 app.use("/employees",EmployeeRoutes);
 app.use("/user",UserRoutes);
+app.use("/suppliers", Supplier);
+app.use("/invetoryItems",InventroyItems);
 generate.initilize();
 
 app.get("/", (req, res) => {
