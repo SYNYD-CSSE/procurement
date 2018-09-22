@@ -21,7 +21,7 @@ const userSchema :Schema  = new Schema({
      }, 
      role :{
         type: String,
-        enum : ['Regular','Constructor','SiteManager','Management','Supplier'],
+        enum : ['Regular','Constructor','SiteManager','Management','Accountant','Supplier'],
         default: 'Regular'
          
      }
