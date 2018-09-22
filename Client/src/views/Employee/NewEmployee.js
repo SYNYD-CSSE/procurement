@@ -39,7 +39,7 @@ class NewEmployee extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" md="6">
+          <Col xs="12" md="12" lg="8">
             <Card>
               <CardHeader>
                 <strong>Employee Register Form</strong> | Add New Employee

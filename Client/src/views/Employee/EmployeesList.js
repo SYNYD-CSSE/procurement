@@ -10,6 +10,7 @@ import {
   Table,
   Pagination,
   Row,
+  Button,
 } from 'reactstrap';
 
 class EmployeesList extends Component {
@@ -37,7 +38,7 @@ class EmployeesList extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" lg="6">
+          <Col lg="12">
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> List of Employees
@@ -47,11 +48,13 @@ class EmployeesList extends Component {
                     <thead>
                     <tr>
                       <th>Name</th>
+
                       <th>Address</th>
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Role</th>
                       <th>Site</th>
+                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -64,6 +67,17 @@ class EmployeesList extends Component {
                         <Badge color="success">Management</Badge>
                       </td>
                       <td>Kollupitiya</td>
+                      <td>
+                          <Button color="ghost-success">
+                            <i className="cui-info font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-warning">
+                            <i className="cui-note font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-danger">
+                            <i className="cui-trash font-2xl"></i>
+                          </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td>Kirito Okazaki</td>
@@ -74,6 +88,17 @@ class EmployeesList extends Component {
                         <Badge color="info">Site Manager</Badge>
                       </td>
                       <td>Battaramulla</td>
+                      <td>
+                          <Button color="ghost-success">
+                            <i className="cui-info font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-warning">
+                            <i className="cui-note font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-danger">
+                            <i className="cui-trash font-2xl"></i>
+                          </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td>Supun Dileepa</td>
@@ -84,6 +109,17 @@ class EmployeesList extends Component {
                         <Badge color="warning">Constructor</Badge>
                       </td>
                       <td>Battaramulla</td>
+                      <td>
+                          <Button color="ghost-success">
+                            <i className="cui-info font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-warning">
+                            <i className="cui-note font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-danger">
+                            <i className="cui-trash font-2xl"></i>
+                          </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td>Vimukthi Thenuka</td>
@@ -94,6 +130,17 @@ class EmployeesList extends Component {
                         <Badge color="warning">Constructor</Badge>
                       </td>
                       <td>Battaramulla</td>
+                      <td>
+                          <Button color="ghost-success">
+                            <i className="cui-info font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-warning">
+                            <i className="cui-note font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-danger">
+                            <i className="cui-trash font-2xl"></i>
+                          </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td>Bimali</td>
@@ -104,6 +151,17 @@ class EmployeesList extends Component {
                         <Badge color="warning">Constructor</Badge>
                       </td>
                       <td>Kollupitiya</td>
+                      <td>
+                          <Button color="ghost-success">
+                            <i className="cui-info font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-warning">
+                            <i className="cui-note font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-danger">
+                            <i className="cui-trash font-2xl"></i>
+                          </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td>Nirmal Senevirathna</td>
@@ -114,6 +172,17 @@ class EmployeesList extends Component {
                         <Badge color="danger">Accountant</Badge>
                       </td>
                       <td>Battaramulla</td>
+                      <td>
+                          <Button color="ghost-success">
+                            <i className="cui-info font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-warning">
+                            <i className="cui-note font-2xl"></i>
+                          </Button>
+                          <Button color="ghost-danger">
+                            <i className="cui-trash font-2xl"></i>
+                          </Button>
+                      </td>
                     </tr>
                     </tbody>
                   </Table>
