@@ -20,6 +20,18 @@ export default {
       icon: 'icon-basket',
     },
     {
+      name: 'Order Details',
+      url:'/base/orders/details',
+      icon:'fa fa-file-text-o ',
+
+    },
+      {
+      name: 'Supplier Rating',
+      url:'/orders/SupplierRating',
+      icon:'icon-star',
+
+    },
+    {
       title: true,
       name: 'Theme',
       wrapper: {            // optional wrapper object

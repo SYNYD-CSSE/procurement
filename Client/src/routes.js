@@ -189,6 +189,14 @@ const Payment = Loadable({
   loading: Loading,
 });
 
+const OrderDetails = Loadable({
+  loader: () => import('./views/Pages/Orders/OrderDetails'),
+  loading: Loading,
+});
+const SupplierRating = Loadable({
+  loader: () => import('./views/Pages/Suppliers/SupplierRating'),
+  loading: Loading,
+});
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -235,6 +243,8 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/payment', exact: true,  name: 'Payment', component: Payment },
+  { path: '/base/orders/details', exact: true,  name: 'OrderDetails', component: OrderDetails },
+  { path: '/orders/SupplierRating', exact: true,  name: 'SupplierRating', component: SupplierRating },
 ];
 
 export default routes;
