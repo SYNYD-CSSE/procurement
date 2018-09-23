@@ -1,4 +1,4 @@
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem('user')) | {user:{role : 'Management'}};
 
 let NavigationBar = {
   items: [
@@ -308,12 +308,12 @@ let NavigationBar = {
   ],
 };
 
-switch (user.role) {
-  case 'Management' : break;
-  case 'Accountant' : 
-            NavigationBar.items = NavigationBar.items.slice(0,3);
-            break;
-  default : NavigationBar = {items: []};
-}
+// switch (user.role) {
+//   case 'Management' : break;
+//   case 'Accountant' : 
+//             NavigationBar.items = NavigationBar.items.slice(0,3);
+//             break;
+//   default : NavigationBar = {items: []};
+// }
 
 export default NavigationBar;
