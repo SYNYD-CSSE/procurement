@@ -58,7 +58,7 @@ class Payment extends React.Component {
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
             >
-              Successfull Payments
+              Successful Payments
             </NavLink>
           </NavItem>
         </Nav>
@@ -141,8 +141,8 @@ class Payment extends React.Component {
 
           <TabPane tabId="2">
             <Row>
-              <Col sm="6">
-              <Table borderless hover responsive size="lg">
+              <Col sm="12">
+              <Table borderless hover responsive size="sm">
                   <thead>
                     <tr>
                       <th>#</th>
