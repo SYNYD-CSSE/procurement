@@ -22,10 +22,10 @@ class OrderDetails extends Component {
 
         // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
    
-        fetch(`http://localhost:5000/api/prescriptions/${this.state.patient.pid}/${this.state.patient.bht}`)
+        fetch(`/orders`)
    
            .then(res=>res.json())
-            .then(prescriptions=> this.setState({prescriptions},()=> console.log(prescriptions)));
+            .then(orders=> this.setState({orders},()=> console.log('asdfasfd')));
    
      }
     
