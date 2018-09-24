@@ -243,7 +243,7 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   { path: '/payment', exact: true,  name: 'Payment', component: Payment },
-  { path: '/base/orders/details', exact: true,  name: 'OrderDetails', component: OrderDetails },
+  { path: '/orders/details', exact: true,  name: 'OrderDetails', component: OrderDetails },
   { path: '/orders/SupplierRating', exact: true,  name: 'SupplierRating', component: SupplierRating },
 ];
 

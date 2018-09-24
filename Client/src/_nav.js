@@ -21,7 +21,7 @@ export default {
     },
     {
       name: 'Order Details',
-      url:'/base/orders/details',
+      url:'/orders/details',
       icon:'fa fa-file-text-o ',
 
     },

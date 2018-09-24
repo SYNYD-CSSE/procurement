@@ -10,12 +10,24 @@ class OrderDetails extends Component {
     
     constructor(props) {
         super(props);
-    
+
         this.toggle = this.toggle.bind(this);
         this.state = {
           activeTab: '1',
+          orders:[]
         };
       }
+
+      componentWillMount(){
+
+        // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
+   
+        fetch(`http://localhost:5000/api/prescriptions/${this.state.patient.pid}/${this.state.patient.bht}`)
+   
+           .then(res=>res.json())
+            .then(prescriptions=> this.setState({prescriptions},()=> console.log(prescriptions)));
+   
+     }
     
       toggle(tab) {
         if (this.state.activeTab !== tab) {
