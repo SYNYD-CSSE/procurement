@@ -8,7 +8,6 @@ router.get("/", (req, res, next) => {
  
    Supplier
     .find()
-    .populate('inventoryItems', 'item'.populate('item', 'name')+' quantity')
     .then(result => {
         res.status(200)
             .json(result);
