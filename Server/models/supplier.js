@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
+var autoIncrement = require('mongoose-auto-increment');
+
 
 const supplierSchema = new mongoose.Schema({
+    supplierId: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -33,6 +39,12 @@ const supplierSchema = new mongoose.Schema({
 
     }
 });
-
+autoIncrement.initialize(mongoose.connection);
+supplierSchema.plugin(autoIncrement.plugin, {
+    model: 'Supplier',
+    field: 'supplierId',
+    startAt: 1,
+    incrementBy: 1
+});
 
 module.exports = mongoose.model("Supplier", supplierSchema);

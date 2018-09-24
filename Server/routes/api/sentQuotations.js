@@ -1,15 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const Order = require("../../models/sentQuotation");
+const sentQuotation = require("../../models/sentQuotation");
 
+
+router.get("/", (req, res, next) => {
+ 
+    sentQuotation
+     .find()
+     .populate('supplier', 'name -_id')
+     .populate('order', 'orderDate -_id')
+     .then(result => {
+         res.status(200)
+             .json(result);
+     })
+ 
+     .catch(error => {
+         console.log(error);
+     })
+ });
 router.post("/", (req, res, next) => {
     try {
-        const order = new Order({
+        const newQuote = new sentQuotation({
             supplier: req.body.supplier,
             order: req.body.order,
             sentItemsList: req.body.sentItemsList
         });
-        order.save((err, result) => {
+        newQuote.save((err, result) => {
             if (err) {
                 return res.status(500).json({
                     title: "An error occured",
@@ -17,7 +33,7 @@ router.post("/", (req, res, next) => {
                 });
             }
             res.status(201).json({
-                message: "Item Added",
+                message: "Quotation sent",
                 result
             });
         });
@@ -25,3 +41,6 @@ router.post("/", (req, res, next) => {
         console.log(error);
     }
 });
+
+
+module.exports = router;

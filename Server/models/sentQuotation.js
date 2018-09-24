@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
+var autoIncrement = require('mongoose-auto-increment');
 
-const sentQuotations = new mongoose.Schema({
+const sentQuotationsSchema = new mongoose.Schema({
     sentQuotationsId: {
         type: String,
         required: true
@@ -47,7 +48,7 @@ const sentQuotations = new mongoose.Schema({
 });
 
 autoIncrement.initialize(mongoose.connection);
-orderSchema.plugin(autoIncrement.plugin, {
+sentQuotationsSchema.plugin(autoIncrement.plugin, {
     model: 'sentQuotations',
     field: 'sentQuotationsId',
     startAt: 1,
