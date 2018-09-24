@@ -10,7 +10,7 @@ const payment = require("../../models/payment");
 // router.use(bodyParser.json());
 
 router.get('/api/pay', function(req, res){
-	res.send('use /api/payments to post a record');
+	res.send('use other routes for payment functions.');
 });
 
 router.post('/api/payments', (req, res) => {
