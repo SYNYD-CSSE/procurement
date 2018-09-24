@@ -24,7 +24,6 @@ let NavigationBar = {
 
     // Samith's Functions Navigation Items
     {
-<<<<<<< HEAD
       name: 'Order Details',
       url:'/orders/details',
       icon:'fa fa-file-text-o ',
@@ -67,11 +66,9 @@ let NavigationBar = {
       name: 'Base',
       url: '/base',
       icon: 'icon-puzzle',
-=======
       name: 'Employee',
       url: '/employee',
       icon: 'icon-people',
->>>>>>> dev
       children: [
         {
           name: 'New Employee',

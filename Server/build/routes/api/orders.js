@@ -1,17 +1,6 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
-const Request = require("../../models/request");
-const Item = require("../../models/item");
-router.post("/add/item", (req, res, next) => {
-    try {
-        const item = new Item({
-            name: req.body.name,
-            quantity: req.body.quantity,
-        });
-        item.save((err, result) => {
-=======
 const Order = require("../../models/order");
 const Item = require("../../models/item");
 //ADD ORDER
@@ -22,7 +11,6 @@ router.post("/", (req, res, next) => {
             items: req.body.itemId
         });
         order.save((err, result) => {
->>>>>>> dev
             if (err) {
                 return res.status(500).json({
                     title: "An error occured",
@@ -39,50 +27,6 @@ router.post("/", (req, res, next) => {
         console.log(error);
     }
 });
-<<<<<<< HEAD
-router.put("/order/item/add", (req, res, next) => {
-    try {
-        Item.findOne({
-            _id: req.body.itemId
-        }, (err, item) => {
-            if (err) {
-                return res.status(500).json({
-                    title: "An error occured",
-                    error: err
-                });
-            }
-            else {
-                Request.update({
-                    _id: req.body.orderId
-                }, {
-                    $addToSet: {
-                        itemList: item._id
-                    }
-                }, (err, order) => {
-                    if (err) {
-                        return res.status(500).json({
-                            title: "An error occured",
-                            error: err
-                        });
-                    }
-                    else {
-                        res.send(order);
-                    }
-                });
-            }
-        });
-    }
-    catch (error) {
-        console.log(error);
-    }
-});
-router.get("/order", (req, res, next) => {
-    try {
-        Request.find(function (err, requset) {
-            if (err)
-                return next(err);
-            res.json(requset);
-=======
 //GET ALL ORDERS
 router.get("/orders", (req, res, next) => {
     Order
@@ -105,15 +49,12 @@ router.get("/:id", (req, res, next) => {
             if (err)
                 return next(err);
             res.json(result);
->>>>>>> dev
         });
     }
     catch (error) {
         console.log(error);
     }
 });
-<<<<<<< HEAD
-=======
 //Update ORDER
 router.put('/:id', (req, res, next) => {
     Order.findOneAndUpdate({
@@ -148,6 +89,5 @@ router.delete('/:oid', (req, res, next) => {
         });
     });
 });
->>>>>>> dev
 module.exports = router;
 //# sourceMappingURL=orders.js.map
