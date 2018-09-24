@@ -22,10 +22,9 @@ const supplierSchema = new mongoose.Schema({
         type: String,
        required: true 
     },
-    inventoryItemsList:[{
+    itemsList:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "inventoryItem",
-        required: true
+        ref: "item"
     }],
     rating:{
         type: Number,
@@ -36,4 +35,4 @@ const supplierSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model("supplier", supplierSchema);
+module.exports = mongoose.model("Supplier", supplierSchema);
