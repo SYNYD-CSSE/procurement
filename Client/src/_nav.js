@@ -20,7 +20,7 @@ export default {
     },
 
     {
-      name: 'Item',
+      name: 'Add Item',
       url: '/addItem',
       icon: 'icon-briefcase',
     },

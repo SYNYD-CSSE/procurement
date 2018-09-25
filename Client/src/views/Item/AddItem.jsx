@@ -22,7 +22,7 @@ import {
   InputGroupAddon,
   InputGroupButton
 } from "reactstrap";
-class NewAddmission extends Component {
+class AddItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -108,7 +108,7 @@ class NewAddmission extends Component {
                         <Col xs="8">
                           <Label htmlFor="unit">Unit</Label>
                           <Input
-                            type="number"
+                            type="text"
                             id="unit"
                             name="unit"
                             placeholder="Enter Unit"
@@ -145,4 +145,4 @@ class NewAddmission extends Component {
   }
 }
 
-export default NewAddmission;
+export default AddItem;

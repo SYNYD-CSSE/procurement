@@ -187,8 +187,8 @@ const Payment = Loadable({
   loading: Loading
 });
 
-const Item = Loadable({
-  loader: () => import("./views/Item/Item"),
+const AddItem = Loadable({
+  loader: () => import("./views/Item/AddItem"),
   loading: Loading
 });
 
@@ -417,8 +417,8 @@ const routes = [
   {
     path: "/addItem",
     exact: true,
-    name: "Item",
-    component: Item
+    name: "AddItem",
+    component: AddItem
   }
 ];
 
