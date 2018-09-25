@@ -1,19 +1,22 @@
+
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import passport from "passport";
+import generate from "./config/generate";
+import path from "path";
+import config from "./config/database";
+import EmployeeRoutes from "./routes/EmployeeRoutes";
+import UserRoutes from "./routes/userRoutes";
+import Order from "./routes/api/orders";
+import Item from "./routes/api/items";
+import Payment from "./routes/api/paymentRoute";
+import Supplier from "./routes/api/suppliers";
+import InventroyItems from "./routes/api/inventoryItems";
 
-const path = require("path");
-//const passport = require("passport");
-const config = require("./config/database");
 
-const Order = require("./routes/api/orders");
-const Item = require("./routes/api/items");
-const Payment = require("./routes/api/paymentRoute");
-
-
-
-mongoose.connect(config.database);
+mongoose.connect(config.database,{useNewUrlParser: true});
 
 mongoose.connection.on("connected", () => {
   console.log(`connected to database ${config.database}`);
@@ -40,15 +43,19 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
-
 app.use("/items", Item);
 app.use("/orders", Order);
-app.use("/", Payment);
+app.use("/payment", Payment);
+app.use("/employees",EmployeeRoutes);
+app.use("/user",UserRoutes);
+app.use("/suppliers", Supplier);
+app.use("/invetoryItems",InventroyItems);
+generate.initilize();
 
-
-app.get("/sample", (req, res) => {
-  res.send("hello World");
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + './../public/index.html'));
 });
+
 
 app.listen(port, () => {
   console.log(`listning to port ${port}`);

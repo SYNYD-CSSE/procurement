@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const inventoryItem = require(inventoryItem);
 const mongooseUniqueValidator = require("mongoose-unique-validator");
 
 const supplierSchema = new mongoose.Schema({
@@ -19,9 +18,20 @@ const supplierSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    inventoryItems:{
-        type: [inventoryItem],
-        required:true
+    status:{
+        type: String,
+       required: true 
+    },
+    inventoryItemsList:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "inventoryItem",
+        required: true
+    }],
+    rating:{
+        type: Number,
+        required: true,
+        default : 5
+
     }
 });
 

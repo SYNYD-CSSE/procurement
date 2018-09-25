@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "d4c13d72-0257-4b64-987b-d1cc2088d10e",
+		"name": "CSSE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Insert New Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"firstName\"   : \"Supun\",\r\n    \"lastName\"    : \"Dileepa\",\r\n    \"address\"     : \"Maharagama Rd, Horana\",\r\n    \"email\"       : \"supundileepa@gmail.com\",\r\n    \"phone\"       : \"078845854\",\r\n    \"role\"        : \"Constructor\",\r\n    \"siteID\"      : 5\r\n            \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"firstName\"   : \"Samith\",\r\n    \"lastName\"    : \"Dilshan\",\r\n    \"address\"     : \"Katuwana Rd, Homagama\",\r\n    \"email\"       : \"samithdilsh@gmail.com\",\r\n    \"phone\"       : \"0779955111\"\r\n            \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"firstName\"   : \"Samith\",\r\n    \"lastName\"    : \"Dilshan\",\r\n    \"address\"     : \"Katuwana Rd, Homagama\",\r\n    \"email\"       : \"samithdilsh@gmail.com\",\r\n    \"phone\"       : \"0779955111\"\r\n            \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/employees/E007",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"employees",
+								"E007"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete EmployeeByID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"firstName\"   : \"Samith\",\r\n    \"lastName\"    : \"Dilshan\",\r\n    \"address\"     : \"Katuwana Rd, Homagama\",\r\n    \"email\"       : \"samithdilsh@gmail.com\",\r\n    \"phone\"       : \"0779955111\"\r\n            \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/employees/E006",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"employees",
+								"E006"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee By ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": \"E006\",\n        \"firstName\": \"Supun\",\n        \"lastName\": \"Dileepa\",\n        \"address\": \"Maharagama Rd, Horana\",\n        \"email\": \"supundileepa@gmail.com\",\n        \"phone\": \"078845854\",\n        \"role\": \"Constructor\",\n        \"siteID\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/employees/E007",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"employees",
+								"E007"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
