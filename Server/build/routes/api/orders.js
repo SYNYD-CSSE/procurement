@@ -62,7 +62,7 @@ router.put('/:id', (req, res, next) => {
     }, {
         $set: {
             status: req.body.status,
-            unit: req.body.unit
+            items: req.body.ItemId
         }
     }, (err, result) => {
         if (err) {
@@ -72,21 +72,20 @@ router.put('/:id', (req, res, next) => {
             });
         }
         res.status(201).json({
-            message: "Item Updated",
+            message: "Order Updated",
             result
         });
     });
 });
 //REMOVE ORDER
-router.delete('/:id', (req, res, next) => {
-    Order.findByIdAndRemove({
-        OrderId: req.params.id
+router.delete('/:oid', (req, res, next) => {
+    Order.remove({
+        OrderId: req.params.oid
     }, (err, item) => {
         if (err)
             return res.json(err);
         res.json({
-            msg: "item deleted",
-            item: item
+            msg: "order deleted",
         });
     });
 });

@@ -1,60 +1,148 @@
 import React, { Component } from "react";
-
-export default class Item extends Component {
+import axios from "axios";
+import {
+  Row,
+  Col,
+  Button,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Card,
+  CardHeader,
+  CardFooter,
+  CardBody,
+  Collapse,
+  Form,
+  FormGroup,
+  FormText,
+  Label,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton
+} from "reactstrap";
+class NewAddmission extends Component {
   constructor(props) {
     super(props);
-    this.onChangeHostName = this.onChangeHostName.bind(this);
-    this.onChangePort = this.onChangePort.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
     this.state = {
       name: "",
-      quantity: "1",
+      quantity: "",
       unit: ""
     };
+
+    this.inputHandler = this.inputHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
-  onChangeHostName(e) {
-    this.setState({
-      name: e.target.value
-    });
+
+  inputHandler(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
-  onChangePort(e) {
-    this.setState({
-      port: e.target.value
-    });
-  }
-  onSubmit(e) {
+  submitHandler(e) {
     e.preventDefault();
-    console.log("clicked");
+    const { quantity, name, unit } = this.state;
+
+    axios
+      .post("http://localhost:5000/items", {
+        name,
+        quantity,
+        unit
+      })
+      .then(result => {
+        console.log(result);
+        // alertify.alert("Alert Title", "New Addmission Added!", function() {
+        //   alertify.success("Ok");
+        // });
+        // alertify.notify("New Item Added!", "success", 5, function() {
+        //   console.log("dismissed");
+        // });
+      });
+    this.props.history.push("/dashboards");
   }
 
   render() {
     return (
-      <div style={{ marginTop: 50 }}>
-        <h3>Add Item</h3>
-        <form>
-          <div className="form-group">
-            <label>Item Name: </label>
-            <input type="text" name="name" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label>Unit: </label>
-            <input type="text" name="unit" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label>Quantity: </label>
-            <input type="number" name="qty" className="form-control" />
-          </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              name=""
-              value="Add"
-              className="btn btn-primary"
-            />
-          </div>
-        </form>
+      <div className="container">
+        <Row>
+          <Col sm="10" xs="6">
+            <form onSubmit={this.submitHandler}>
+              <Card>
+                <CardHeader>
+                  <strong>ADD ITEM</strong>
+                  <small> Form</small>
+                </CardHeader>
+
+                <CardBody>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <FormGroup row>
+                        <Col xs="8">
+                          <Label htmlFor="name">Item Name</Label>
+                          <Input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Item Name"
+                            onChange={this.inputHandler}
+                            value={this.state.name}
+                            required
+                          />
+                        </Col>
+                      </FormGroup>
+
+                      <FormGroup row>
+                        <Col xs="8">
+                          <Label htmlFor="quantity">Quantity</Label>
+                          <Input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            placeholder="Enter Quantity"
+                            onChange={this.inputHandler}
+                            value={this.state.quantity}
+                            required
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Col xs="8">
+                          <Label htmlFor="unit">Unit</Label>
+                          <Input
+                            type="number"
+                            id="unit"
+                            name="unit"
+                            placeholder="Enter Unit"
+                            onChange={this.inputHandler}
+                            value={this.state.unit}
+                            required
+                          />
+                        </Col>
+                      </FormGroup>
+                    </div>
+                  </div>
+                </CardBody>
+                <CardFooter>
+                  <div className="float-right">
+                    <Button type="submit" size="sm" color="primary">
+                      <i className="fa fa-dot-circle-o" /> Submit
+                    </Button>
+                    <Button
+                      type="reset"
+                      size="sm"
+                      color="danger"
+                      onClick={this.resetHandler}
+                    >
+                      <i className="fa fa-ban" /> Reset
+                    </Button>
+                  </div>
+                </CardFooter>
+              </Card>
+            </form>
+          </Col>
+        </Row>
       </div>
     );
   }
 }
+
+export default NewAddmission;
