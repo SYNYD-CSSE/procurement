@@ -1,0 +1,6 @@
+{
+    "name": "OrderDetails",
+    "version": "0.0.0",
+    "private": true,
+    "main": "./OrderDetails.js"
+  }
