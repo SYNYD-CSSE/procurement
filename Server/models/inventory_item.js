@@ -3,8 +3,7 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 
 const inventoryItemSchema = new mongoose.Schema({
     item: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Item",
+        type: String,
         required: true
     },
     unitprice: {

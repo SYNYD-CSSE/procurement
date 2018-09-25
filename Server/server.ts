@@ -13,7 +13,7 @@ import Order from "./routes/api/orders";
 import Item from "./routes/api/items";
 import Payment from "./routes/api/paymentRoute";
 import Supplier from "./routes/api/suppliers";
-import InventroyItems from "./routes/api/inventoryItems";
+import Quotations from "./routes/api/sentQuotations";
 
 
 mongoose.connect(config.database,{useNewUrlParser: true});
@@ -49,7 +49,7 @@ app.use("/payment", Payment);
 app.use("/employees",EmployeeRoutes);
 app.use("/user",UserRoutes);
 app.use("/suppliers", Supplier);
-app.use("/invetoryItems",InventroyItems);
+app.use("/quotations",Quotations);
 generate.initilize();
 
 app.get("/", (req, res) => {

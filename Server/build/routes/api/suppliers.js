@@ -2,11 +2,11 @@
 const express = require("express");
 const router = express.Router();
 const Supplier = require("../../models/supplier");
+var autoIncrement = require('mongoose-auto-increment');
 //GET ALL
 router.get("/", (req, res, next) => {
     Supplier
         .find()
-        .populate('inventoryItems', 'item'.populate('item', 'name') + ' quantity')
         .then(result => {
         res.status(200)
             .json(result);
@@ -53,12 +53,14 @@ router.post("/", (req, res, next) => {
     }
 });
 router.put('/supplier/update/:id', (req, res, next) => {
-    user.findOneAndUpdate({ _id: req.params.id }, { $set: {
+    Supplier.findOneAndUpdate({ supplierId: req.params.id }, { $set: {
             name: req.body.name,
             address: req.body.address,
             email: req.body.email,
             phone: req.body.phone,
-            inventoryItemsList: req.body.inventoryItems
+            status: req.body.status,
+            itemsList: req.body.itemsList,
+            rating: req.body.rating
         } }, (err, result) => {
         if (err) {
             res.json(err);
@@ -69,7 +71,7 @@ router.put('/supplier/update/:id', (req, res, next) => {
     });
 });
 router.put('/supplier/status/:id', (req, res, next) => {
-    user.findOneAndUpdate({ _id: req.params.id }, { $set: {
+    Supplier.findOneAndUpdate({ supplierId: req.params.id }, { $set: {
             status: req.body.status,
         } }, (err, result) => {
         if (err) {
@@ -78,6 +80,17 @@ router.put('/supplier/status/:id', (req, res, next) => {
         else {
             res.json({ msg: 'Successfully Updated Status', obj: result });
         }
+    });
+});
+router.delete('/:id', (req, res, next) => {
+    Supplier.remove({
+        supplierId: req.params.id
+    }, (err, item) => {
+        if (err)
+            return res.json(err);
+        res.json({
+            msg: "Supplier deleted",
+        });
     });
 });
 module.exports = router;

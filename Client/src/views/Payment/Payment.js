@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class Payment extends React.Component {
 
@@ -10,9 +11,11 @@ class Payment extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.setModal = this.setModal.bind(this);
+    this.payModal = this.payModal.bind(this);
     this.state = {
       activeTab: '1',
-      modal: false
+      modal: false,
+      payOpen: false
     };
   }
 
@@ -27,6 +30,12 @@ class Payment extends React.Component {
   setModal() {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  payModal() {
+    this.setState({
+      payOpen: !this.state.payOpen
     });
   }
 
@@ -49,7 +58,7 @@ class Payment extends React.Component {
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
             >
-              Successfull Payments
+              Successful Payments
             </NavLink>
           </NavItem>
         </Nav>
@@ -87,7 +96,28 @@ class Payment extends React.Component {
                                 <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                               </ModalFooter>
                             </Modal>
-                        <Button color="danger" >Pay Now</Button>
+                        <Button color="danger" onClick={this.payModal}>Pay Now</Button>
+                            <Modal isOpen={this.state.payOpen} toggle={this.payModal} className={this.props.className}>
+                              <ModalHeader toggle={this.payModal}>Payment Details</ModalHeader>
+                              <ModalBody>
+                                <FormGroup row>
+                                    <Label for="exampleEmail" sm={2}>Payment Method</Label>
+                                    <Col sm={10}>
+                                      <Input name="email" id="exampleEmail" placeholder="with a placeholder" />
+                                    </Col>
+                                  </FormGroup>
+                                  <FormGroup row>
+                                    <Label for="examplePassword" sm={2}>Voucher No</Label>
+                                    <Col sm={10}>
+                                      <Input name="password" id="examplePassword" placeholder="password placeholder" />
+                                    </Col>
+                                </FormGroup>
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+                                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                              </ModalFooter>
+                            </Modal>
                       </td>
                     </tr>  
 
@@ -111,19 +141,33 @@ class Payment extends React.Component {
 
           <TabPane tabId="2">
             <Row>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
+              <Col sm="12">
+              <Table borderless hover responsive size="sm">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Order ID</th>
+                      <th>Payment ID</th>
+                      <th>Amout</th>
+                      <th>Date</th>
+                      <th>Supplier ID</th>
+                      <th>Site Manager</th>
+                      <th>Payment Method</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>120</td>
+                      <td>75</td>
+                      <td>12500</td>
+                      <td>2018/08/15</td>
+                      <td>Access</td>             
+                      <td>MAGA</td>   
+                      <td>Voucher</td>  
+                    </tr> 
+                  </tbody>
+                </Table>
               </Col>
             </Row>
           </TabPane>
