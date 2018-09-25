@@ -85,8 +85,7 @@ router.delete('/:pid', (req, res, next) => {
         if (err)
             return res.json(err);
         res.json({
-            msg: "item deleted",
-            item: item
+            msg: "item deleted"
         });
     });
 });
