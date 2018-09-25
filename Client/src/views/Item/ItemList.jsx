@@ -58,6 +58,8 @@ class ItemList extends Component {
               <th>Item Name</th>
               <th>Unit</th>
               <th>Quantity</th>
+              <th />
+              <th />
             </tr>
           </thead>
           <tbody>{tabRow}</tbody>

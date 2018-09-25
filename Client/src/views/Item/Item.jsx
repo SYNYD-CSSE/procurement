@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Item extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    // this.deleteItemService = new ItemService();
-    // this.deleteMember = this.deleteMember.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  // deleteMember() {
-  //   // event.preventDefault();
-  //   this.deleteItemService.deleteData(this.props.id);
-  // }
+  deleteItem(event) {
+    event.preventDefault();
+    axios
+      .delete("http://localhost:5000/items/" + this.props.itemId)
+      .then(res => {
+        this.setState({ res });
+      })
+      .catch(err => console.log(err));
+  }
 
   //   sendToLocal() {
   //     localStorage.clear();
@@ -46,14 +51,11 @@ class Item extends Component {
             </button>
           </Link> */}
         </td>
-        {/* <td>
-          <input
-            type="button"
-            onClick={this.deleteMember}
-            value="Delete"
-            className="btn btn-danger"
-          />
-        </td> */}
+        <td>
+          <form onSubmit={this.deleteItem}>
+            <input type="submit" value="Delete" className="btn btn-danger" />
+          </form>
+        </td>
       </tr>
     );
   }
