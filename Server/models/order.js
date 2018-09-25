@@ -12,6 +12,11 @@ const orderSchema = new mongoose.Schema({
         default: 1
         // required: true
     },
+    siteManagerId: {
+        type: Number,
+        default: null
+        // required: true
+    },
     orderDate: {
         type: Date,
         default: Date.now
