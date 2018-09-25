@@ -192,6 +192,11 @@ const AddItem = Loadable({
   loading: Loading
 });
 
+const ItemList = Loadable({
+  loader: () => import("./views/Item/ItemList"),
+  loading: Loading
+});
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   {
@@ -419,6 +424,12 @@ const routes = [
     exact: true,
     name: "AddItem",
     component: AddItem
+  },
+  {
+    path: "/itemList",
+    exact: true,
+    name: "ItemList",
+    component: ItemList
   }
 ];
 

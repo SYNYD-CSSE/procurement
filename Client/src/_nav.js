@@ -25,6 +25,11 @@ export default {
       icon: 'icon-briefcase',
     },
     {
+      name: 'Items',
+      url: '/itemList',
+      icon: 'icon-briefcase',
+    },
+    {
       title: true,
       name: 'Theme',
       wrapper: { // optional wrapper object
