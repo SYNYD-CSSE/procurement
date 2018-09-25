@@ -25,7 +25,7 @@ class OrderDetails extends Component {
         fetch(`/orders`)
    
            .then(res=>res.json())
-            .then(orders=> this.setState({orders},()=> console.log('asdfasfd')));
+            .then(orders=> this.setState({orders},()=> console.log(orders)));
    
      }
     
