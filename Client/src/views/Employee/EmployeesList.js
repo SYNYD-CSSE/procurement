@@ -13,9 +13,12 @@ import {
   Button,
 } from 'reactstrap';
 
+import  Employees  from "../../services/EmployeeService";
+
 class EmployeesList extends Component {
   constructor(props) {
     super(props);
+    let employees;
 
     this.toggle = this.toggle.bind(this);
     this.toggleFade = this.toggleFade.bind(this);
@@ -34,6 +37,15 @@ class EmployeesList extends Component {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
 
+  loadAllEmployees(){
+    Employees.getAllEmployees().then(data =>{
+      console.log(data);
+    }).catch(err =>{
+      console.log(`Loading Employees get some errors ${err}`);
+    });
+
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -47,6 +59,7 @@ class EmployeesList extends Component {
                   <Table responsive hover>
                     <thead>
                     <tr>
+                      <th>ID</th>
                       <th>Name</th>
 
                       <th>Address</th>
@@ -59,6 +72,7 @@ class EmployeesList extends Component {
                     </thead>
                     <tbody>
                     <tr>
+                      <td>E000</td>
                       <td>Samith Dilshan</td>
                       <td>Katuawan Rd, Homagama</td>
                       <td>samithdilsh@gmail.com</td>
@@ -80,6 +94,7 @@ class EmployeesList extends Component {
                       </td>
                     </tr>
                     <tr>
+                      <td>E000</td>
                       <td>Kirito Okazaki</td>
                       <td>Kandy Rd, Battaramulla</td>
                       <td>yasirutit1@gmail.com</td>
@@ -101,6 +116,7 @@ class EmployeesList extends Component {
                       </td>
                     </tr>
                     <tr>
+                      <td>E000</td>
                       <td>Supun Dileepa</td>
                       <td>Maharagama Rd, Horana</td>
                       <td>supundileepa@gmail.com</td>
@@ -122,6 +138,7 @@ class EmployeesList extends Component {
                       </td>
                     </tr>
                     <tr>
+                      <td>E000</td>
                       <td>Vimukthi Thenuka</td>
                       <td>Awissawella Rd, Delgoda</td>
                       <td>vimukthithenuka@gmail.com</td>
@@ -143,6 +160,7 @@ class EmployeesList extends Component {
                       </td>
                     </tr>
                     <tr>
+                      <td>E000</td>
                       <td>Bimali</td>
                       <td>Diyathawa Rd, Badulla</td>
                       <td>bimaliyapa@gmail.com</td>
@@ -164,6 +182,7 @@ class EmployeesList extends Component {
                       </td>
                     </tr>
                     <tr>
+                      <td>E000</td>
                       <td>Nirmal Senevirathna</td>
                       <td>Kaduwela Rd, Battaramulla</td>
                       <td>nirmalseneviratna@gmail.com</td>
