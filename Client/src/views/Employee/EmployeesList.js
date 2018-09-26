@@ -60,6 +60,31 @@ class EmployeesList extends Component {
     }
   }
 
+  deleteEmployee(id){
+
+    Employees.deleteEmployeeByID(id).then(data =>{
+      if(data){
+
+        let employees = this.state.employees;
+        let index = employees.find(x=> x.id==id);
+        employees.splice(index,1);
+        this.setState({employees:employees});
+        console.log(this.state.employees);
+        alert(`${data.data.id} Employee Deleted Successfully!`);
+
+
+
+      }
+
+    }).catch(err =>{
+      console.log(`Deleting Employees get some errors ${err}`);
+    });
+  }
+
+  onDelete(id){
+    this.deleteEmployee(id);
+  }
+
   componentWillUnmount() {
     this.loadAllEmployees();
   }
@@ -91,7 +116,7 @@ class EmployeesList extends Component {
                   <Button color="ghost-warning">
                     <i className="cui-note font-2xl"></i>
                   </Button>
-                  <Button color="ghost-danger">
+                  <Button color="ghost-danger"  onClick={this.onDelete.bind(this,employee.id)}>
                     <i className="cui-trash font-2xl"></i>
                   </Button>
               </td>
