@@ -61,6 +61,20 @@ router.get("/:id", (req, res, next) => {
     }
 });
 
+//ORDER FIND BY status
+
+router.get("/status/:status", (req, res, next) => {
+    try {
+        Order.find({
+            status: req.params.status
+        }, (err, result) => {
+            if (err) return next(err);
+            res.json(result);
+        });
+    } catch (error) {
+        console.log(error)
+    }
+});
 
 //Update ORDER
 router.put('/:id', (req, res, next) => {
