@@ -19,20 +19,19 @@ class Payment extends React.Component {
       modal: false,
       payOpen: false,
       items : [],
-      count : 0
+      count : 0,
+      amount : 0
     };
     
   }
 
-  setModal(e) {
-    e.preventDefault()
+  setModal() {
     this.setState({
       modal: !this.state.modal
     });
   }
 
-  setPayModal(e) {
-    e.preventDefault()
+  setPayModal() {
     this.setState({
       payOpen: !this.state.payOpen
     });
@@ -63,6 +62,33 @@ class Payment extends React.Component {
   }
 
  
+  // post a payment
+  sendPayment(){
+    
+    this.setState({
+      amount : 782300,
+      payOpen: !this.state.payOpen
+    }, () => {     
+
+      // create a new payment 
+      fetch('http://localhost:5000/payment/create/', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "amount" : this.state.amount
+        })
+        }).then(res=>res.json())
+        .then(res => console.log(res));
+
+        alert('Payment Successful !');        
+    });    
+    
+  }
+
+
 
   render() {
 
@@ -81,35 +107,36 @@ class Payment extends React.Component {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+              <Button color="primary" onClick={this.setModal}>Do Something</Button>{' '}
+              <Button color="secondary" onClick={this.setModal}>Cancel</Button>
             </ModalFooter>
           </Modal>
 
 
 
 
-<Modal isOpen={this.state.payOpen} toggle={this.setPayModal} className={this.props.className}>
-<ModalHeader toggle={this.setPayModal}>Payment Details</ModalHeader>
-<ModalBody>
-  <FormGroup row>
-      <Label for="exampleEmail" sm={2}>Payment Method</Label>
-      <Col sm={10}>
-        <Input name="email" id="exampleEmail" placeholder="card voucher etc" />
-      </Col>
-    </FormGroup>
-    <FormGroup row>
-      <Label for="examplePassword" sm={2}>Voucher No</Label>
-      <Col sm={10}>
-        <Input name="password" id="examplePassword" placeholder="password placeholder" />
-      </Col>
-  </FormGroup>
-</ModalBody>
-<ModalFooter>
-  <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-  <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-</ModalFooter>
-</Modal>
+        <Modal isOpen={this.state.payOpen} toggle={this.setPayModal} className={this.props.className}>
+        <ModalHeader toggle={this.setPayModal}>Payment Details</ModalHeader>
+        <ModalBody>
+          <FormGroup row>
+              <Label for="exampleEmail" sm={2}>Payment Method</Label>
+              <Col sm={10}>
+                <Input id="payType" placeholder="Card voucher etc" />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="examplePassword" sm={2}>Voucher No / Card No</Label>
+              <Col sm={10}>
+                <Input id="cardNo" placeholder="Enter the number" />
+              </Col>
+          </FormGroup>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.sendPayment.bind(this)}>Pay</Button>{' '}
+          {/* ()=>{ this.sendPayment.bind(this); this.setPayModal()} */}
+          <Button color="secondary" onClick={this.setPayModal}>Cancel</Button>{' '}
+        </ModalFooter>
+        </Modal>
 
 
 

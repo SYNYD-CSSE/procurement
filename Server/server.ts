@@ -11,7 +11,7 @@ import EmployeeRoutes from "./routes/EmployeeRoutes";
 import UserRoutes from "./routes/userRoutes";
 import Order from "./routes/api/orders";
 import Item from "./routes/api/items";
-import Payment from "./routes/api/paymentRoute";
+import Payment from "./routes/api/payment";
 import Supplier from "./routes/api/suppliers";
 import Quotations from "./routes/api/sentQuotations";
 
