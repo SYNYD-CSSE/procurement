@@ -98,6 +98,8 @@ class NewEmployee extends Component {
     else{
       Employees.updateEmployee(this.state.employeeID,this.state.employee).then(data =>{
         console.log(data);
+        alert('Employee Sucessfully updated !');
+        this.props.history.push("/employee/list");
   
       }).catch(err =>{
         console.log(`Update Employee get some errors ${err}`);

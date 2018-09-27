@@ -63,6 +63,17 @@ class EmployeesList extends Component {
       default :  return 'primary';
     }
   }
+  returnSiteLocation(siteID){
+    switch (siteID) {
+      case 0 : return 'Not Assign';
+      case 1 : return 'Kollupitiya';
+      case 2 : return 'Kaduwela';
+      case 3 : return 'Kottawa';
+      case 4 : return 'Malabe';
+      case 5 : return 'Battaramulla';
+      default :  return 'Invalid';
+    }
+  }
 
   deleteEmployee(id){
 
@@ -191,12 +202,14 @@ class EmployeesList extends Component {
         </Row>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
-          <ModalHeader toggle={this.toggle}>
-            <h1><i className="fa fa-user-circle"></i> {this.state.employee.firstName +' ' + this.state.employee.lastName }</h1>
-            <h3>
-              <Badge color={this.returnRoleColor(this.state.employee.role)}>{this.state.employee.role}</Badge>
-            </h3>
-          </ModalHeader>
+          <div className="modal-header">
+              <h1 className="modal-title">
+                  <i className="fa fa-user-circle"></i> 
+                    {' ' + this.state.employee.firstName +' ' + this.state.employee.lastName }
+                    <br/>
+                    <small> <Badge color={this.returnRoleColor(this.state.employee.role)}>{this.state.employee.role}</Badge></small>
+              </h1>
+          </div>
           <ModalBody>
         <Table hover>
         <tbody>
@@ -247,7 +260,7 @@ class EmployeesList extends Component {
               <i className="fa fa-building"></i>  
             </td>
             <td><b>Site</b></td>
-            <td>{this.state.employee.siteID}</td>
+            <td>{this.returnSiteLocation(this.state.employee.siteID)}</td>
           </tr>
         </tbody>
       </Table>
