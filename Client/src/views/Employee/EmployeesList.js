@@ -11,6 +11,10 @@ import {
   Pagination,
   Row,
   Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
 } from 'reactstrap';
 
 import  Employees  from "../../services/EmployeeService";
@@ -21,8 +25,9 @@ class EmployeesList extends Component {
     this.employees;
 
     this.toggle = this.toggle.bind(this);
-    this.toggleFade = this.toggleFade.bind(this);
+
     this.state = {
+      employee:{},
       employees :[],
       collapse: true,
       fadeIn: true,
@@ -31,12 +36,11 @@ class EmployeesList extends Component {
   }
 
   toggle() {
-    this.setState({ collapse: !this.state.collapse });
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
-  toggleFade() {
-    this.setState((prevState) => { return { fadeIn: !prevState }});
-  }
 
   loadAllEmployees(){
     Employees.getAllEmployees().then(data =>{
@@ -82,6 +86,19 @@ class EmployeesList extends Component {
     this.deleteEmployee(id);
   }
 
+  onUpdate(id){
+    this.props.history.push(`/employee/${id}`);
+  }
+
+  onInfo(id){
+      let employee = this.state.employees.filter(e => {
+        return e.id == id;
+      })[0];
+      this.setState({employee : employee});
+      this.toggle();
+
+  }
+
   componentWillUnmount() {
     this.loadAllEmployees();
   }
@@ -107,10 +124,10 @@ class EmployeesList extends Component {
               </td>
               <td>{employee.siteID}</td>
               <td>
-                  <Button color="ghost-success">
-                    <i className="cui-info font-2xl"></i>
+                  <Button color="ghost-success" onClick={this.onInfo.bind(this,employee.id)} >
+                    <i className="cui-info font-2xl"  ></i>
                   </Button>
-                  <Button color="ghost-warning">
+                  <Button color="ghost-warning" onClick={this.onUpdate.bind(this,employee.id)}>
                     <i className="cui-note font-2xl"></i>
                   </Button>
                   <Button color="ghost-danger"  onClick={this.onDelete.bind(this,employee.id)}>
@@ -172,6 +189,75 @@ class EmployeesList extends Component {
               </Card>
             </Col>
         </Row>
+
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
+          <ModalHeader toggle={this.toggle}>
+            <h1><i className="fa fa-user-circle"></i> {this.state.employee.firstName +' ' + this.state.employee.lastName }</h1>
+            <h3>
+              <Badge color={this.returnRoleColor(this.state.employee.role)}>{this.state.employee.role}</Badge>
+            </h3>
+          </ModalHeader>
+          <ModalBody>
+        <Table hover>
+        <tbody>
+          <tr>
+            <td>
+              <i className="fa fa-drivers-license"></i>  
+            </td>
+            <td><b>Employee ID</b></td>
+            <td>{this.state.employee.id}</td>
+          </tr>
+          <tr>
+            <td>
+              <i className="fa fa-user"></i>  
+            </td>
+            <td><b>First Name</b></td>
+            <td>{this.state.employee.firstName}</td>
+          </tr>
+          <tr>
+            <td>
+              <i className="fa fa-user"></i>  
+            </td>
+            <td><b>Last Name</b></td>
+            <td>{this.state.employee.lastName}</td>
+          </tr>
+          <tr>
+            <td>
+              <i className="fa fa-envelope"></i>  
+            </td>
+            <td><b>Email</b></td>
+            <td>{this.state.employee.email}</td>
+          </tr>
+          <tr>
+            <td>
+              <i className="fa fa-map-marker"></i>  
+            </td>
+            <td><b>Address</b></td>
+            <td>{this.state.employee.address}</td>
+          </tr>
+          <tr>
+            <td>
+              <i className="fa fa-phone"></i>  
+            </td>
+            <td><b>Phone</b></td>
+            <td>{this.state.employee.phone}</td>
+          </tr>
+          <tr>
+            <td>
+              <i className="fa fa-building"></i>  
+            </td>
+            <td><b>Site</b></td>
+            <td>{this.state.employee.siteID}</td>
+          </tr>
+        </tbody>
+      </Table>
+
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" onClick={this.toggle}>Close</Button>
+          </ModalFooter>
+        </Modal>
+
       </div>
     );
   }
