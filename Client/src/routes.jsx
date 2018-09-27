@@ -197,6 +197,11 @@ const ItemList = Loadable({
   loading: Loading
 });
 
+const EditItem = Loadable({
+  loader: () => import("./views/Item/EditItem"),
+  loading: Loading
+});
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   {
@@ -430,6 +435,12 @@ const routes = [
     exact: true,
     name: "ItemList",
     component: ItemList
+  },
+  {
+    path: "/editItem/:itemId",
+    exact: true,
+    name: "EditItem",
+    component: EditItem
   }
 ];
 

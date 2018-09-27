@@ -1,15 +1,33 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  CardHeader,
+  CardFooter,
+  CardBody,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
 class EditItem extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: "" };
+    this.state = {
+      name: "",
+      quantity: "",
+      unit: ""
+    };
+
+    this.inputHandler = this.inputHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
   componentDidMount() {
     axios
-      .put("http://localhost:5000/items/" + this.props.match.params.itemId)
+      .get("http://localhost:5000/items/" + this.props.match.params.itemId)
       .then(response => {
         this.setState({ items: response.data });
       })
@@ -18,21 +36,103 @@ class EditItem extends Component {
       });
   }
 
+  inputHandler(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+  submitHandler(e) {
+    e.preventDefault();
+    const { quantity, name, unit } = this.state;
+
+    axios
+      .put("http://localhost:5000/items/" + this.props.match.params.itemId, {
+        name,
+        quantity,
+        unit
+      })
+      .then(result => {
+        console.log(result);
+        // alertify.alert("Alert Title", "New Addmission Added!", function() {
+        //   alertify.success("Ok");
+        // });
+        // alertify.notify("New Item Added!", "success", 5, function() {
+        //   console.log("dismissed");
+        // });
+      });
+    this.props.history.push("/dashboards");
+  }
+
   render() {
     return (
       <div className="container">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Edit Item:
-            <input
-              type="text"
-              value={this.state.items.item}
-              className="form-control"
-            />
-          </label>
-          <br />
-          <input type="submit" value="Update" className="btn btn-primary" />
-        </form>
+        <Row>
+          <Col sm="10" xs="6">
+            <form onSubmit={this.submitHandler}>
+              <Card>
+                <CardHeader>
+                  <strong>EDIT ITEM</strong>
+                  <small> Form</small>
+                </CardHeader>
+
+                <CardBody>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <FormGroup row>
+                        <Col xs="8">
+                          <Label htmlFor="name">Item Name</Label>
+                          <Input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Item Name"
+                            onChange={this.inputHandler}
+                            value={this.state.name}
+                            required
+                          />
+                        </Col>
+                      </FormGroup>
+
+                      <FormGroup row>
+                        <Col xs="8">
+                          <Label htmlFor="quantity">Quantity</Label>
+                          <Input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            placeholder="Enter Quantity"
+                            onChange={this.inputHandler}
+                            value={this.state.quantity}
+                            required
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Col xs="8">
+                          <Label htmlFor="unit">Unit</Label>
+                          <Input
+                            type="text"
+                            id="unit"
+                            name="unit"
+                            placeholder="Enter Unit"
+                            onChange={this.inputHandler}
+                            value={this.state.unit}
+                            required
+                          />
+                        </Col>
+                      </FormGroup>
+                    </div>
+                  </div>
+                </CardBody>
+                <CardFooter>
+                  <div className="float-right">
+                    <Button type="submit" size="sm" color="primary">
+                      <i className="fa fa-dot-circle-o" /> Update
+                    </Button>
+                  </div>
+                </CardFooter>
+              </Card>
+            </form>
+          </Col>
+        </Row>
       </div>
     );
   }

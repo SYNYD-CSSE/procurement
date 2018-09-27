@@ -50,6 +50,13 @@ class Item extends Component {
               <i className="fa fa-search fa-sm" /> View BHT
             </button>
           </Link> */}
+
+          <Link
+            to={"/editItem/" + this.props.itemId}
+            className="btn btn-primary"
+          >
+            Edit
+          </Link>
         </td>
         <td>
           <form onSubmit={this.deleteItem}>

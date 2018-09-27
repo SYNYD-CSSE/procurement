@@ -62,7 +62,8 @@ router.put('/:id', (req, res, next) => {
     }, {
         $set: {
             name: req.body.name,
-            unit: req.body.unit
+            unit: req.body.unit,
+            quantity: req.body.quantity
         }
     }, (err, result) => {
         if (err) {
