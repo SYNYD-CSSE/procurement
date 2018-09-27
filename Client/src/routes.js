@@ -221,8 +221,9 @@ const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
 
-  { path: '/employee/new', name: 'New Employee', component: NewEmployee },
+  
   { path: '/employee/list', name: 'Employees List', component: EmployeesList },
+  { path: '/employee/:id', name: 'New Employee', component: NewEmployee },
 
   { path: '/user/new', name: 'New User', component: NewUser },
   { path: '/user/list', name: 'Users List', component: UsersList },

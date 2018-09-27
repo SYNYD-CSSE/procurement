@@ -20,12 +20,15 @@ class NewEmployee extends Component {
   constructor(props) {
     super(props);
 
+    
+
     this.onSumbitForm = this.onSumbitForm.bind(this);
     this.onHandleChange = this.onHandleChange.bind(this);
 
     this.toggle = this.toggle.bind(this);
     this.toggleFade = this.toggleFade.bind(this);
     this.state = {
+      employeeID :'',
       employee : {
         firstName : '',
         lastName : '',
@@ -39,6 +42,22 @@ class NewEmployee extends Component {
       fadeIn: true,
       timeout: 300
     };
+
+    const id = String(this.props.match.params.id);
+    
+    if(id.length===4 && id.charAt(0)==='E'){
+      this.state.employeeID = id;
+      this.loadEmployee(this.state.employeeID);
+      
+    }
+    else if(id==='new'){
+      this.state.employeeID = '';
+    }
+    else {
+      this.state.employeeID = '';
+      this.props.history.push("/");
+    }
+
   }
 
   toggle() {
@@ -48,7 +67,14 @@ class NewEmployee extends Component {
   toggleFade() {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
+  
+  loadEmployee(id){
+    Employees.getEmployeeByID(id).then(data=>{
+      this.setState({employee:data.data});
+      console.log(this.state);
+    });
 
+  }
   insertEmployee(employee){
     Employees.insertEmployee(employee).then(data =>{
       this.setState({employee:data.data});

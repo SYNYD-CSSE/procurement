@@ -36,7 +36,7 @@ class employeeController {
     static getEmployeeByID(req, res) {
         try {
             const id = req.params.id;
-            employee_1.default.find({ id: id }).then((data) => {
+            employee_1.default.findOne({ id: id }).then((data) => {
                 const status = res.statusCode;
                 res.json({
                     status,
