@@ -14,13 +14,27 @@ import {
   Row,
 } from 'reactstrap';
 
+import  Employees  from "../../services/EmployeeService";
+
 class NewEmployee extends Component {
   constructor(props) {
     super(props);
 
+    this.onSumbitForm = this.onSumbitForm.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
+
     this.toggle = this.toggle.bind(this);
     this.toggleFade = this.toggleFade.bind(this);
     this.state = {
+      employee : {
+        firstName : '',
+        lastName : '',
+        address : '',
+        email : '',
+        phone : '',
+        role : '',
+        siteID : 0
+      },
       collapse: true,
       fadeIn: true,
       timeout: 300
@@ -35,23 +49,65 @@ class NewEmployee extends Component {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
 
+  insertEmployee(employee){
+    Employees.insertEmployee(employee).then(data =>{
+      this.setState({employee:data.data});
+      console.log(this.state.employee);
+
+    }).catch(err =>{
+      console.log(`Inserting Employee get some errors ${err}`);
+    });
+  }
+  onSumbitForm(e){
+    e.preventDefault();
+    Employees.insertEmployee(this.state.employee).then(data =>{
+      console.log(data);
+
+    }).catch(err =>{
+      console.log(`Loading Employees get some errors ${err}`);
+    });
+  }
+
+  onHandleChange(e){
+  
+    let key = e.target.id;
+    let value = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      employee : {
+        ...prevState.employee,
+        [key]: value
+      }
+    }));
+  }
+
+  componentWillUnmount() {
+
+  }
+
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" md="12" lg="8">
+          <Form className="form-horizontal" onSubmit={this.onSumbitForm}>
             <Card>
               <CardHeader>
                 <strong>Employee Register Form</strong> | Add New Employee
               </CardHeader>
               <CardBody>
-                <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
+                
                  <FormGroup row>
                     <Col md="3">
                       <Label htmlFor="firstName">First Name</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="firstName" name="firstName" placeholder="First Name" />
+                      <Input type="text" id="firstName" value={this.state.employee.firstName} name="firstName" placeholder="First Name" onChange={this.onHandleChange}/>
                       <FormText color="muted">Enter Employee's First Name </FormText>
                     </Col>
                   </FormGroup>
@@ -60,7 +116,7 @@ class NewEmployee extends Component {
                       <Label htmlFor="lastName">Last Name</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="lastName" name="lastName" placeholder="Last Name" />
+                      <Input type="text" id="lastName" value={this.state.employee.lastName} name="lastName" placeholder="Last Name" onChange={this.onHandleChange} />
                       <FormText color="muted">Enter Employee's Last Name </FormText>
                     </Col>
                   </FormGroup>
@@ -69,7 +125,7 @@ class NewEmployee extends Component {
                       <Label htmlFor="address">Address</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="address" name="address" placeholder="Address" />
+                      <Input type="text" id="address" value={this.state.employee.address} name="address" placeholder="Address" onChange={this.onHandleChange} />
                       <FormText color="muted">Enter Employee's Address </FormText>
                     </Col>
                   </FormGroup>
@@ -78,7 +134,7 @@ class NewEmployee extends Component {
                       <Label htmlFor="email">Email</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="email" id="email" name="email" placeholder="Enter Email" autoComplete="email"/>
+                      <Input type="email" id="email" value={this.state.employee.email} name="email" placeholder="Enter Email" autoComplete="email" onChange={this.onHandleChange} />
                       <FormText className="help-block">Enter Employee's Email</FormText>
                     </Col>
                   </FormGroup>
@@ -87,7 +143,7 @@ class NewEmployee extends Component {
                       <Label htmlFor="phone">Phone Number</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="phone" name="phone" placeholder="Phone Number" />
+                      <Input type="text" id="phone" value={this.state.employee.phone} name="phone" placeholder="Phone Number" onChange={this.onHandleChange} />
                       <FormText color="muted">Enter Employee's Phone Number </FormText>
                     </Col>
                   </FormGroup>
@@ -97,7 +153,7 @@ class NewEmployee extends Component {
                       <Label htmlFor="role">Role</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="select" name="role" id="role">
+                      <Input type="select" value={this.state.employee.role} name="role" id="role" onChange={this.onHandleChange} >
                         <option value="Regular">Regular</option>
                         <option value="Constructor">Constructor</option>
                         <option value="SiteManager">Site Manager</option>
@@ -112,7 +168,7 @@ class NewEmployee extends Component {
                       <Label htmlFor="siteID">Site</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="select" name="siteID" id="siteID">
+                      <Input type="select" value={this.state.employee.siteID} name="siteID" id="siteID" onChange={this.onHandleChange} >
                         <option value="1">Kollupitiya</option>
                         <option value="2">Kaduwela</option>
                         <option value="3">Kottawa</option>
@@ -123,13 +179,14 @@ class NewEmployee extends Component {
                     </Col>
                   </FormGroup>
                   
-                  </Form>
+                  
               </CardBody>
               <CardFooter>
                 <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
                 <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Reset</Button>
               </CardFooter>
             </Card>
+          </Form>
           </Col>
         </Row>
       </div>
