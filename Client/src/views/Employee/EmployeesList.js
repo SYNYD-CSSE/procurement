@@ -14,7 +14,8 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
-  ModalHeader
+  ModalHeader,
+  ButtonGroup,
 } from 'reactstrap';
 
 import  Employees  from "../../services/EmployeeService";
@@ -135,15 +136,17 @@ class EmployeesList extends Component {
               </td>
               <td>{employee.siteID}</td>
               <td>
-                  <Button color="ghost-success" onClick={this.onInfo.bind(this,employee.id)} >
-                    <i className="cui-info font-2xl"  ></i>
+                <ButtonGroup>
+                  <Button color="success" size="sm" onClick={this.onInfo.bind(this,employee.id)} >
+                    <i className="cui-info"></i> Info
                   </Button>
-                  <Button color="ghost-warning" onClick={this.onUpdate.bind(this,employee.id)}>
-                    <i className="cui-note font-2xl"></i>
+                  <Button color="warning" size="sm" onClick={this.onUpdate.bind(this,employee.id)}>
+                    <i className="cui-note"></i> Edit
                   </Button>
-                  <Button color="ghost-danger"  onClick={this.onDelete.bind(this,employee.id)}>
-                    <i className="cui-trash font-2xl"></i>
+                  <Button color="danger" size="sm" onClick={this.onDelete.bind(this,employee.id)}>
+                    <i className="cui-trash"></i> Delete
                   </Button>
+                </ButtonGroup>
               </td>
             </tr>
           );
@@ -267,7 +270,12 @@ class EmployeesList extends Component {
 
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" onClick={this.toggle}>Close</Button>
+                  
+                    <Button className="btn-success btn-brand" onClick={this.toggle} ><i className="fa fa-check"></i><span>Done</span></Button>
+                    <Button className="btn-warning btn-brand" onClick={this.onUpdate.bind(this,this.state.employee.id)} ><i className="fa fa-pencil"></i><span>Edit</span></Button>
+                    <Button className="btn-danger btn-brand" onClick={this.onDelete.bind(this,this.state.employee.id)} ><i className="fa fa-trash"></i><span>Delete</span></Button>
+                  
+               
           </ModalFooter>
         </Modal>
 
