@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Item from "./Item";
-
+import SearchBar from "./Search";
 import { Table } from "reactstrap";
 
 class ItemList extends Component {
@@ -24,6 +24,9 @@ class ItemList extends Component {
       });
   }
 
+  // if (this.state.query && this.state.query.length > 1) {
+  //   if (this.state.query.length % 2 === 0)
+
   render() {
     var array = this.state.itemList;
     var tabRow = "";
@@ -43,7 +46,7 @@ class ItemList extends Component {
         );
       });
     } else {
-      tabRow = "";
+      tabRow = " ";
 
       return tabRow;
     }

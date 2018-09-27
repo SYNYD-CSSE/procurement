@@ -18,7 +18,7 @@ class AddItem extends Component {
     super(props);
     this.state = {
       name: "",
-      quantity: "",
+      quantity: "1",
       unit: ""
     };
 
