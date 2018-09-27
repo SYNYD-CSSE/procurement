@@ -22,8 +22,9 @@ generate.initilize = () => {
     generate.initilizeLastEmployeeID();
 };
 generate.initilizeLastEmployeeID = () => {
-    employee_1.default.findOne({}).sort({ id: -1 }).limit(1).then((data) => {
+    employee_1.default.findOne({}).sort({ _id: -1 }).limit(1).then((data) => {
         generate.lastEmployeeID = (data == null) ? null : data.id;
+        console.log(generate.lastEmployeeID);
     });
 };
 exports.default = generate;

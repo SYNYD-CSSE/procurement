@@ -26,8 +26,9 @@ class generate {
 
     public static initilizeLastEmployeeID = () =>{
 
-        employee.findOne({}).sort({id:-1}).limit(1).then((data)=>{
+        employee.findOne({}).sort({_id:-1}).limit(1).then((data)=>{
             generate.lastEmployeeID =  (data==null)? null : data.id;
+            console.log(generate.lastEmployeeID);
         });
 
     }

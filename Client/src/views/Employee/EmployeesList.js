@@ -66,14 +66,11 @@ class EmployeesList extends Component {
       if(data){
 
         let employees = this.state.employees;
-        let index = employees.find(x=> x.id==id);
+        let index = employees.findIndex(x=> x.id==id);
         employees.splice(index,1);
         this.setState({employees:employees});
-        console.log(this.state.employees);
+
         alert(`${data.data.id} Employee Deleted Successfully!`);
-
-
-
       }
 
     }).catch(err =>{
