@@ -17,8 +17,12 @@ class OrderDetails extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
           activeTab: '1',
-          orders:[]
-        };
+          orders:[],
+          OrderId:null
+
+        }
+        this.sucess=this.sucess.bind(this)
+        this.reject=this.reject.bind(this)
       }
 
       componentWillMount(){
@@ -31,11 +35,60 @@ class OrderDetails extends Component {
             .then(orders=> this.setState({orders},()=> console.log(orders)));
    
      }
+
+     rowId=(dataFromChild)=>{
+        this.setState({OrderId:dataFromChild})
+     }
+     sucess(){
+      var ApprovedDate=new Date();
+      const state={
+        status:'Approved',
+        approvedDate:ApprovedDate
+          }
+ 
+              fetch(`/orders/abc/${this.state.OrderId}`,{
+                      method:'PUT',
+                      headers:{
+                          'Accept':'application/json,text/plain,*/*',
+                          'Content-Type': 'application/json'
+  
+                      },
+                          body: JSON.stringify(state)
+  
+                  })
+                
+
+                       .then((res)=>res.json())
+                        .then(this.forceUpdate())
+
+     }
+
+     reject(){
+      
+      const state={
+        status:'Declined'
+          }
+ 
+              fetch(`/orders/abc/${this.state.orderId}`,{
+                      method:'PUT',
+                      headers:{
+                          'Accept':'application/json,text/plain,*/*',
+                          'Content-Type': 'application/json'
+  
+                      },
+                          body: JSON.stringify(state)
+  
+                  })
+
+                       .then((res)=>res.json())
+                         .then(this.forceUpdate())
+
+     }
     
       toggle(tab) {
         if (this.state.activeTab !== tab) {
           this.setState({
-            activeTab: tab,
+            activeTab:tab,
           });
         }
       }
@@ -63,7 +116,7 @@ class OrderDetails extends Component {
       var pendingItems =this.state.orders.map((orders,i)=>{
 
         return(
-          <PendingItems key={i} item={orders}/>
+          <PendingItems key={i} item={orders} orderId={this.rowId}/>
         )
       });
 
@@ -117,14 +170,14 @@ class OrderDetails extends Component {
               <nav>
                 <button   className="btn btn-lg btn-primary m-3" >Go To Details</button>
                   </nav>
-                <Table responsive>
+                <Table hover responsive size="sm">
                   <thead>
                   <tr>
                     <th>Order ID</th>
                     <th>Constructor ID</th>
                     <th>Date Added</th>
                     <th>Date Approved</th>
-                    <th>Date Placed</th>
+                    <th>Date Rejected</th>
                     <th>Status</th>
                   </tr>
                   </thead>
@@ -144,15 +197,17 @@ class OrderDetails extends Component {
               </CardHeader> */}
               <CardBody>
                 <nav>
-                <button   className="btn btn-lg btn-success m-3" >Approve Order</button>
-                <button   className="btn btn-lg btn-danger m-1" >Reject Order</button>
+                <button   className="btn btn-lg btn-success m-3" onClick={this.sucess} >Approve Order</button>
+                <button   className="btn btn-lg btn-danger m-1" onClick={this.reject}>Reject Order</button>
                   </nav>
-                <Table responsive>
+                <Table hover responsive size="sm">
                   <thead>
                   <tr>
                     <th>Order ID</th>
                     <th>Constructor ID</th>
                     <th>Date Added</th>
+                    <th>Date Approved</th>
+                    <th>Date Rejected</th>
                     <th>Status</th>
                   </tr>
                   </thead>
@@ -174,7 +229,7 @@ class OrderDetails extends Component {
                 <i className="fa fa-align-justify"></i> Simple Table
               </CardHeader> */}
               <CardBody>
-                <Table responsive>
+                <Table hover responsive size="sm">
                   <thead>
                   <tr>
                     <th>Order ID</th>
@@ -200,14 +255,13 @@ class OrderDetails extends Component {
                 <i className="fa fa-align-justify"></i> Simple Table
               </CardHeader> */}
               <CardBody>
-                <Table responsive>
+                <Table hover responsive size="sm">
                   <thead>
                   <tr>
                     <th>Order ID</th>
                     <th>Constructor ID</th>
                     <th>Date Added</th>
-                    <th>Rejected Approved</th>
-                    <th>Date Placed</th>
+                    <th>Date Rejected</th>
                     <th>Status</th>
                   </tr>
                   </thead>

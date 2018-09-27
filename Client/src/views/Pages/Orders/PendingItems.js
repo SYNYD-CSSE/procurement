@@ -13,15 +13,20 @@ constructor(props){
         item:props.item
     }
 
-    console.log('Hello form the items');
+    
 
+}
+
+getId(){
+    this.props.orderId(this.state.item.orderId)
+    console.log('Hello form the items {this.state.item.orderId})');
 }
 
   render() {
       if(this.state.item.status=="Pending"){
     return (
-        <tr>
-                    <td>{this.state.item._id}</td>
+        <tr onClick={this.getId.bind(this)}>
+                    <td>{this.state.item.orderId}</td>
                     <td>{this.state.item.constructorId}</td>
                     <td>{this.state.item.orderDate}</td>
                     <td></td>

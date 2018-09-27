@@ -28,7 +28,7 @@ router.post("/", (req, res, next) => {
     }
 });
 //GET ALL ORDERS
-router.get("/orders", (req, res, next) => {
+router.get("/", (req, res, next) => {
     Order
         .find()
         .populate('items', 'id name quantity unit -_id')
@@ -75,6 +75,18 @@ router.put('/:id', (req, res, next) => {
             message: "Order Updated",
             result
         });
+    });
+});
+router.put('/abc/:id', (req, res, next) => {
+    Order.findOneAndUpdate({ orderId: req.params.id }, { $set: {
+            status: req.body.status
+        } }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json({ msg: 'Successfully Updated', obj: result });
+        }
     });
 });
 //REMOVE ORDER

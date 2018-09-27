@@ -42,8 +42,6 @@ app.use("/payment", paymentRoute_1.default);
 app.use("/employees", EmployeeRoutes_1.default);
 app.use("/user", userRoutes_1.default);
 app.use("/suppliers", suppliers_1.default);
-app.use("/invetoryItems", inventoryItems_1.default);
-app.use("/suppliers", suppliers_1.default);
 app.use("/quotations", sentQuotations_1.default);
 generate_1.default.initilize();
 app.get("/", (req, res) => {

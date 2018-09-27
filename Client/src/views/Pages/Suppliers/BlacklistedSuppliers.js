@@ -3,7 +3,7 @@ import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane ,Card ,Tabl
 import { Link } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
 
-class SupplierItems extends Component {
+class BlacklistedSuppliers extends Component {
 
 constructor(props){
 
@@ -21,6 +21,7 @@ constructor(props){
 
   render() {
 
+    if(this.state.item.rating < 3){
     return (
         <tr>
                     <td>{this.state.item.supplierId}</td>
@@ -28,14 +29,16 @@ constructor(props){
                     <td>{this.state.item.address}</td>
                     <td> <StarRatings
           rating={this.state.item.rating}
-          starRatedColor="gold"
+          starRatedColor="red"
           numberOfStars={5}
           starDimension="30px"
           name='rating' /> </td>     
         </tr>
     )
+    }
+    else return null;
 
   }
 }
 
-export default SupplierItems;
+export default BlacklistedSuppliers;

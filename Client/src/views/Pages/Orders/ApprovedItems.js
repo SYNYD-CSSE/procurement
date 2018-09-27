@@ -9,7 +9,6 @@ constructor(props){
     super(props);
 
     this.state={
-
         item:props.item
     }
 
@@ -22,11 +21,11 @@ constructor(props){
      if(this.state.item.status=="Approved"){
         return(
     <tr>
-        <td>{this.state.item._id}</td>
+        <td>{this.state.item.orderId}</td>
         <td>{this.state.item.constructorId}</td>
         <td>{this.state.item.orderDate}</td>
-        <td></td>
-        <td></td>
+        <td>{this.state.item.approvedDate}</td>
+
         <td> 
         <Badge color="success">{this.state.item.status}</Badge>
         </td>

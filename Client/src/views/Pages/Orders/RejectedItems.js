@@ -21,11 +21,10 @@ constructor(props){
         if(this.state.item.status=="Declined"){
             return(
         <tr>
-            <td>{this.state.item._id}</td>
+            <td>{this.state.item.orderId}</td>
             <td>{this.state.item.constructorId}</td>
             <td>{this.state.item.orderDate}</td>
-            <td></td>
-            <td></td>
+            <td>{this.state.item.rejectedDate}</td>
             <td> 
             <Badge color="danger">{this.state.item.status}</Badge>
             </td>
