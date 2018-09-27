@@ -12,13 +12,15 @@ import {
   Label,
   Input
 } from "reactstrap";
+import alertify from "alertifyjs";
 class EditItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      quantity: "",
-      unit: ""
+      // name: "",
+      // quantity: "",
+      // unit: ""
+      items: {}
     };
 
     this.inputHandler = this.inputHandler.bind(this);
@@ -37,11 +39,14 @@ class EditItem extends Component {
   }
 
   inputHandler(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    // this.setState({ [e.target.name]: e.target.value });
+    const state = this.state.items;
+    state[e.target.name] = e.target.value;
+    this.setState({ items: state });
   }
   submitHandler(e) {
     e.preventDefault();
-    const { quantity, name, unit } = this.state;
+    const { quantity, name, unit } = this.state.items;
 
     axios
       .put("http://localhost:5000/items/" + this.props.match.params.itemId, {
@@ -51,14 +56,11 @@ class EditItem extends Component {
       })
       .then(result => {
         console.log(result);
-        // alertify.alert("Alert Title", "New Addmission Added!", function() {
-        //   alertify.success("Ok");
-        // });
-        // alertify.notify("New Item Added!", "success", 5, function() {
-        //   console.log("dismissed");
-        // });
+        alertify.notify("Item Updated!", "success", 5, function() {
+          console.log("dismissed");
+        });
       });
-    this.props.history.push("/dashboards");
+    this.props.history.push("/itemList");
   }
 
   render() {
@@ -85,7 +87,7 @@ class EditItem extends Component {
                             name="name"
                             placeholder="Item Name"
                             onChange={this.inputHandler}
-                            value={this.state.name}
+                            value={this.state.items.name}
                             required
                           />
                         </Col>
@@ -100,7 +102,7 @@ class EditItem extends Component {
                             name="quantity"
                             placeholder="Enter Quantity"
                             onChange={this.inputHandler}
-                            value={this.state.quantity}
+                            value={this.state.items.quantity}
                             required
                           />
                         </Col>
@@ -114,7 +116,7 @@ class EditItem extends Component {
                             name="unit"
                             placeholder="Enter Unit"
                             onChange={this.inputHandler}
-                            value={this.state.unit}
+                            value={this.state.items.unit}
                             required
                           />
                         </Col>

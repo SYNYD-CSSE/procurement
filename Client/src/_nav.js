@@ -25,7 +25,7 @@ export default {
       icon: 'icon-briefcase',
     },
     {
-      name: 'Items',
+      name: 'View Item',
       url: '/itemList',
       icon: 'icon-briefcase',
     },

@@ -12,6 +12,7 @@ import {
   Label,
   Input
 } from "reactstrap";
+import alertify from "alertifyjs";
 class AddItem extends Component {
   constructor(props) {
     super(props);
@@ -40,14 +41,11 @@ class AddItem extends Component {
       })
       .then(result => {
         console.log(result);
-        // alertify.alert("Alert Title", "New Addmission Added!", function() {
-        //   alertify.success("Ok");
-        // });
-        // alertify.notify("New Item Added!", "success", 5, function() {
-        //   console.log("dismissed");
-        // });
+        alertify.notify("New Item Added!", "success", 5, function() {
+          console.log("dismissed");
+        });
       });
-    this.props.history.push("/dashboards");
+    this.props.history.push("/itemList");
   }
 
   render() {

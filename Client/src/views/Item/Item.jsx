@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import alertify from "alertifyjs";
 
 class Item extends Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class Item extends Component {
     axios
       .delete("http://localhost:5000/items/" + this.props.itemId)
       .then(res => {
-        this.setState({ res });
+        alertify.notify("Item Deleted!", "success", 5, function() {
+          console.log("dismissed");
+        });
       })
       .catch(err => console.log(err));
   }
