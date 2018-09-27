@@ -9,11 +9,11 @@ const router = express.Router();
 const payment = require("../../models/payment");
 // router.use(bodyParser.json());
 
-router.get('/api/pay', function(req, res){
+router.get('/', function(req, res){
 	res.send('use other routes for payment functions.');
 });
 
-router.post('/api/payments', (req, res) => {
+router.post('/create', (req, res) => {
 	var pay = req.body;
 	payment.create(pay, function(err, success){
 		if(err){
