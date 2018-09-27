@@ -124,7 +124,7 @@ class EmployeesList extends Component {
     if(this.state.employees.length > 0 ){
       employees = this.state.employees.map(employee =>{
           return (
-            <tr key={employee.id}>
+            <tr key={employee.id} onClick={this.onInfo.bind(this,employee.id)}>
               <td>{employee.id}</td>
               <td>{employee.firstName  + ' ' +employee.lastName }</td>
               <td>{employee.address}</td>
