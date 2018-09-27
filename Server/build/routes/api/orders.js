@@ -41,7 +41,7 @@ router.get("/", (req, res, next) => {
     });
 });
 //ORDER FIND BY ID
-router.get("/:id", (req, res, next) => {
+router.get("/order/:id", (req, res, next) => {
     try {
         Order.findOne({
             orderId: req.params.id
@@ -87,6 +87,21 @@ router.delete('/:oid', (req, res, next) => {
         res.json({
             msg: "order deleted",
         });
+    });
+});
+//get approved orders
+router.get("/approvedOrders", (req, res, next) => {
+    Order
+        .find({
+        status: 'Approved'
+    })
+        .populate('items', 'id name quantity unit -_id')
+        .then(result => {
+        res.status(200)
+            .json(result);
+    })
+        .catch(error => {
+        console.log(error);
     });
 });
 module.exports = router;

@@ -16,7 +16,7 @@ router.get("/", (req, res, next) => {
     });
 });
 router.get('/:id', (req, res, next) => {
-    Supplier.findById(req.params.id, (err, Supplier) => {
+    Supplier.findOne({ supplierId: req.params.id }, (err, Supplier) => {
         if (err) {
             res.json(err);
         }

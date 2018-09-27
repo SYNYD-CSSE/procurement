@@ -20,6 +20,17 @@ export default {
       icon: 'icon-basket',
     },
     {
+      name: 'Add Supplier',
+      url: '/addSupplier',
+      icon: 'icon-basket',
+    },
+    {
+      name: 'View Supplier',
+      url: '/viewSupplier',
+      icon: 'icon-basket',
+    },
+  
+    {
       title: true,
       name: 'Theme',
       wrapper: {            // optional wrapper object
