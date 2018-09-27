@@ -51,6 +51,7 @@ class NewEmployee extends Component {
       
     }
     else if(id==='new'){
+      this.setState({employee :{}});
       this.state.employeeID = '';
     }
     else {
@@ -86,12 +87,22 @@ class NewEmployee extends Component {
   }
   onSumbitForm(e){
     e.preventDefault();
-    Employees.insertEmployee(this.state.employee).then(data =>{
-      console.log(data);
-
-    }).catch(err =>{
-      console.log(`Loading Employees get some errors ${err}`);
-    });
+    if(this.state.employeeID ===''){
+      Employees.insertEmployee(this.state.employee).then(data =>{
+        console.log(data);
+  
+      }).catch(err =>{
+        console.log(`Insert Employee get some errors ${err}`);
+      });
+    }
+    else{
+      Employees.updateEmployee(this.state.employeeID,this.state.employee).then(data =>{
+        console.log(data);
+  
+      }).catch(err =>{
+        console.log(`Update Employee get some errors ${err}`);
+      });
+    }
   }
 
   onHandleChange(e){
