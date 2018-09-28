@@ -44,6 +44,7 @@ class Dropdown extends Component {
     }
     return (
       <Select
+        isMulti
         value={selectedOption}
         onChange={this.handleChange}
         options={tabRow}
