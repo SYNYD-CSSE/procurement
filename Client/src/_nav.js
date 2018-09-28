@@ -30,6 +30,11 @@ export default {
       icon: 'icon-briefcase',
     },
     {
+      name: 'Add Order',
+      url: '/addOrder',
+      icon: 'icon-briefcase',
+    },
+    {
       title: true,
       name: 'Theme',
       wrapper: { // optional wrapper object

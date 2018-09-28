@@ -202,6 +202,11 @@ const EditItem = Loadable({
   loading: Loading
 });
 
+const AddOrder = Loadable({
+  loader: () => import("./views/Order/AddOrder"),
+  loading: Loading
+});
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   {
@@ -441,6 +446,12 @@ const routes = [
     exact: true,
     name: "EditItem",
     component: EditItem
+  },
+  {
+    path: "/addOrder",
+    exact: true,
+    name: "AddOrder",
+    component: AddOrder
   }
 ];
 
