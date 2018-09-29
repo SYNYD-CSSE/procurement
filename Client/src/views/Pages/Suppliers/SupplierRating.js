@@ -18,6 +18,8 @@ class SupplierRating extends Component {
           activeTab: '1',
           suppliers:[]
         };
+
+        this.toggle=this.toggle.bind(this);
       }
     
       componentWillMount(){
@@ -31,12 +33,13 @@ class SupplierRating extends Component {
    
      }
 
+
       toggle(tab) {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab: tab,
           });
-          this.forceUpdate()
+          
         }
       }
       

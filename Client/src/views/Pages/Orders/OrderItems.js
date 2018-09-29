@@ -27,7 +27,7 @@ constructor(props){
                     <td>{this.state.item.approvedDate}</td>
                     <td>{this.state.item.rejectedDate}</td>
                     <td> 
-                    <Badge color="warning">{this.state.item.status}</Badge>
+                  <h4><Badge color="warning">{this.state.item.status}</Badge></h4>
                     </td>
         </tr>
     )}

@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import { Link } from "react-router-dom";
+import {Route } from "react-router-dom";
+
 import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane ,Card ,Table , CardBody , CardHeader} from 'reactstrap';
 import classnames from 'classnames';
 import OrderItems from './OrderItems';
@@ -197,8 +198,18 @@ class OrderDetails extends Component {
               </CardHeader> */}
               <CardBody>
                 <nav>
+                <Route render={({ history}) => (
+                          <button
+                            type='button'
+                            className="btn btn-lg btn-primary m-3"
+                            onClick={() => { history.push(`/orders/items/${this.state.OrderId}`) }}
+                          >
+                            Click Me!
+                          </button>
+                        )} />
                 <button   className="btn btn-lg btn-success m-3" onClick={this.sucess} >Approve Order</button>
                 <button   className="btn btn-lg btn-danger m-1" onClick={this.reject}>Reject Order</button>
+                <h3>Order No : {this.state.OrderId}</h3>
                   </nav>
                 <Table hover responsive size="sm">
                   <thead>
