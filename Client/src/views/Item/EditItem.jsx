@@ -51,7 +51,6 @@ class EditItem extends Component {
     axios
       .put("http://localhost:5000/items/" + this.props.match.params.itemId, {
         name,
-        quantity,
         unit
       })
       .then(result => {

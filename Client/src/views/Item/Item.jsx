@@ -42,7 +42,6 @@ class Item extends Component {
         <td>{this.props.itemId}</td>
         <td>{this.props.name}</td>
         <td>{this.props.unit}</td>
-        <td>{this.props.quantity}</td>
         <td>
           {/* <Link to="/bht/profile">
             <button
