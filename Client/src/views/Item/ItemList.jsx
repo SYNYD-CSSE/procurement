@@ -24,8 +24,6 @@ class ItemList extends Component {
       });
   }
 
-
-
   render() {
     var array = this.state.itemList;
     var tabRow = "";
@@ -40,7 +38,6 @@ class ItemList extends Component {
             itemId={item.itemId}
             name={item.name}
             unit={item.unit}
-            quantity={item.quantity}
           />
         );
       });
@@ -59,7 +56,6 @@ class ItemList extends Component {
               <th>Item Code</th>
               <th>Item Name</th>
               <th>Unit</th>
-              <th>Quantity</th>
               <th />
               <th />
             </tr>
