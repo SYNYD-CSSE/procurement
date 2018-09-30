@@ -39,8 +39,7 @@ router.post("/", (req, res, next) => {
     try {
         const item = new Item({
             name: req.body.name,
-            quantity: req.body.quantity,
-            unit: req.body.unit,
+            unit: req.body.unit
         });
         item.save((err, result) => {
             if (err) {
@@ -66,8 +65,7 @@ router.put('/:id', (req, res, next) => {
         }, {
             $set: {
                 name: req.body.name,
-                unit: req.body.unit,
-                quantity: req.body.quantity
+                unit: req.body.unit
             }
         },
         (err, result) => {
