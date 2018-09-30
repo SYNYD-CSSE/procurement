@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Counter from "./Counter";
 import axios from "axios";
+import OrderService from "./OrderService";
 import {
   Row,
   Col,
@@ -13,7 +14,7 @@ import {
   Label,
   Input
 } from "reactstrap";
-
+let os = new OrderService();
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,13 @@ class Product extends Component {
       // quickViewProdcut: {},
       isAdded: false
     };
+
+    this.addToOrder = this.addToOrder.bind(this);
   }
+
+  addToOrder = () => {
+    os.addOrderListItem(this.props.product);
+  };
   addToCart(name, quantity) {
     this.setState(
       {
@@ -76,7 +83,7 @@ class Product extends Component {
       <div className="col-md-6">
         <Card className=" bg-info " style={myStyle}>
           <CardHeader className="text-dark font-weight-bold text-uppercase">
-            {this.props.name}
+            {this.props.product.name}
           </CardHeader>
           <CardBody>
             <Counter
@@ -88,7 +95,7 @@ class Product extends Component {
           <CardFooter className=" bg-info">
             <button
               className="btn btn-success float-right"
-              onClick={this.addToCart.bind(this, name, quantity)}
+              onClick={this.addToOrder}
             >
               {" "}
               {!this.state.isAdded ? "ADD TO CART" : "✔ ADDED"}

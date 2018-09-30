@@ -25,7 +25,7 @@ class Products extends Component {
         return (
           <Product
             key={product.id}
-            name={product.name}
+            product={product}
             //addToCart={this.props.addToCart}
             productQuantity={this.props.productQuantity}
             updateQuantity={this.props.updateQuantity}
