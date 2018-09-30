@@ -14,7 +14,14 @@ class OrderService {
     }
     return instance;
   }
-
+  itemOnOrderList = item => {
+    for (let x = 0; x < orderList.length; x++) {
+      if (orderList[x]._id === item._id) {
+        return true;
+      }
+    }
+    return false;
+  }
   addOrderListItem = item => {
     orderList.push(item);
     ns.postNotification(NOTIF_ORDERLIST_CHANGED, orderList)
