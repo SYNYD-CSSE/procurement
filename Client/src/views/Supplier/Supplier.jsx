@@ -7,7 +7,16 @@ class Supplier extends Component {
   constructor(props) {
     super(props);
     console.log(props);
+
+    this.state= {
+       supplierStatus : this.props.status,
+       isActive : false
+      } ;
+
     this.deleteSupplier = this.deleteSupplier.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
+    this.inactiveButton = this.inactiveButton.bind(this);
+    this.activeButton = this.activeButton.bind(this);
   }
 
   deleteSupplier(event) {
@@ -22,7 +31,52 @@ class Supplier extends Component {
       .catch(err => console.log(err));
   }
 
+  updateStatus(event){
+    event.preventDefault();
+    let status ;
+    if(this.state.supplierStatus === 'Active'){
+        status = 'Inactive';
+    }else{
+        status = 'Active';
+    }
+    axios.put("http://localhost:5000/suppliers/supplier/status/"+this.props.supplierId, {
+      status
+    }).then(result => {
+      console.log(result);
+      alertify.notify(" Supplier Updated!", "success", 5, function() {
+        console.log("dismissed");
+        window.location.reload();
+
+      });
+    });
+   // this.props.history.push("/viewSupplier");
+  }
+
+  activeButton(props){
+    return <div>
+      <form onSubmit={this.updateStatus}><input type="submit" value="Active" className="btn btn-success" /></form>
+    </div>;
+  }
+
+  inactiveButton(props){
+
+    return <div><form onSubmit={this.updateStatus}>
+    <input type="submit" value="Inactive" className="btn btn-danger" />
+  </form></div>
+   ;
+  }
+
   render() {
+   // const supplierStatus = this.props.status;
+    
+    if(this.state.supplierStatus === 'Active'){
+   //   console.log('isactive '+ this.state.supplierStatus);
+      this.state.isActive = true;
+    }else{
+  //    console.log('isactive '+ this.state.supplierStatus);
+      this.state.isActive =false;
+    }
+//console.log('isActive'+this.state.isActive); 
     return (
       <tr>
         <td>{this.props.supplierId}</td>
@@ -30,11 +84,18 @@ class Supplier extends Component {
         <td>{this.props.address}</td>
         <td>{this.props.email}</td>
         <td>
+          {this.state.isActive  ? (
+              <this.activeButton/>
+          ) : ( 
+              <this.inactiveButton/>
+          )
+          }
+        </td>
+        <td>
 
           <Link
             to={"/updateSupplier/" + this.props.supplierId}
-            className="btn btn-primary"
-          >
+            className="btn btn-primary">
             Edit
           </Link>
         </td>

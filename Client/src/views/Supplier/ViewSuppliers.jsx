@@ -39,6 +39,7 @@ class ViewSuppliers extends Component {
             name={supplier.name}
             address={supplier.address}
             email={supplier.email}
+            status={supplier.status}
           />
         );
       });
@@ -58,6 +59,7 @@ class ViewSuppliers extends Component {
               <th>Supplier Name</th>
               <th>Address</th>
               <th>Email</th>
+              <th>Status</th>
               <th />
               <th />
             </tr>
