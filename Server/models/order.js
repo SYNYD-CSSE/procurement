@@ -17,9 +17,10 @@ const orderSchema = new mongoose.Schema({
         default: Date.now
         //    required: true
     },
+
     items: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Item",
+        ref: "OrderItem",
         required: true
     }],
 

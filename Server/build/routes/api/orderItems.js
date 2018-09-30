@@ -76,6 +76,7 @@ router.put('/:id', (req, res, next) => {
             message: "Order Item Updated",
             result
         });
+        console.log(result); //bimali
     });
 });
 //REMOVE ITEMS

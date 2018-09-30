@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Products from "./Products";
+import OrderItemList from "./OrderItemList";
 // import "./scss/style.scss";
 
 class AddOrder extends Component {
@@ -150,6 +151,22 @@ class AddOrder extends Component {
   render() {
     return (
       <div className="container">
+        <div className="row">
+          <div className="col-md-9">
+            <Products
+              productsList={this.state.products}
+              searchTerm={this.state.term}
+              addToCart={this.handleAddToCart}
+              productQuantity={this.state.quantity}
+              updateQuantity={this.updateQuantity}
+              openModal={this.openModal}
+            />
+          </div>
+          <div className="col-md-3">
+            <h1>WishList</h1>
+            <OrderItemList />
+          </div>
+        </div>
         {/* <Header
           cartBounce={this.state.cartBounce}
           total={this.state.totalAmount}
@@ -163,15 +180,6 @@ class AddOrder extends Component {
           updateQuantity={this.updateQuantity}
           productQuantity={this.state.moq}
         /> */}
-
-        <Products
-          productsList={this.state.products}
-          searchTerm={this.state.term}
-          addToCart={this.handleAddToCart}
-          productQuantity={this.state.quantity}
-          updateQuantity={this.updateQuantity}
-          openModal={this.openModal}
-        />
 
         {/* <Footer />
         <QuickView
