@@ -49,17 +49,16 @@ router.get("/", (req, res, next) => {
 //ORDER FIND BY ID
 
 router.get("/:id", (req, res, next) => {
-    try {
-        Order.findOne({
-            orderId: req.params.id
-        }, (err, result) => {
+   
+        Order.findOne({orderId: req.params.id}).
+        populate('items').
+        exec((err, result) => {
             if (err) return next(err);
             res.json(result);
-        });
-    } catch (error) {
-        console.log(error)
-    }
+        })
+
 });
+
 
 
 //Update ORDER
