@@ -18,7 +18,6 @@ class AddItem extends Component {
     super(props);
     this.state = {
       name: "",
-      quantity: "1",
       unit: ""
     };
 
@@ -36,7 +35,6 @@ class AddItem extends Component {
     axios
       .post("http://localhost:5000/items", {
         name,
-        quantity,
         unit
       })
       .then(result => {
@@ -73,21 +71,6 @@ class AddItem extends Component {
                             placeholder="Item Name"
                             onChange={this.inputHandler}
                             value={this.state.name}
-                            required
-                          />
-                        </Col>
-                      </FormGroup>
-
-                      <FormGroup row>
-                        <Col xs="8">
-                          <Label htmlFor="quantity">Quantity</Label>
-                          <Input
-                            type="number"
-                            id="quantity"
-                            name="quantity"
-                            placeholder="Enter Quantity"
-                            onChange={this.inputHandler}
-                            value={this.state.quantity}
                             required
                           />
                         </Col>
