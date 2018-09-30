@@ -1,11 +1,11 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-const Item = require("../../models/item");
+const OrderItem = require("../../models/orderItem");
 //GET ALL ITEMS
 router.get("/", (req, res, next) => {
     try {
-        Item.find((err, requset) => {
+        OrderItem.find((err, requset) => {
             if (err)
                 return next(err);
             res.json(requset);
@@ -18,8 +18,8 @@ router.get("/", (req, res, next) => {
 //ITEM FIND BY ID
 router.get("/:id", (req, res, next) => {
     try {
-        Item.findOne({
-            itemId: req.params.id
+        OrderItem.findOne({
+            orderItemId: req.params.id
         }, (err, result) => {
             if (err)
                 return next(err);
@@ -33,11 +33,12 @@ router.get("/:id", (req, res, next) => {
 //ADD ITEMS
 router.post("/", (req, res, next) => {
     try {
-        const item = new Item({
+        const orderItem = new OrderItem({
             name: req.body.name,
-            unit: req.body.unit
+            quantity: req.body.quantity,
+            unit: req.body.unit,
         });
-        item.save((err, result) => {
+        orderItem.save((err, result) => {
             if (err) {
                 return res.status(500).json({
                     title: "An error occured",
@@ -45,7 +46,7 @@ router.post("/", (req, res, next) => {
                 });
             }
             res.status(201).json({
-                message: "Item Added",
+                message: "Order Item Added",
                 result
             });
         });
@@ -56,12 +57,13 @@ router.post("/", (req, res, next) => {
 });
 //Update Item
 router.put('/:id', (req, res, next) => {
-    Item.findOneAndUpdate({
-        itemId: req.params.id
+    OrderItem.findOneAndUpdate({
+        orderItemId: req.params.id
     }, {
         $set: {
             name: req.body.name,
-            unit: req.body.unit
+            unit: req.body.unit,
+            quantity: req.body.quantity
         }
     }, (err, result) => {
         if (err) {
@@ -71,22 +73,22 @@ router.put('/:id', (req, res, next) => {
             });
         }
         res.status(201).json({
-            message: "Item Updated",
+            message: "Order Item Updated",
             result
         });
     });
 });
 //REMOVE ITEMS
 router.delete('/:pid', (req, res, next) => {
-    Item.remove({
-        itemId: req.params.pid
+    OrderItem.remove({
+        orderItemId: req.params.pid
     }, (err, item) => {
         if (err)
             return res.json(err);
         res.json({
-            msg: "item deleted"
+            msg: "OrderItem deleted"
         });
     });
 });
 module.exports = router;
-//# sourceMappingURL=items.js.map
+//# sourceMappingURL=orderItems.js.map

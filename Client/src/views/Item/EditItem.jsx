@@ -46,7 +46,7 @@ class EditItem extends Component {
   }
   submitHandler(e) {
     e.preventDefault();
-    const { quantity, name, unit } = this.state.items;
+    const { name, unit } = this.state.items;
 
     axios
       .put("http://localhost:5000/items/" + this.props.match.params.itemId, {
@@ -93,20 +93,6 @@ class EditItem extends Component {
                         </Col>
                       </FormGroup>
 
-                      <FormGroup row>
-                        <Col xs="8">
-                          <Label htmlFor="quantity">Quantity</Label>
-                          <Input
-                            type="number"
-                            id="quantity"
-                            name="quantity"
-                            placeholder="Enter Quantity"
-                            onChange={this.inputHandler}
-                            value={this.state.items.quantity}
-                            required
-                          />
-                        </Col>
-                      </FormGroup>
                       <FormGroup row>
                         <Col xs="8">
                           <Label htmlFor="unit">Unit</Label>

@@ -12,6 +12,7 @@ const path = require("path");
 const config = require("./config/database");
 const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
+const OrderItem = require("./routes/api/orderItems");
 mongoose_1.default.connect(config.database);
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
@@ -32,6 +33,7 @@ app.use(cors_1.default());
 app.use(express_1.default.static(path.join(__dirname, "public")));
 const port = 5000;
 app.use("/items", Item);
+app.use("/orderItems", OrderItem);
 app.use("/orders", Order);
 app.get("/sample", (req, res) => {
     res.send("Hello World");
