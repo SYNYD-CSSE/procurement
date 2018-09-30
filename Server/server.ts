@@ -8,7 +8,7 @@ const path = require("path");
 const config = require("./config/database");
 const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
-
+const OrderItem = require("./routes/api/orderItems");
 mongoose.connect(config.database);
 
 mongoose.connection.on("connected", () => {
@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const port = 5000;
 
 app.use("/items", Item);
+app.use("/orderItems", OrderItem);
 app.use("/orders", Order);
 
 app.get("/sample", (req, res) => {
