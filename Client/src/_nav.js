@@ -29,7 +29,11 @@ export default {
       url: '/viewSupplier',
       icon: 'icon-basket',
     },
-  
+  {
+    name: 'Approved Orders',
+    url: '/viewApprovedOrders',
+    icon: 'icon-basket',
+  },
     {
       title: true,
       name: 'Theme',

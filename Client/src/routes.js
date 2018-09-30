@@ -204,6 +204,11 @@ const UpdateSupplier = Loadable({
   loading: Loading,
 });
 
+const ViewApprovedOrders = Loadable({
+  loader: () => import('./views/ApprovedOrders/ViewApprovedOrders'),
+  loading: Loading,
+})
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
@@ -252,7 +257,7 @@ const routes = [
   { path: '/addSupplier', exact: true,  name: 'Add Supplier', component: AddSupplier },
   { path: '/viewSupplier', exact: true,  name: 'View Supplier', component: ViewSupplier },
   { path: '/updateSupplier/:supplierId', exact: true,  name: 'Update Supplier', component:UpdateSupplier },
-
+  { path: '/viewApprovedOrders', exact: true,  name: 'Approved Orders', component: ViewApprovedOrders },
 
 ];
 

@@ -10,6 +10,7 @@ router.post("/", (req, res, next) => {
         const order = new Order({
             status: req.body.status,
             items: req.body.itemId
+            //constructor details should come here
         });
         order.save((err, result) => {
             if (err) {
@@ -70,6 +71,7 @@ router.put('/:id', (req, res, next) => {
             $set: {
                 status: req.body.status,
                 items: req.body.ItemId
+
             }
         },
         (err, result) => {
