@@ -24,8 +24,7 @@ class ItemList extends Component {
       });
   }
 
-  // if (this.state.query && this.state.query.length > 1) {
-  //   if (this.state.query.length % 2 === 0)
+
 
   render() {
     var array = this.state.itemList;

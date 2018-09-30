@@ -52,7 +52,7 @@ class AddItem extends Component {
     return (
       <div className="container">
         <Row>
-          <Col sm="10" xs="6">
+          <Col sm="8" xs="6">
             <form onSubmit={this.submitHandler}>
               <Card>
                 <CardHeader>
@@ -114,6 +114,7 @@ class AddItem extends Component {
                     <Button type="submit" size="sm" color="primary">
                       <i className="fa fa-dot-circle-o" /> Submit
                     </Button>
+                    &nbsp; &nbsp;
                     <Button
                       type="reset"
                       size="sm"
