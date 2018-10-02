@@ -19,7 +19,7 @@ router.get("/", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
     try {
         OrderItem.findOne({
-            orderItemId: req.params.id
+            _id: req.params.id
         }, (err, result) => {
             if (err)
                 return next(err);

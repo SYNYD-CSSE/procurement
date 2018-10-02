@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ViewOrderItems from "./ViewOrderItems"
+
 import {
   Row,
   Col,
@@ -41,7 +43,7 @@ class PlaceOrder extends Component {
                                 id="cid"
                                 name="cid"
                                 value="C001"
-                                readonly
+                                readOnly
                               />
                             </Col>
                           </FormGroup>
@@ -53,7 +55,7 @@ class PlaceOrder extends Component {
                                 id="status"
                                 name="status"
                                 value="Pending"
-                                readonly
+                                readOnly
                               />
                             </Col>
                           </FormGroup>
@@ -80,7 +82,12 @@ class PlaceOrder extends Component {
                 </form>
               </Col>
             </Row>
+
+            <ViewOrderItems/>
           </div>
+
+
+
          );
     }
 }
