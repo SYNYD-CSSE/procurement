@@ -203,7 +203,7 @@ const EditItem = Loadable({
 });
 
 const AddOrder = Loadable({
-  loader: () => import("./views/Order/AddOrder"),
+  loader: () => import("./views/Order/index"),
   loading: Loading
 });
 
