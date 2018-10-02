@@ -2,8 +2,9 @@
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
 const inventoryItemSchema = new mongoose.Schema({
-    name: {
-        type: String,
+    item: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
         required: true
     },
     unitprice: {
@@ -19,11 +20,11 @@ const inventoryItemSchema = new mongoose.Schema({
         required: true
     },
     quantity: {
-        type: float,
+        type: Number,
         required: true
     },
     totalValue: {
-        type: float,
+        type: Number,
         required: true
     }
 });

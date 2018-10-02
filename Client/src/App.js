@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 // Styles
 // CoreUI Icons Set
@@ -18,13 +18,14 @@ import { DefaultLayout } from './containers';
 // Pages
 import { Login, Page404, Page500, Register } from './views/Pages';
 import Payment  from './views/Payment/Payment';
+import BrowserRouter from 'react-router-dom/BrowserRouter';
 
 // import { renderRoutes } from 'react-router-config';
 
 class App extends Component {
   render() {
     return (
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/login" name="Login Page" component={Login} />
           <Route exact path="/register" name="Register Page" component={Register} />
@@ -33,7 +34,7 @@ class App extends Component {
           <Route exact path="/payment" name="Payment" component={Payment} />
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
