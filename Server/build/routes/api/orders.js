@@ -28,7 +28,7 @@ router.post("/", (req, res, next) => {
     }
 });
 //GET ALL ORDERS
-router.get("/orders", (req, res, next) => {
+router.get("/", (req, res, next) => {
     Order
         .find()
         .populate('items', 'id name quantity unit -_id')

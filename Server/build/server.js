@@ -7,13 +7,19 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const generate_1 = __importDefault(require("./config/generate"));
+const EmployeeRoutes_1 = __importDefault(require("./routes/EmployeeRoutes"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const paymentRoute_1 = __importDefault(require("./routes/api/paymentRoute"));
+const suppliers_1 = __importDefault(require("./routes/api/suppliers"));
+const inventoryItems_1 = __importDefault(require("./routes/api/inventoryItems"));
 const path = require("path");
 //const passport = require("passport");
 const config = require("./config/database");
 const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
 const OrderItem = require("./routes/api/orderItems");
-mongoose_1.default.connect(config.database);
+mongoose_1.default.connect(config.database, { useNewUrlParser: true });
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
 });
@@ -35,8 +41,14 @@ const port = 5000;
 app.use("/items", Item);
 app.use("/orderItems", OrderItem);
 app.use("/orders", Order);
-app.get("/sample", (req, res) => {
-    res.send("Hello World");
+app.use("/payment", paymentRoute_1.default);
+app.use("/employees", EmployeeRoutes_1.default);
+app.use("/user", userRoutes_1.default);
+app.use("/suppliers", suppliers_1.default);
+app.use("/invetoryItems", inventoryItems_1.default);
+generate_1.default.initilize();
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + './../public/index.html'));
 });
 app.listen(port, () => {
     console.log(`listning to port ${port}`);
