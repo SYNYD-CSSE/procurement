@@ -38,6 +38,11 @@ let NavigationBar = {
       url: '/addOrder',
       icon: 'icon-briefcase',
     },
+    {
+      name: 'Place Order',
+      url: '/placeOrder',
+      icon: 'icon-briefcase',
+    },
     
     // Samith's Functions Navigation Items
     {

@@ -5,6 +5,7 @@ import EmptyCart from "../empty-states/EmptyCart";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 import { findDOMNode } from "react-dom";
 import axios from "axios";
+import alertify from "alertifyjs";
 
 class Header extends Component {
   constructor(props) {
@@ -90,18 +91,12 @@ class Header extends Component {
       .post("http://localhost:5000/orderItems",{name,quantity} )
       .then(result => {
         console.log(result);
+     
       });
     })
-  //   todos.push({
-  //     id: /*unique id*/,
-  //     text: this.state.notetext,
-  //     completed: false
-  // });
-  
-    //e.preventDefault();
-    //  const {id} = this.state.cart;
-
-
+    alertify.notify("New Item Added!", "success", 5, function() {
+      console.log("dismissed");
+    });
   
   }
 
@@ -245,7 +240,7 @@ class Header extends Component {
                   type="button"
                   className={this.state.cart.length > 0 ? " " : "disabled"}
                 >
-                  PLACE ORDER
+                  PROCEED
                 </button>
               </div>
             </div>

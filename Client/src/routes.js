@@ -224,6 +224,10 @@ const AddOrder = Loadable({
   loader: () => import("./views/Order/index"),
   loading: Loading
 });
+const PlaceOrder = Loadable({
+  loader: () => import("./views/Order/components/PlaceOrder"),
+  loading: Loading
+});
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -299,6 +303,12 @@ const routes = [
     exact: true,
     name: "AddOrder",
     component: AddOrder
+  },
+  {
+    path: "/placeOrder",
+    exact: true,
+    name: "PlaceOrder",
+    component: PlaceOrder
   }
 ];
 
