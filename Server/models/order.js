@@ -20,9 +20,10 @@ const orderSchema = new mongoose.Schema({
     amount: {
         type: String
     },
+
     items: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Item",
+        ref: "OrderItem",
         required: true
     }],
 

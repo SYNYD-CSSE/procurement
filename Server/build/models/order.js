@@ -19,7 +19,11 @@ const orderSchema = new mongoose.Schema({
     },
     items: [{
             type: mongoose.Schema.Types.ObjectId,
+<<<<<<< HEAD
             ref: "Item",
+=======
+            ref: "OrderItem",
+>>>>>>> dileepa
             required: true
         }],
     status: {
