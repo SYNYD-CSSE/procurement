@@ -15,7 +15,13 @@ class Header extends Component {
       mobileSearch: false
     };
     console.log(this.state.cart.name);
-    // this.submitHandler = this.submitHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+
+  this.state.cart.map(pro=>{
+      pro.id
+      console.log( pro.id);
+     })
+
   }
   handleCart(e) {
     e.preventDefault();
@@ -71,24 +77,39 @@ class Header extends Component {
   //   );
   // }
 
-  // submitHandler(e) {
-  //   console.log(this.state.cart);
+ 
+  submitHandler(e) {
+    // console.log(this.props.cartItems);
 
-  //   //e.preventDefault();
-  //   //  const {id} = this.state.cart;
+    var name,quantity;
+    this.state.cart.map(c=>{
+      name = c.name;
+      quantity = c.quantity;
 
-  //   const { orderItems } = this.state.cart;
-  //   axios
-  //     .post("http://localhost:5000/orderItems", { qty, name })
-  //     .then(result => {
-  //       console.log(result);
-  //     });
-  // }
+      axios
+      .post("http://localhost:5000/orderItems",{name,quantity} )
+      .then(result => {
+        console.log(result);
+      });
+    })
+  //   todos.push({
+  //     id: /*unique id*/,
+  //     text: this.state.notetext,
+  //     completed: false
+  // });
+  
+    //e.preventDefault();
+    //  const {id} = this.state.cart;
+
+
+  
+  }
 
   render() {
     let cartItems;
     cartItems = this.state.cart.map(product => {
       console.log(cartItems);
+    
       return (
         <li className="cart-item" key={product.name}>
           <div className="product-info">
@@ -113,7 +134,7 @@ class Header extends Component {
     if (cartItems.length <= 0) {
       view = <EmptyCart />;
     } else {
-      view = (
+      view = (  
         <CSSTransitionGroup
           transitionName="fadeIn"
           transitionEnterTimeout={500}
@@ -220,6 +241,7 @@ class Header extends Component {
               <CartScrollBar>{view}</CartScrollBar>
               <div className="action-block">
                 <button
+                onClick={this.submitHandler}
                   type="button"
                   className={this.state.cart.length > 0 ? " " : "disabled"}
                 >

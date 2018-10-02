@@ -39,8 +39,7 @@ router.post("/", (req, res, next) => {
     try {
         const orderItem = new OrderItem({
             name: req.body.name,
-            quantity: req.body.quantity,
-            unit: req.body.unit,
+            quantity: req.body.quantity
         });
         orderItem.save((err, result) => {
             if (err) {
