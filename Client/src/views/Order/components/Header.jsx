@@ -81,7 +81,7 @@ class Header extends Component {
  
   submitHandler(e) {
     // console.log(this.props.cartItems);
-
+    var orderitemarr = [];
     var name,quantity;
     this.state.cart.map(c=>{
       name = c.name;
@@ -90,14 +90,18 @@ class Header extends Component {
       axios
       .post("http://localhost:5000/orderItems",{name,quantity} )
       .then(result => {
-        console.log(result);
-     
+        orderitemarr.push(result.data.result._id);
+        console.log(orderitemarr);
+        localStorage.setItem("orderitemarr",JSON.stringify(orderitemarr))
+       // this.props.history.push("/placeOrder");
       });
+     
     })
     alertify.notify("New Item Added!", "success", 5, function() {
       console.log("dismissed");
     });
-  
+    //localStorage.setItem("orderitemarr", orderitemarr);
+    console.log("local"+localStorage.getItem("orderitemarr"));
   }
 
   render() {
