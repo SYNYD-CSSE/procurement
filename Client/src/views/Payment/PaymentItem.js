@@ -15,7 +15,6 @@ class PaymentItem extends Component {
             <tr>
                 <td>{this.state.item.paymentid}</td>
                 <td>{this.state.item.amount}</td>   
-                <td>hihihihihihih</td>
             </tr>  
         )
     }

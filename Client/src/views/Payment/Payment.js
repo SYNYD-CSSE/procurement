@@ -112,7 +112,7 @@ class Payment extends React.Component {
         )
     })
 
-    var payments =this.state.items.map((al,i)=>{            
+    var payment =this.state.paymentItems.map((al,i)=>{            
       return(
           <PaymentItem key={i} item={al}/>
         )
@@ -220,12 +220,11 @@ class Payment extends React.Component {
                     <tr>                      
                       <th>PaymentID</th>
                       <th>Amount</th>
-                      <th>hihihi</th>
                     </tr>
                   </thead>
 
                   <tbody>
-                  {payments}                   
+                  {payment}                   
                   </tbody>
                 </Table>
               </Col>
