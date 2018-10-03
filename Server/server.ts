@@ -4,19 +4,19 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import passport from "passport";
-
 import generate from "./config/generate";
-
-import path from "path";
-import config from "./config/database";
-
-import employeeRoutes from "./routes/EmployeeRoutes";
-import Order from "./routes/api/orders";
-import Item from "./routes/api/items";
+import EmployeeRoutes from "./routes/EmployeeRoutes";
+import UserRoutes from "./routes/userRoutes";
 import Payment from "./routes/api/paymentRoute";
 import Supplier from "./routes/api/suppliers";
 import Quotations from "./routes/api/sentQuotations";
 
+const path = require("path");
+//const passport = require("passport");
+const config = require("./config/database");
+const Order = require("./routes/api/orders");
+const Item = require("./routes/api/items");
+const OrderItem = require("./routes/api/orderItems");
 
 mongoose.connect(config.database,{useNewUrlParser: true});
 
@@ -46,9 +46,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const port = 5000;
 app.use("/items", Item);
+app.use("/orderItems", OrderItem);
 app.use("/orders", Order);
 app.use("/payment", Payment);
-app.use("/employees",employeeRoutes);
+app.use("/employees",EmployeeRoutes);
+app.use("/user",UserRoutes);
 app.use("/suppliers", Supplier);
 app.use("/quotations",Quotations);
 generate.initilize();

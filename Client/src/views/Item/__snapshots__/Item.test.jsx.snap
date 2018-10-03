@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item should render correctly 1`] = `
+<tr>
+  <td />
+  <td />
+  <td />
+  <td />
+  <td>
+    <Link
+      className="btn btn-primary"
+      replace={false}
+      to="/editItem/undefined"
+    >
+      Edit
+    </Link>
+  </td>
+  <td>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        className="btn btn-danger"
+        type="submit"
+        value="Delete"
+      />
+    </form>
+  </td>
+</tr>
+`;

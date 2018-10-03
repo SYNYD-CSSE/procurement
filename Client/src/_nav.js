@@ -1,4 +1,7 @@
-export default {
+
+const user = JSON.parse(localStorage.getItem('user')) | {user:{role : 'Management'}};
+
+let NavigationBar = {
   items: [
     {
       name: 'Dashboard',
@@ -8,17 +11,18 @@ export default {
     {
       title: true,
       name: 'Procurement System',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+      wrapper: { // optional wrapper object
+        element: '', // required valid HTML5 element tag
+        attributes: {} // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
       },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
+      class: '' // optional class names space delimited list for title item ex: "text-center"
     },
     {
       name: 'Payment',
       url: '/payment',
       icon: 'icon-basket',
     },
+
     {
       name: 'Add Supplier',
       url: '/addSupplier',
@@ -34,247 +38,85 @@ export default {
     url: '/viewApprovedOrders',
     icon: 'icon-basket',
   },
-    {
-      title: true,
-      name: 'Theme',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
-      },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
+    
+      {
+                // optional class names space delimited list for title item ex: "text-center"
+      name: 'Add Item',
+      url: '/addItem',
+      icon: 'icon-briefcase',
     },
     {
-      name: 'Colors',
-      url: '/theme/colors',
-      icon: 'icon-drop',
+      name: 'View Item',
+      url: '/itemList',
+      icon: 'icon-briefcase',
     },
     {
-      name: 'Typography',
-      url: '/theme/typography',
-      icon: 'icon-pencil',
+      name: 'Add Order',
+      url: '/addOrder',
+      icon: 'icon-briefcase',
     },
     {
-      title: true,
-      name: 'Components',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
+      name: 'Place Order',
+      url: '/placeOrder',
+      icon: 'icon-briefcase',
     },
+    
+    // Samith's Functions Navigation Items
     {
-      name: 'Base',
-      url: '/base',
-      icon: 'icon-puzzle',
+      name: 'Employee',
+      url: '/employee',
+      icon: 'icon-people',
       children: [
         {
-          name: 'Breadcrumbs',
-          url: '/base/breadcrumbs',
-          icon: 'icon-puzzle',
+          name: 'New Employee',
+          url: '/employee/new',
+          icon: 'icon-plus',
         },
         {
-          name: 'Cards',
-          url: '/base/cards',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Carousels',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Collapses',
-          url: '/base/collapses',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Dropdowns',
-          url: '/base/dropdowns',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Forms',
-          url: '/base/forms',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Jumbotrons',
-          url: '/base/jumbotrons',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'List groups',
-          url: '/base/list-groups',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Navs',
-          url: '/base/navs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Paginations',
-          url: '/base/paginations',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Popovers',
-          url: '/base/popovers',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Progress Bar',
-          url: '/base/progress-bar',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Switches',
-          url: '/base/switches',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tables',
-          url: '/base/tables',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tabs',
-          url: '/base/tabs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tooltips',
-          url: '/base/tooltips',
-          icon: 'icon-puzzle',
-        },
-      ],
+          name: 'Employee List',
+          url: '/employee/list',
+          icon: 'icon-list',
+        }
+      ]
     },
     {
       name: 'Buttons',
       url: '/buttons',
       icon: 'icon-cursor',
-      children: [
-        {
+      children: [{
           name: 'Buttons',
           url: '/buttons/buttons',
           icon: 'icon-cursor',
-        },
-        {
-          name: 'Button dropdowns',
-          url: '/buttons/button-dropdowns',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Button groups',
-          url: '/buttons/button-groups',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Brand Buttons',
-          url: '/buttons/brand-buttons',
-          icon: 'icon-cursor',
-        },
-      ],
-    },
-    {
-      name: 'Charts',
-      url: '/charts',
-      icon: 'icon-pie-chart',
-    },
-    {
-      name: 'Icons',
-      url: '/icons',
-      icon: 'icon-star',
+      name: 'User',
+      url: '/user',
+      icon: 'icon-user',
       children: [
         {
-          name: 'CoreUI Icons',
-          url: '/icons/coreui-icons',
-          icon: 'icon-star',
-          badge: {
-            variant: 'info',
-            text: 'NEW',
-          },
+          name: 'New User',
+          url: '/user/new',
+          icon: 'icon-plus',
         },
         {
-          name: 'Flags',
-          url: '/icons/flags',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Font Awesome',
-          url: '/icons/font-awesome',
-          icon: 'icon-star',
-          badge: {
-            variant: 'secondary',
-            text: '4.7',
-          },
-        },
-        {
-          name: 'Simple Line Icons',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star',
-        },
-      ],
-    },
-    {
-      name: 'Notifications',
-      url: '/notifications',
-      icon: 'icon-bell',
-      children: [
-        {
-          name: 'Alerts',
-          url: '/notifications/alerts',
-          icon: 'icon-bell',
-        },
-        {
-          name: 'Badges',
-          url: '/notifications/badges',
-          icon: 'icon-bell',
-        },
-        {
-          name: 'Modals',
-          url: '/notifications/modals',
-          icon: 'icon-bell',
-        },
-      ],
-    },
-    {
-      name: 'Widgets',
-      url: '/widgets',
-      icon: 'icon-calculator',
-    },
-    {
-      divider: true,
-    },
-    {
-      title: true,
-      name: 'Extras',
-    },
-    {
-      name: 'Pages',
-      url: '/pages',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
-    },
-  ],
+          name: 'User List',
+          url: '/user/list',
+          icon: 'icon-list',
+        }
+      ]
+    }
+  ] 
+  }
+
+  
+  ]
+  
 };
+
+// switch (user.role) {
+//   case 'Management' : break;
+//   case 'Accountant' : 
+//             NavigationBar.items = NavigationBar.items.slice(0,3);
+//             break;
+//   default : NavigationBar = {items: []};
+// }
+
+export default NavigationBar;
