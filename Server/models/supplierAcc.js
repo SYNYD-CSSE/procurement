@@ -3,7 +3,8 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 
 const supplierAccSchema = new mongoose.Schema({
     supplierId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Supplier",
         required: true
     },
     accountNumber: {
