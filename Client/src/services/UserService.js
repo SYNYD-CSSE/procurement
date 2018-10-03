@@ -17,7 +17,7 @@ class EmployeeService {
             }).catch((error)=>{
 
                 reject (error)
-            });
+            }); 
         });
     }
 
