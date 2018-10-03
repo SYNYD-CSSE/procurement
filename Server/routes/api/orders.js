@@ -102,6 +102,32 @@ router.put('/:id', (req, res, next) => {
 })
 
 
+//Update the order state to closed
+router.put('/closed/:id', (req, res, next) => {
+    Order.findOneAndUpdate({
+            orderId: req.params.id
+        }, {
+            $set: {
+                status: 'Closed'
+            }
+        },
+        (err, result) => {
+            if (err) {
+                return res.status(500).json({
+                    title: "An error occured",
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: "Order Updated",
+                result
+            });
+        }
+    )
+})
+
+
+
 //REMOVE ORDER
 router.delete('/:oid', (req, res, next) => {
     Order.remove({
