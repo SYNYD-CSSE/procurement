@@ -1,16 +1,16 @@
 import axios from 'axios';
 import config from "../config/config";
 
-class EmployeeService {
+class UserService {
 
     constructor () {
 
     }
 
-     static getAllEmployees(){
+     static getAllUsers(){
         return new Promise((resolve , reject)=>{
 
-            axios.get(`${config.api}employees/`).then((data)=>{
+            axios.get(`${config.api}user/`).then((data)=>{
                 
                  resolve(data.data);
             
@@ -21,10 +21,10 @@ class EmployeeService {
         });
     }
 
-    static getEmployeeByID(id){
+    static getUserByID(id){
         return new Promise((resolve , reject)=>{
 
-            axios.get(`${config.api}employees/${id}`).then((data)=>{
+            axios.get(`${config.api}user/${id}`).then((data)=>{
                 
                  resolve(data.data);
             
@@ -35,10 +35,24 @@ class EmployeeService {
         });
     }
 
-    static deleteEmployeeByID(id){
+    static login(user){
         return new Promise((resolve , reject)=>{
 
-            axios.delete(`${config.api}employees/${id}`).then((data)=>{
+            axios.post(`${config.api}user/login/`,user).then((data)=>{
+                
+                 resolve(data.data);
+            
+            }).catch((error)=>{
+
+                reject (error)
+            });
+        });
+    }
+  
+    static deleteUserByID(id){
+        return new Promise((resolve , reject)=>{
+
+            axios.delete(`${config.api}user/${id}`).then((data)=>{
                 
                  resolve(data.data);
             
@@ -49,10 +63,10 @@ class EmployeeService {
         });
     }
 
-    static insertEmployee(employee){
+    static insertUser(user){
         return new Promise((resolve , reject)=>{
 
-            axios.post(`${config.api}employees/`,employee).then((data)=>{
+            axios.post(`${config.api}user/`,user).then((data)=>{
                 
                  resolve(data.data);
             
@@ -63,10 +77,10 @@ class EmployeeService {
         });
     }
 
-    static updateEmployee(id,employee){
+    static updateUser(id,user){
         return new Promise((resolve , reject)=>{
 
-            axios.put(`${config.api}employees/${id}`,employee).then((data)=>{
+            axios.put(`${config.api}user/${id}`,user).then((data)=>{
                 
                  resolve(data.data);
             
@@ -79,4 +93,4 @@ class EmployeeService {
 
 }
 
-export default EmployeeService;
+export default UserService;
