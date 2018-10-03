@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import OrderItem from "./OrderItem";
+import PaymentItem from "./PaymentItem";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
@@ -20,7 +21,8 @@ class Payment extends React.Component {
       payOpen: false,
       items : [],
       count : 0,
-      amount : 0
+      amount : 0,
+      paymentItems : []
     };
     
   }
@@ -39,6 +41,7 @@ class Payment extends React.Component {
 
   componentDidMount(){
 		this.request();
+    this.paymentRequest();
   }
   
   // get placed orders data from database
@@ -48,6 +51,17 @@ class Payment extends React.Component {
 		.then(items=>this.setState({items}, () => 
 			console.log('orders fetched', items),
 			this.setState({count : Object.keys(items).length})
+		))
+		
+		// this.loadData();
+	}
+
+  // get payments data from database
+	paymentRequest = async () => {
+		const response = await fetch(`http://localhost:5000/payment/all`)
+		.then(result=>result.json())
+		.then(paymentItems=>this.setState({paymentItems}, () => 
+			console.log('payments fetched', paymentItems)
 		))
 		
 		// this.loadData();
@@ -95,6 +109,12 @@ class Payment extends React.Component {
     var orders =this.state.items.map((al,i)=>{            
       return(
           <OrderItem key={i} item={al} setModal = {this.setModal} setPayModal = {this.setPayModal}/>
+        )
+    })
+
+    var payments =this.state.items.map((al,i)=>{            
+      return(
+          <PaymentItem key={i} item={al}/>
         )
     })
 
@@ -193,32 +213,19 @@ class Payment extends React.Component {
 
 
           <TabPane tabId="2">
-            <Row>
+          <Row>
               <Col sm="12">
-              <Table borderless hover responsive size="sm">
+                <Table borderless hover responsive size="sm">
                   <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Order ID</th>
-                      <th>Payment ID</th>
-                      <th>Amout</th>
-                      <th>Date</th>
-                      <th>Supplier ID</th>
-                      <th>Site Manager</th>
-                      <th>Payment Method</th>
+                    <tr>                      
+                      <th>PaymentID</th>
+                      <th>Amount</th>
+                      <th>hihihi</th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>120</td>
-                      <td>75</td>
-                      <td>12500</td>
-                      <td>2018/08/15</td>
-                      <td>Access</td>             
-                      <td>MAGA</td>   
-                      <td>Voucher</td>  
-                    </tr> 
+                  {payments}                   
                   </tbody>
                 </Table>
               </Col>
