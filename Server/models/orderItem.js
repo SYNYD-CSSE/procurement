@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
 var autoIncrement = require('mongoose-auto-increment');
 
-const itemSchema = new mongoose.Schema({
+const orderItemSchema = new mongoose.Schema({
 
-    itemId: {
+    orderItemId: {
         type: Number,
         required: true
     },
@@ -15,15 +15,20 @@ const itemSchema = new mongoose.Schema({
 
     unit: {
         type: String
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1
     }
 
 });
 autoIncrement.initialize(mongoose.connection);
-itemSchema.plugin(autoIncrement.plugin, {
-    model: 'Item',
-    field: 'itemId',
+orderItemSchema.plugin(autoIncrement.plugin, {
+    model: 'OrderItem',
+    field: 'orderItemId',
     startAt: 1000,
     incrementBy: 1
 });
 
-module.exports = mongoose.model("Item", itemSchema);
+module.exports = mongoose.model("OrderItem", orderItemSchema);
