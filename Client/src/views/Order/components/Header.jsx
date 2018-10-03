@@ -92,7 +92,7 @@ class Header extends Component {
       .then(result => {
         orderitemarr.push(result.data.result._id);
         console.log(orderitemarr);
-        localStorage.setItem("orderitemarr",orderitemarr)
+        localStorage.setItem("orderitemarr",JSON.stringify(orderitemarr));
        // this.props.history.push("/placeOrder");
       });
      
