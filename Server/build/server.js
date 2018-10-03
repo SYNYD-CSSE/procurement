@@ -12,11 +12,7 @@ const EmployeeRoutes_1 = __importDefault(require("./routes/EmployeeRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const paymentRoute_1 = __importDefault(require("./routes/api/paymentRoute"));
 const suppliers_1 = __importDefault(require("./routes/api/suppliers"));
-<<<<<<< HEAD
 const sentQuotations_1 = __importDefault(require("./routes/api/sentQuotations"));
-mongoose_1.default.connect(database_1.default.database, { useNewUrlParser: true });
-=======
-const inventoryItems_1 = __importDefault(require("./routes/api/inventoryItems"));
 const path = require("path");
 //const passport = require("passport");
 const config = require("./config/database");
@@ -24,7 +20,6 @@ const Order = require("./routes/api/orders");
 const Item = require("./routes/api/items");
 const OrderItem = require("./routes/api/orderItems");
 mongoose_1.default.connect(config.database, { useNewUrlParser: true });
->>>>>>> dileepa
 mongoose_1.default.connection.on("connected", () => {
     console.log(`connected to database ${config.database}`);
 });
@@ -48,14 +43,9 @@ app.use("/orderItems", OrderItem);
 app.use("/orders", Order);
 app.use("/payment", paymentRoute_1.default);
 app.use("/employees", EmployeeRoutes_1.default);
-<<<<<<< HEAD
-app.use("/suppliers", suppliers_1.default);
-app.use("/quotations", sentQuotations_1.default);
-=======
 app.use("/user", userRoutes_1.default);
 app.use("/suppliers", suppliers_1.default);
-app.use("/invetoryItems", inventoryItems_1.default);
->>>>>>> dileepa
+app.use("/quotations", sentQuotations_1.default);
 generate_1.default.initilize();
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + './../public/index.html'));

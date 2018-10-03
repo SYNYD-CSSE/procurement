@@ -38,7 +38,7 @@ class ViewOrderItems extends Component {
         .then(res => {
           console.log(res.data)
           this.setState({ orderItems: [res.data] });
-          console.log(orderItems)
+          
         })
         .catch(err => {
           console.log(err);
