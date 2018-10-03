@@ -1,5 +1,5 @@
 
-const user = JSON.parse(localStorage.getItem('user')) | {user:{role : 'Management'}};
+const user = JSON.parse(localStorage.getItem('user')) | { user: { role: 'Management' } };
 
 let NavigationBar = {
   items: [
@@ -38,18 +38,18 @@ let NavigationBar = {
       url: '/addOrder',
       icon: 'icon-briefcase',
     },
-    
+
     // Samith's Functions Navigation Items
     {
       name: 'Order Details',
-      url:'/orders/details',
-      icon:'fa fa-file-text-o ',
+      url: '/orders/details',
+      icon: 'fa fa-file-text-o ',
 
     },
-      {
+    {
       name: 'Supplier Rating',
-      url:'/orders/SupplierRating',
-      icon:'icon-star',
+      url: '/orders/SupplierRating',
+      icon: 'icon-star',
 
     },
     {
@@ -100,13 +100,6 @@ let NavigationBar = {
       ]
     },
     {
-      name: 'Buttons',
-      url: '/buttons',
-      icon: 'icon-cursor',
-      children: [{
-          name: 'Buttons',
-          url: '/buttons/buttons',
-          icon: 'icon-cursor',
       name: 'User',
       url: '/user',
       icon: 'icon-user',
@@ -122,13 +115,22 @@ let NavigationBar = {
           icon: 'icon-list',
         }
       ]
+    },
+    {
+      name: 'Buttons',
+      url: '/buttons',
+      icon: 'icon-cursor',
+      children: [{
+        name: 'Buttons',
+        url: '/buttons/buttons',
+        icon: 'icon-cursor',
+      }
+      ]
     }
-  ] 
-  }
 
-  
+
   ]
-  
+
 };
 
 // switch (user.role) {
