@@ -19,6 +19,32 @@ class PlaceOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
+
+        this.submitHandler =this.submitHandler.bind(this);
+
+      
+    }
+
+  componentDidMount(){
+   
+  }
+    submitHandler(e){
+      e.preventDefault();
+
+      let getOrderItems = JSON.parse(localStorage.getItem("orderitemarr")) ;
+      console.log(getOrderItems);
+      axios
+        .post("http://localhost:5000/orders", {
+          itemId:getOrderItems
+        })
+        .then(result => {
+          console.log(result);
+          alertify.notify("New Item Added!", "success", 5, function() {
+            console.log("dismissed");
+          });
+        });
+      this.props.history.push("/");
+
     }
     render() { 
         return ( 
