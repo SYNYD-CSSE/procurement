@@ -19,9 +19,12 @@ class ViewOrderItems extends Component {
     constructor(props) {
         super(props);
         this.state = {
-         //   p: localStorage.getItem("orderitemarr"), 
+                   //   p: JSON.parse(localStorage.getItem("orderitemarr")), 
             orderItems :[]
+
+           
          }
+         console.log(this.state.p);
     }
    
   componentDidMount() {
@@ -37,6 +40,7 @@ class ViewOrderItems extends Component {
     //      var itemref = orderref[];
     //      console.log(orderref);
 console.log('itemref'+itemref);
+    
         axios
         .get("http://localhost:5000/orderItems/"+itemref)
         .then(res => {
@@ -45,7 +49,7 @@ console.log('itemref'+itemref);
         // let item = this.setState({ orderItems:arr});;
           console.log(res.data);
          this.setState(prevState => ({
-          orderItems: [...prevState.orderItems, res.data]
+          orderItems: [...prevState.orderItems,res.data]
         }))
        //  console.log('itmIFor '+item);
         // let item = this.state.orderItems[orderref];
@@ -58,12 +62,13 @@ console.log('itemref'+itemref);
           console.log(err);
         });
       
-    }
-  
+    
+      }
     
   }
 
   render() {
+
     console.log('in Render '+this.state.orderItems);
     return(
         <div className="container">
@@ -73,27 +78,25 @@ console.log('itemref'+itemref);
           <thead className="thead-dark">
             <tr>
               <th>Item Name</th>
-              <th>Quantity</th>
-              <th />
-              <th />
             </tr>
           </thead>
           <tbody>
-          {this.state.orderItems
-             .map((item, i) => {
-   console.log('item'+item);
-                  <tr>
-                      <td>{item.name}</td>
-                      {/* <td>{item.quantity}</td> */}
-                  </tr>                
-            })
-          }
+            {
+              [this.state.orderItems].map(function(exp){
+                console.log(exp)
+                return  
+                <tr>
+              
+                  <td >{exp.name}</td>
+                  
+                  </tr>
+              })
+            }
             </tbody>
             </Table>
           </div>          
 
     )
-    
     
   }
 }
