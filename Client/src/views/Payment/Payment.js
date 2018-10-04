@@ -14,6 +14,7 @@ class Payment extends React.Component {
     this.setModal = this.setModal.bind(this)
     this.setPayModal = this.setPayModal.bind(this)
     this.toggle = this.toggle.bind(this);
+    this.updateOrderToClosed = this.updateOrderToClosed.bind(this)
     
     this.state = {
       activeTab: '1',
@@ -75,10 +76,21 @@ class Payment extends React.Component {
     }
   }
 
+  //Update the order state to closed
+  updateOrderToClosed(name){
+    fetch('http://localhost:5000/orders/closed/29', {
+        method: 'put',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        })
+        .then(res=>res.json())
+        .then(res => console.log(res))
+  }
  
   // post a payment
-  sendPayment(){
-    
+  sendPayment(){    
     this.setState({
       amount : 782300,
       payOpen: !this.state.payOpen
@@ -94,9 +106,10 @@ class Payment extends React.Component {
         body: JSON.stringify({
             "amount" : this.state.amount
         })
-        }).then(res=>res.json())
-        .then(res => console.log(res));
-
+        })
+        .then(res=>res.json())
+        .then(res => console.log(res))
+        .then(this.updateOrderToClosed(this.state.count))
         alert('Payment Successful !');        
     });    
     
