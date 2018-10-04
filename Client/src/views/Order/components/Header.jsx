@@ -94,8 +94,11 @@ class Header extends Component {
         console.log(orderitemarr);
         localStorage.setItem("orderitemarr",JSON.stringify(orderitemarr));
        // this.props.history.push("/placeOrder");
+       this.setState({
+        showCart: false
       });
-     
+      });
+    
     })
     alertify.notify("New Item Added!", "success", 5, function() {
       console.log("dismissed");
