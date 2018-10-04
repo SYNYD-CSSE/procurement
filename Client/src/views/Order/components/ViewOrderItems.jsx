@@ -29,26 +29,38 @@ class ViewOrderItems extends Component {
       var getOrderItems = JSON.parse(localStorage.getItem("orderitemarr")) ;
    //   console.log('orderitems'+orderitems);
      // var arr = orderitems.split(",");
+     var arr= [];
       var i= 0;
       for(i=0; i<getOrderItems.length; i++){
+   //     for( var orderref in getOrderItems ){
           var itemref=getOrderItems[i]; 
-//console.log('itemref'+itemref);
+    //      var itemref = orderref[];
+    //      console.log(orderref);
+console.log('itemref'+itemref);
         axios
         .get("http://localhost:5000/orderItems/"+itemref)
         .then(res => {
-          console.log(res.data)
-          this.setState({ orderItems: [res.data] });
+         arr.push(res.data);
+         console.log('arrInFor '+arr);
+         let item = this.setState({ orderItems:arr});;
+         console.log('itmIFor '+item);
+        // let item = this.state.orderItems[orderref];
+        //   console.log(arr);
+       //   this.setState({ orderItems: [res.data] });
         //  console.log(orderItems)
+
         })
         .catch(err => {
           console.log(err);
         });
-      } 
+      
+    }
+  
     
   }
 
   render() {
-    
+    console.log('in Render '+this.state.orderItems);
     return(
         <div className="container">
         <h4>ORDER ITEMS</h4>
@@ -64,12 +76,12 @@ class ViewOrderItems extends Component {
           </thead>
           <tbody>
           {
-            this.state.orderItems
-            .map((item, i) => {
-  
+             Object.keys(this.state.orderItems)
+             .map((item, i) => {
+   console.log('item'+item);
                   <tr>
-                      <td>{item.name}</td>
-                      <td>{item.quantity}</td>
+                      <td>{this.state.orderItems[item].name}</td>
+                      {/* <td>{item.quantity}</td> */}
                   </tr>                
             })
           }
