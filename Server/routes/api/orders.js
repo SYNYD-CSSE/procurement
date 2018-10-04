@@ -49,17 +49,23 @@ router.get("/", (req, res, next) => {
 
 //ORDER FIND BY ID
 
+<<<<<<< HEAD
 router.get("/order/:id", (req, res, next) => {
     try {
         Order.findOne({
             orderId: req.params.id
         }, (err, result) => {
+=======
+router.get("/:id", (req, res, next) => {
+   
+        Order.findOne({orderId: req.params.id}).
+        populate('items').
+        exec((err, result) => {
+>>>>>>> yasiru
             if (err) return next(err);
             res.json(result);
-        });
-    } catch (error) {
-        console.log(error)
-    }
+        })
+
 });
 
 //ORDER FIND BY status
@@ -76,6 +82,7 @@ router.get("/status/:status", (req, res, next) => {
         console.log(error)
     }
 });
+
 
 //Update ORDER
 router.put('/:id', (req, res, next) => {
@@ -101,7 +108,20 @@ router.put('/:id', (req, res, next) => {
             });
         }
     )
-})
+});
+
+router.put('/abc/:id', (req, res, next)=>{
+    Order.findOneAndUpdate({orderId:req.params.id},{$set:{
+        status:req.body.status
+    }}, (err,result)=>{
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json({msg:'Successfully Updated',obj:result});
+        }
+    });
+});
 
 
 //Update the order state to closed

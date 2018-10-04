@@ -228,6 +228,10 @@ const AddSupplier = Loadable({
   loader: () => import('./views/Supplier/AddSupplier'),
   loading: Loading,
 });
+const Changes = Loadable({
+  loader: () => import('./views/Pages/Changes/Change'),
+  loading: Loading,
+});
 
 const ViewSupplier = Loadable({
   loader: () => import('./views/Supplier/ViewSuppliers'),
@@ -316,6 +320,7 @@ const routes = [
   { path: '/payment', exact: true,  name: 'Payment', component: Payment },
   { path: '/orders/details', exact: true,  name: 'OrderDetails', component: OrderDetails },
   { path: '/orders/SupplierRating', exact: true,  name: 'SupplierRating', component: SupplierRating },
+<<<<<<< HEAD
   { path: '/addSupplier', exact: true,  name: 'Add Supplier', component: AddSupplier },
   { path: '/viewSupplier', exact: true,  name: 'View Supplier', component: ViewSupplier },
   { path: '/updateSupplier/:supplierId', exact: true,  name: 'Update Supplier', component:UpdateSupplier },
@@ -352,6 +357,9 @@ const routes = [
     name: "PlaceOrder",
     component: PlaceOrder
   }
+=======
+  { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes },
+>>>>>>> yasiru
 ];
 
 export default routes;

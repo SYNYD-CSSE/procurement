@@ -42,6 +42,7 @@ router.get("/", (req, res, next) => {
     });
 });
 //ORDER FIND BY ID
+<<<<<<< HEAD
 router.get("/order/:id", (req, res, next) => {
     try {
         Order.findOne({
@@ -55,6 +56,16 @@ router.get("/order/:id", (req, res, next) => {
     catch (error) {
         console.log(error);
     }
+=======
+router.get("/:id", (req, res, next) => {
+    Order.findOne({ orderId: req.params.id }).
+        populate('items').
+        exec((err, result) => {
+        if (err)
+            return next(err);
+        res.json(result);
+    });
+>>>>>>> yasiru
 });
 //Update ORDER
 router.put('/:id', (req, res, next) => {
@@ -76,6 +87,18 @@ router.put('/:id', (req, res, next) => {
             message: "Order Updated",
             result
         });
+    });
+});
+router.put('/abc/:id', (req, res, next) => {
+    Order.findOneAndUpdate({ orderId: req.params.id }, { $set: {
+            status: req.body.status
+        } }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json({ msg: 'Successfully Updated', obj: result });
+        }
     });
 });
 //REMOVE ORDER

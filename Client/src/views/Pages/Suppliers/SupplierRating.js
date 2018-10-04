@@ -1,7 +1,10 @@
 import React,{Component} from 'react';
 import { Link } from "react-router-dom";
-import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane ,Card ,Table , CardBody , CardHeader} from 'reactstrap';
 import classnames from 'classnames';
+import SupplierItems from './SupplierItems';
+import NewSupplierRating from './NewSupplierRating';
+import BlacklistedSuppliers from './BlacklistedSuppliers';
 
 
 
@@ -13,21 +16,57 @@ class SupplierRating extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
           activeTab: '1',
+          suppliers:[]
         };
+
+        this.toggle=this.toggle.bind(this);
       }
     
+      componentWillMount(){
+
+        // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
+   
+        fetch(`/suppliers`)
+   
+           .then(res=>res.json())
+            .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));
+   
+     }
+
+
       toggle(tab) {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab: tab,
           });
+          
         }
       }
-        
+      
   
     render(){
-  
-  
+      
+      var supplierItems = this.state.suppliers.map((suppliers,i)=>{
+
+        return(
+          <SupplierItems key={suppliers.id} item={suppliers}/>
+        )
+      });
+
+      var ratesupplierItems = this.state.suppliers.map((suppliers,i)=>{
+
+        return(
+          <NewSupplierRating key={suppliers.id} item={suppliers}/>
+        )
+      });
+
+      var blacklistedsupplierItems = this.state.suppliers.map((suppliers,i)=>{
+
+        return(
+          <BlacklistedSuppliers key={suppliers.id} item={suppliers}/>
+        )
+      });
+      
         return(
   
             <div className="animated fadeIn">
@@ -55,25 +94,74 @@ class SupplierRating extends Component {
 
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
+              <Card>
+              {/* <CardHeader>
+                <i className="fa fa-align-justify"></i> Simple Table
+              </CardHeader> */}
+              <CardBody>
+                <Table responsive>
+                  <thead>
+                  <tr>
+                    <th>Supplier ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Rating</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {supplierItems}
+                  </tbody>
+                </Table>
+                </CardBody>
+                </Card>
               </TabPane>
+
+
               <TabPane tabId="2">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
+              <Card>
+              {/* <CardHeader>
+                <i className="fa fa-align-justify"></i> Simple Table
+              </CardHeader> */}
+              <CardBody>
+                <Table responsive>
+                  <thead>
+                  <tr>
+                    <th>Supplier ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Rating</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {ratesupplierItems}
+                  </tbody>
+                </Table>
+                </CardBody>
+                </Card>
               </TabPane>
+
+
               <TabPane tabId="3">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
+              <Card>
+              {/* <CardHeader>
+                <i className="fa fa-align-justify"></i> Simple Table
+              </CardHeader> */}
+              <CardBody>
+                <Table responsive>
+                  <thead>
+                  <tr>
+                    <th>Supplier ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Rating</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {blacklistedsupplierItems}
+                  </tbody>
+                </Table>
+                </CardBody>
+                </Card>
               </TabPane>
             </TabContent>
           
