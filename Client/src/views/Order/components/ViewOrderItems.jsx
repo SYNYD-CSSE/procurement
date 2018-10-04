@@ -40,10 +40,14 @@ console.log('itemref'+itemref);
         axios
         .get("http://localhost:5000/orderItems/"+itemref)
         .then(res => {
-         arr.push(res.data);
-         console.log('arrInFor '+arr);
-         let item = this.setState({ orderItems:arr});;
-         console.log('itmIFor '+item);
+        //  arr.push(res.data);
+        //  console.log('arrInFor '+arr);
+        // let item = this.setState({ orderItems:arr});;
+          console.log(res.data);
+         this.setState(prevState => ({
+          orderItems: [...prevState.orderItems, res.data]
+        }))
+       //  console.log('itmIFor '+item);
         // let item = this.state.orderItems[orderref];
         //   console.log(arr);
        //   this.setState({ orderItems: [res.data] });
@@ -75,12 +79,11 @@ console.log('itemref'+itemref);
             </tr>
           </thead>
           <tbody>
-          {
-             Object.keys(this.state.orderItems)
+          {this.state.orderItems
              .map((item, i) => {
    console.log('item'+item);
                   <tr>
-                      <td>{this.state.orderItems[item].name}</td>
+                      <td>{item.name}</td>
                       {/* <td>{item.quantity}</td> */}
                   </tr>                
             })
