@@ -1,30 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
 import {
-    Row,
-    Col,
-    Button,
-    Card,
-    CardHeader,
-    CardFooter,
-    CardBody,
-    FormGroup,
-    Label,
-    Input,
+
     Table
   } from "reactstrap";
-  import alertify from "alertifyjs";
+
+
+  import OrderItem from "./OrderItem"
 
 class ViewOrderItems extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                   //   p: JSON.parse(localStorage.getItem("orderitemarr")), 
+         //   p: localStorage.getItem("orderitemarr"), 
             orderItems :[]
-
-           
          }
-         console.log(this.state.p);
     }
    
   componentDidMount() {
@@ -40,17 +30,17 @@ class ViewOrderItems extends Component {
     //      var itemref = orderref[];
     //      console.log(orderref);
 console.log('itemref'+itemref);
-    
         axios
         .get("http://localhost:5000/orderItems/"+itemref)
         .then(res => {
         //  arr.push(res.data);
         //  console.log('arrInFor '+arr);
         // let item = this.setState({ orderItems:arr});;
-          console.log(res.data);
+         
          this.setState(prevState => ({
-          orderItems: [...prevState.orderItems,res.data]
+          orderItems: [...prevState.orderItems, res.data]
         }))
+        console.log(this.state.orderItems);
        //  console.log('itmIFor '+item);
         // let item = this.state.orderItems[orderref];
         //   console.log(arr);
@@ -62,14 +52,36 @@ console.log('itemref'+itemref);
           console.log(err);
         });
       
-    
-      }
+    }
+  
     
   }
 
   render() {
-
     console.log('in Render '+this.state.orderItems);
+    var array = this.state.orderItems;
+    var tabRow = "";
+
+    if (array) {
+      tabRow = array.map((item, i) => {
+        console.log(item);
+
+        return (
+          <OrderItem
+            key={i}
+            id={item._id}
+            name={item.name}
+            quantity={item.quantity}
+          />
+        );
+      });
+    } else {
+      tabRow = " ";
+
+      return tabRow;
+    }
+
+
     return(
         <div className="container">
         <h4>ORDER ITEMS</h4>
@@ -77,26 +89,17 @@ console.log('itemref'+itemref);
         <Table hover bordered striped responsive size="sm">
           <thead className="thead-dark">
             <tr>
+              <th>Id</th>
               <th>Item Name</th>
+              <th>Quantity</th>
             </tr>
           </thead>
-          <tbody>
-            {
-              [this.state.orderItems].map(function(exp){
-                console.log(exp)
-                return  
-                <tr>
-              
-                  <td >{exp.name}</td>
-                  
-                  </tr>
-              })
-            }
-            </tbody>
+          <tbody>{tabRow}</tbody>
             </Table>
           </div>          
 
     )
+    
     
   }
 }
