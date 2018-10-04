@@ -14,6 +14,7 @@ class PaymentItem extends Component {
         return (  
             <tr>
                 <td>{this.state.item.paymentid}</td>
+                <td>{this.state.item.orderid}</td>
                 <td>{this.state.item.amount}</td>   
             </tr>  
         )
