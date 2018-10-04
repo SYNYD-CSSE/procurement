@@ -13,7 +13,7 @@ constructor(props){
         item:props.item
     }
 
-    console.log('Hello form the items');
+    console.log('Hello form the orderitems component');
 
 }
 
@@ -27,7 +27,7 @@ constructor(props){
                     <td>{this.state.item.approvedDate}</td>
                     <td>{this.state.item.rejectedDate}</td>
                     <td> 
-                  <h4><Badge color="warning">{this.state.item.status}</Badge></h4>
+                    <Badge color="warning">{this.state.item.status}</Badge>
                     </td>
         </tr>
     )}
@@ -73,6 +73,7 @@ constructor(props){
             </tr>
         
                 )}
+        else return null;
   }
 }
 

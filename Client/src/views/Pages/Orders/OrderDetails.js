@@ -168,9 +168,7 @@ class OrderDetails extends Component {
                 <i className="fa fa-align-justify"></i> Simple Table
               </CardHeader> */}
               <CardBody>
-              <nav>
-                <button   className="btn btn-lg btn-primary m-3" >Go To Details</button>
-                  </nav>
+        
                 <Table hover responsive size="sm">
                   <thead>
                   <tr>
@@ -204,7 +202,7 @@ class OrderDetails extends Component {
                             className="btn btn-lg btn-primary m-3"
                             onClick={() => { history.push(`/orders/items/${this.state.OrderId}`) }}
                           >
-                            Click Me!
+                            Go To Details
                           </button>
                         )} />
                 <button   className="btn btn-lg btn-success m-3" onClick={this.sucess} >Approve Order</button>
