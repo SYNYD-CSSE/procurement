@@ -45,7 +45,7 @@ export default class employeeController {
        try {
 
             const id = req.params.id;
-            Employee.find({id:id}).then((data)=>{
+            Employee.findOne({id:id}).then((data)=>{
 
                     const status = res.statusCode;
                     res.json({

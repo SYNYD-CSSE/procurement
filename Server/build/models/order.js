@@ -22,6 +22,9 @@ const orderSchema = new mongoose.Schema({
         default: Date.now
         //    required: true
     },
+    amount: {
+        type: String
+    },
     approvedDate: {
         type: Date,
     },
@@ -30,13 +33,13 @@ const orderSchema = new mongoose.Schema({
     },
     items: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Item",
+            ref: "OrderItem",
             required: true
         }],
     status: {
         type: String,
         //  required: true,
-        enum: ['Approved', 'Declined', 'Pending', 'Placed'],
+        enum: ['Pending', 'Approved', 'Declined', 'Placed', 'Closed'],
         default: 'Pending'
     },
 });

@@ -41,10 +41,16 @@ class OrderDetails extends Component {
         console.log(this.state.OrderId);
      }
      sucess(){
+<<<<<<< HEAD
      
       const ostate={
         status:'Approved'
         
+=======
+      var ApprovedDate=new Date();
+      const state={
+        status:'Approved'
+>>>>>>> dev
           }
  
               fetch(`/orders/abc/${this.state.OrderId}`,{
@@ -90,11 +96,20 @@ class OrderDetails extends Component {
             activeTab:tab,
             orders:[]
           });
+<<<<<<< HEAD
           fetch(`/orders`)
    
           .then(res=>res.json())
            .then(orders=> this.setState({orders},()=> console.log(orders)));
   
+=======
+    
+            fetch(`/orders`)
+               .then(res=>res.json())
+                .then(orders=> this.setState({orders},()=> console.log(orders)));
+       
+     
+>>>>>>> dev
         }
       }
         

@@ -1,60 +1,73 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import alertify from "alertifyjs";
 
-export default class Item extends Component {
+class Item extends Component {
   constructor(props) {
     super(props);
-    this.onChangeHostName = this.onChangeHostName.bind(this);
-    this.onChangePort = this.onChangePort.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    console.log(props);
+    this.deleteItem = this.deleteItem.bind(this);
+  }
 
-    this.state = {
-      name: "",
-      quantity: "1",
-      unit: ""
-    };
+  deleteItem(event) {
+    event.preventDefault();
+    axios
+      .delete("http://localhost:5000/items/" + this.props.itemId)
+      .then(res => {
+        alertify.notify("Item Deleted!", "success", 5, function() {
+          console.log("dismissed");
+        });
+      })
+      .catch(err => console.log(err));
   }
-  onChangeHostName(e) {
-    this.setState({
-      name: e.target.value
-    });
-  }
-  onChangePort(e) {
-    this.setState({
-      port: e.target.value
-    });
-  }
-  onSubmit(e) {
-    e.preventDefault();
-    console.log("clicked");
-  }
+
+  //   sendToLocal() {
+  //     localStorage.clear();
+
+  //     const item = {
+  //       pid: this.props.pId,
+  //       bht: this.props.bht,
+  //       name: this.props.name,
+  //       wardNo: this.props.wardNo,
+  //       bedNo: this.props.bedNo
+  //     };
+
+  //     localStorage.setItem("patientDetails", JSON.stringify(patient));
+  //   }
 
   render() {
     return (
-      <div style={{ marginTop: 50 }}>
-        <h3>Add Item</h3>
-        <form>
-          <div className="form-group">
-            <label>Item Name: </label>
-            <input type="text" name="name" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label>Unit: </label>
-            <input type="text" name="unit" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label>Quantity: </label>
-            <input type="number" name="qty" className="form-control" />
-          </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              name=""
-              value="Add"
-              className="btn btn-primary"
-            />
-          </div>
-        </form>
-      </div>
+      <tr>
+        <td>{this.props.itemId}</td>
+        <td>{this.props.name}</td>
+        <td>{this.props.unit}</td>
+        <td>
+          {/* <Link to="/bht/profile">
+            <button
+              onClick={this.sendToLocal.bind(this)}
+              type="button"
+              className="btn btn-success btn-sm"
+            >
+              <i className="fa fa-search fa-sm" /> View BHT
+            </button>
+          </Link> */}
+
+          <Link
+            to={"/editItem/" + this.props.itemId}
+            className="btn btn-primary"
+          >
+            Edit
+          </Link>
+        </td>
+        <td>
+          <form onSubmit={this.deleteItem}>
+            <input type="submit" value="Delete" className="btn btn-danger" />
+          </form>
+        </td>
+      </tr>
     );
   }
 }
+
+export default Item;

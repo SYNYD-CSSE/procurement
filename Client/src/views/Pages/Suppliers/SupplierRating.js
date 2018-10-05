@@ -40,9 +40,16 @@ class SupplierRating extends Component {
             activeTab: tab,
             suppliers:[]
           });
+<<<<<<< HEAD
           fetch(`/suppliers`)
           .then(res=>res.json())
            .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));    
+=======
+
+          fetch(`/suppliers`)
+          .then(res=>res.json())
+           .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));
+>>>>>>> dev
           
         }
       }
@@ -53,21 +60,21 @@ class SupplierRating extends Component {
       var supplierItems = this.state.suppliers.map((suppliers,i)=>{
 
         return(
-          <SupplierItems key={suppliers.id} item={suppliers}/>
+          <SupplierItems key={suppliers.rating} item={suppliers}/>
         )
       });
 
       var ratesupplierItems = this.state.suppliers.map((suppliers,i)=>{
 
         return(
-          <NewSupplierRating key={suppliers.id} item={suppliers}/>
+          <NewSupplierRating key={suppliers._id} item={suppliers}/>
         )
       });
 
       var blacklistedsupplierItems = this.state.suppliers.map((suppliers,i)=>{
 
         return(
-          <BlacklistedSuppliers key={suppliers.id} item={suppliers}/>
+          <BlacklistedSuppliers key={suppliers.rating} item={suppliers}/>
         )
       });
       

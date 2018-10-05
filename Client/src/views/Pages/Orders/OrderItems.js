@@ -10,11 +10,18 @@ constructor(props){
 
     this.state={
 
-        item:props.item
+        item:props.item,
+        //date: date
     }
+
+    // var today =Date.now,
+    // date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+
 
     console.log('Hello form the orderitems component');
 
+// console.log(this.state.date);
 }
 
   render() {
@@ -25,7 +32,7 @@ constructor(props){
                     <td>{this.state.item.constructorId}</td>
                     <td>{this.state.item.orderDate}</td>
                     <td>{this.state.item.approvedDate}</td>
-                    <td>{this.state.item.rejectedDate}</td>
+                    <td>{this.state.item.approvedDate}</td>
                     <td> 
                     <Badge color="warning">{this.state.item.status}</Badge>
                     </td>
@@ -66,7 +73,7 @@ constructor(props){
                 <td>{this.state.item.constructorId}</td>
                 <td>{this.state.item.orderDate}</td>
                 <td>{this.state.item.approvedDate}</td>
-                <td>{this.state.item.rejectedDate}</td>
+                <td>{this.state.item.approvedDate}</td>
                 <td> 
                 <Badge color="primary">{this.state.item.status}</Badge>
                 </td>

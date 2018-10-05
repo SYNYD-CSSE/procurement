@@ -9,6 +9,7 @@ router.post("/", (req, res, next) => {
         const order = new Order({
             status: req.body.status,
             items: req.body.itemId
+            //constructor details should come here
         });
         order.save((err, result) => {
             if (err) {
@@ -50,6 +51,21 @@ router.get("/:id", (req, res, next) => {
         res.json(result);
     });
 });
+//ORDER FIND BY status
+router.get("/status/:status", (req, res, next) => {
+    try {
+        Order.find({
+            status: req.params.status
+        }, (err, result) => {
+            if (err)
+                return next(err);
+            res.json(result);
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
 //Update ORDER
 router.put('/:id', (req, res, next) => {
     Order.findOneAndUpdate({
@@ -85,6 +101,27 @@ router.put('/abc/:id', (req, res, next) => {
         }
     });
 });
+//Update the order state to closed
+router.put('/closed/:id', (req, res, next) => {
+    Order.findOneAndUpdate({
+        orderId: req.params.id
+    }, {
+        $set: {
+            status: 'Closed'
+        }
+    }, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                title: "An error occured",
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: "Order Updated",
+            result
+        });
+    });
+});
 //REMOVE ORDER
 router.delete('/:oid', (req, res, next) => {
     Order.remove({
@@ -95,6 +132,21 @@ router.delete('/:oid', (req, res, next) => {
         res.json({
             msg: "order deleted",
         });
+    });
+});
+//get approved orders
+router.get("/approvedOrders", (req, res, next) => {
+    Order
+        .find({
+        status: 'Approved'
+    })
+        .populate('items', 'id name quantity unit -_id')
+        .then(result => {
+        res.status(200)
+            .json(result);
+    })
+        .catch(error => {
+        console.log(error);
     });
 });
 module.exports = router;
