@@ -11,6 +11,7 @@ class UserRoutes {
 
     routes(){
         this.router.get("/",userController.getUsersList);
+        this.router.get("/:id",userController.getUserByID);
         this.router.post("/login",userController.login);
         this.router.post("/",userController.newUser);
     }

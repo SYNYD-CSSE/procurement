@@ -91,6 +91,14 @@ class UserService {
         });
     }
 
+    static getAllSuppliers(){
+        return new Promise((resolve,reject)=>{
+            axios.get('http://localhost:5000/suppliers').then((data)=>{
+                resolve(data);
+            });
+        });
+    }
+
 }
 
 export default UserService;

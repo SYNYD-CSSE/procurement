@@ -57,6 +57,40 @@ export default class employeeController {
      
         }
     }
+
+    // GET SINGLE USER BY USER_ID
+    public static getUserByID( req : Request , res : Response) :void {
+        
+        
+        try {
+ 
+             const id = req.params.id;
+             User.findOne({id:id}).then((data)=>{
+ 
+                     const status = res.statusCode;
+                     res.json({
+                         status,
+                         data
+                     });
+ 
+             }).catch((err)=>{
+ 
+                     const status = res.statusCode;
+                     res.json({
+                         status,
+                         err
+                 }); 
+ 
+             });
+ 
+         } catch (error) {
+ 
+             console.log(`GetUserByID function goes wrong: ${error}`);
+    
+         }
+  
+     }
+ 
     // GET ALL USER 
     public static getUsersList( req : Request , res : Response) :void {
        try {
