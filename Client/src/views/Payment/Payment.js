@@ -3,6 +3,7 @@ import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTi
 import classnames from 'classnames';
 import OrderItem from "./OrderItem";
 import PaymentItem from "./PaymentItem";
+import BuyItem from "./buyitem";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
@@ -21,6 +22,7 @@ class Payment extends React.Component {
     this.payNow = this.payNow.bind(this)
     this.sendPayment = this.sendPayment.bind(this)
     this.showDetails = this.showDetails.bind(this)
+
     
     this.state = {
       activeTab: '1',
@@ -36,7 +38,9 @@ class Payment extends React.Component {
       payno: '',
 
       constructor: '',
-      gotorders: []
+      gotorders: [],
+      golist: [],
+      newitems: []
     };
     
   }
@@ -110,12 +114,11 @@ class Payment extends React.Component {
   // post a payment
   sendPayment(){    
     this.setState({
-      paymethod : document.getElementById('paymethod'),
-      payno : document.getElementById('payno'), 
+      paymethod : document.getElementById('paymethod').value,
+      payno : document.getElementById('payno').value,       
       payOpen: !this.state.payOpen
-    }, () => {     
-
-      // create a new payment 
+    }, () => {
+      // create a new payment
       fetch('http://localhost:5000/payment/create/', {
         method: 'post',
         headers: {
@@ -125,8 +128,8 @@ class Payment extends React.Component {
         },
         body: JSON.stringify({
             "orderid" : this.state.orderId,
-            // "paymethod" : this.state.paymethod,
-            // "payno" : this.state.payno,           
+            "paymethod" : this.state.paymethod,
+            "payno" : this.state.payno,           
             "amount" : this.state.amount
         })
         })
@@ -135,7 +138,7 @@ class Payment extends React.Component {
         .then(this.updateOrderToClosed(this.state.orderId))
         alert('Payment Successful !');        
     });    
-    
+    window.location.reload();
   }
 
   payNow(oid, amo){
@@ -146,16 +149,28 @@ class Payment extends React.Component {
     })
   }
 
+
+  
   showDetails(oid, amo, cid, gor){
-    this.setModal()
+    this.setModal();
+    
     this.setState({
       orderId: oid,
       amount: amo,
       constructor: cid,
-      gotorders: gor
-    })
-  }
+      gotorders: gor,
+      // golist: this.state.gotorders.items
+    }
+    , () => {
+      fetch('http://localhost:5000/orders/' + this.state.orderId)
+      .then(res=>res.json())
+      .then(orders=> this.setState({items:orders.items}));
+      console.log(this.state.items);
 
+
+    }); 
+    
+  }
 
   render() {
 
@@ -171,6 +186,12 @@ class Payment extends React.Component {
         )
     })
 
+    var buy =this.state.items.map((al,i)=>{            
+      return(
+          <BuyItem key={i} item={al}/>
+        )
+    })
+
     return (
       <div>
 
@@ -179,28 +200,29 @@ class Payment extends React.Component {
             <ModalBody>
             <Table hover>
               <tbody>
-              <tr>
-                                   
+              <tr>                                   
                   <td><b>Order ID</b></td>
                   <td><b>{this.state.orderId}</b></td>
                 </tr>
 
-                <tr>
-                  
+                <tr>                  
                   <td><b>Amount</b></td>
                   <td><b>{this.state.amount}</b></td>
                 </tr>
 
-                <tr>
-                  
+                <tr>                  
                   <td><b>Constructor ID</b></td>
                   <td><b>{this.state.constructor}</b></td>
                 </tr>
 
-                <tr>
-                  
+                <tr>                  
+                  <td><b>Supplier</b></td>
+                  <td><b>Maga</b></td>
+                </tr>
+
+                <tr>                  
                   <td><b>Items</b></td>
-                  <td><b>{this.state.gotorders[0]}</b></td>
+                  <td><b>{buy}</b></td>
                 </tr>                
                 
                 </tbody>
@@ -279,8 +301,9 @@ class Payment extends React.Component {
                   <thead>
                     <tr>                      
                       <th>Order ID</th>
-                      <th>Date</th>
+                      <th>Ordered Date</th>
                       <th>Amount</th>
+                      <th>Supplier</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -302,6 +325,8 @@ class Payment extends React.Component {
                     <tr>                      
                       <th>PaymentID</th>
                       <th>OrderID</th>
+                      <th>Payment Type</th>
+                      <th>Card No</th>
                       <th>Amount</th>
                     </tr>
                   </thead>
