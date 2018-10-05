@@ -166,26 +166,27 @@ class Payment extends React.Component {
             <ModalBody>
             <Table hover>
               <tbody>
-              <tr>
-                                   
+              <tr>                                   
                   <td><b>Order ID</b></td>
                   <td><b>{this.state.orderId}</b></td>
                 </tr>
 
-                <tr>
-                  
+                <tr>                  
                   <td><b>Amount</b></td>
                   <td><b>{this.state.amount}</b></td>
                 </tr>
 
-                <tr>
-                  
+                <tr>                  
                   <td><b>Constructor ID</b></td>
                   <td><b>{this.state.constructor}</b></td>
                 </tr>
 
-                <tr>
-                  
+                <tr>                  
+                  <td><b>Supplier</b></td>
+                  <td><b>Maga</b></td>
+                </tr>
+
+                <tr>                  
                   <td><b>Items</b></td>
                   <td><b>{this.state.gotorders[0]}</b></td>
                 </tr>                
@@ -268,6 +269,7 @@ class Payment extends React.Component {
                       <th>Order ID</th>
                       <th>Date</th>
                       <th>Amount</th>
+                      <th>Supplier</th>
                       <th>Action</th>
                     </tr>
                   </thead>
