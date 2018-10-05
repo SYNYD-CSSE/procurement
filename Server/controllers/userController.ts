@@ -14,10 +14,13 @@ export default class employeeController {
         try {
 
             const login = {
+                id : '',
                 username: req.body.username,
-                password: req.body.password
+                password: req.body.password,
+                role    : ''
 
             };
+            console.log(login);
 
             User.findOne({ username: login.username }, (err, user) => {
                 const status = res.statusCode;
@@ -30,6 +33,8 @@ export default class employeeController {
                     let message: string;
                     if (isMatch) {
                         message = "Login success !";
+                        login.role = (user as any).role;
+                        login.id   = (user as any).id;
                         const token = jwt.sign(login, config.secretOrKey, {
                             expiresIn: 8640 // One day
                         });
