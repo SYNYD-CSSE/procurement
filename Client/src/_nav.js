@@ -72,27 +72,42 @@ let NavigationBar = {
       url: '/viewApprovedOrders',
       icon: 'icon-basket',
     },
-
+//Dileepa's final routes
     {
-      // optional class names space delimited list for title item ex: "text-center"
-      name: 'Add Item',
-      url: '/addItem',
-      icon: 'icon-briefcase',
+      name: 'Categories',
+      url: '/items',
+      icon: 'icon-list',
+      children: [
+        {
+          // optional class names space delimited list for title item ex: "text-center"
+          name: 'Add Item',
+          url: '/addItem',
+          icon: 'icon-briefcase',
+        },
+        {
+          name: 'View Item',
+          url: '/itemList',
+          icon: 'icon-briefcase',
+        },
+      ]
     },
     {
-      name: 'View Item',
-      url: '/itemList',
-      icon: 'icon-briefcase',
-    },
-    {
-      name: 'Add Order',
-      url: '/addOrder',
-      icon: 'icon-briefcase',
-    },
-    {
-      name: 'Place Order',
-      url: '/placeOrder',
-      icon: 'icon-briefcase',
+      name: 'Orders',
+      url: '/order',
+      icon: 'icon-list',
+      children: [
+        {
+          name: 'Add Order',
+          url: '/addOrder',
+          icon: 'icon-briefcase',
+        },
+        {
+          name: 'Place Order',
+          url: '/placeOrder',
+          icon: 'icon-briefcase',
+        },
+    
+      ]
     },
 
     // Samith's Functions Navigation Items
