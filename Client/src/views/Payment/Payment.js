@@ -3,6 +3,7 @@ import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTi
 import classnames from 'classnames';
 import OrderItem from "./OrderItem";
 import PaymentItem from "./PaymentItem";
+import BuyItem from "./buyitem";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
@@ -18,6 +19,7 @@ class Payment extends React.Component {
     this.payNow = this.payNow.bind(this)
     this.sendPayment = this.sendPayment.bind(this)
     this.showDetails = this.showDetails.bind(this)
+
     
     this.state = {
       activeTab: '1',
@@ -33,7 +35,9 @@ class Payment extends React.Component {
       payno: '',
 
       constructor: '',
-      gotorders: []
+      gotorders: [],
+      golist: [],
+      newitems: []
     };
     
   }
@@ -132,16 +136,28 @@ class Payment extends React.Component {
     })
   }
 
+
+  
   showDetails(oid, amo, cid, gor){
-    this.setModal()
+    this.setModal();
+    
     this.setState({
       orderId: oid,
       amount: amo,
       constructor: cid,
-      gotorders: gor
-    })
-  }
+      gotorders: gor,
+      // golist: this.state.gotorders.items
+    }
+    , () => {
+      fetch('http://localhost:5000/orders/' + this.state.orderId)
+      .then(res=>res.json())
+      .then(orders=> this.setState({items:orders.items}));
+      console.log(this.state.items);
 
+
+    }); 
+    
+  }
 
   render() {
 
@@ -154,6 +170,12 @@ class Payment extends React.Component {
     var payment =this.state.paymentItems.map((al,i)=>{            
       return(
           <PaymentItem key={i} item={al}/>
+        )
+    })
+
+    var buy =this.state.items.map((al,i)=>{            
+      return(
+          <BuyItem key={i} item={al}/>
         )
     })
 
@@ -187,7 +209,7 @@ class Payment extends React.Component {
 
                 <tr>                  
                   <td><b>Items</b></td>
-                  <td><b>{this.state.gotorders[0]}</b></td>
+                  <td><b>{buy}</b></td>
                 </tr>                
                 
                 </tbody>
