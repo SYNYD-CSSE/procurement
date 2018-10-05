@@ -5,7 +5,6 @@ exports[`Item should render correctly 1`] = `
   <td />
   <td />
   <td />
-  <td />
   <td>
     <Link
       className="btn btn-primary"

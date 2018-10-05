@@ -38,6 +38,7 @@ class AddItem extends Component {
         unit
       })
       .then(result => {
+        
         console.log(result);
         alertify.notify("New Item Added!", "success", 5, function() {
           console.log("dismissed");
