@@ -31,7 +31,7 @@ class ApproverOrder extends Component {
         </td>
         <td>
           <Link
-            to={"/sendQuotation/" + this.props.orderId}
+            to={"/sendQuotation/" + this.props.orderId+"/"+this.props.refId}
             className="btn btn-primary">
             Send Quotation
           </Link>
