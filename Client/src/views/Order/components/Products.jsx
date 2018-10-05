@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import Product from "./Product";
 import LoadingProducts from "../loaders/Products";
 import NoResults from "../empty-states/NoResults";
+<<<<<<< HEAD
 import {CSSTransitionGroup }from "react-transition-group";
+=======
+import { CSSTransitionGroup } from 'react-transition-group';
+
+>>>>>>> dev
 class Products extends Component {
   constructor() {
     super();

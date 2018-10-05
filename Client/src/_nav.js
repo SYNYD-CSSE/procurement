@@ -24,6 +24,23 @@ let NavigationBar = {
     },
 
     {
+      name: 'Add Supplier',
+      url: '/addSupplier',
+      icon: 'icon-basket',
+    },
+    {
+      name: 'View Supplier',
+      url: '/viewSupplier',
+      icon: 'icon-basket',
+    },
+  {
+    name: 'Approved Orders',
+    url: '/viewApprovedOrders',
+    icon: 'icon-basket',
+  },
+    
+      {
+                // optional class names space delimited list for title item ex: "text-center"
       name: 'Add Item',
       url: '/addItem',
       icon: 'icon-briefcase',
@@ -38,7 +55,16 @@ let NavigationBar = {
       url: '/addOrder',
       icon: 'icon-briefcase',
     },
+<<<<<<< HEAD
 
+=======
+    {
+      name: 'Place Order',
+      url: '/placeOrder',
+      icon: 'icon-briefcase',
+    },
+    
+>>>>>>> dev
     // Samith's Functions Navigation Items
     {
       name: 'Order Details',

@@ -18,10 +18,10 @@ router.get("/", (req, res, next) => {
 
 //ITEM FIND BY ID
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id",async (req, res, next) => {
     try {
-        OrderItem.findOne({
-            orderItemId: req.params.id
+        await OrderItem.findOne({
+            _id: req.params.id
         }, (err, result) => {
             if (err) return next(err);
             res.json(result);
@@ -39,8 +39,7 @@ router.post("/", (req, res, next) => {
     try {
         const orderItem = new OrderItem({
             name: req.body.name,
-            quantity: req.body.quantity,
-            unit: req.body.unit,
+            quantity: req.body.quantity
         });
         orderItem.save((err, result) => {
             if (err) {

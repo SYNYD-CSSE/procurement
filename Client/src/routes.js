@@ -224,6 +224,34 @@ const ItemList = Loadable({
   loading: Loading
 });
 
+const AddSupplier = Loadable({
+  loader: () => import('./views/Supplier/AddSupplier'),
+  loading: Loading,
+});
+const Changes = Loadable({
+  loader: () => import('./views/Pages/Changes/Change'),
+  loading: Loading,
+});
+
+const ViewSupplier = Loadable({
+  loader: () => import('./views/Supplier/ViewSuppliers'),
+  loading: Loading,
+});
+
+const UpdateSupplier = Loadable({
+  loader: () => import('./views/Supplier/UpdateSupplier'),
+  loading: Loading,
+});
+
+const ViewApprovedOrders = Loadable({
+  loader: () => import('./views/ApprovedOrders/ViewApprovedOrders'),
+  loading: Loading,
+});
+
+const OrderQuotation = Loadable({
+  loader: ()=> import('./views/ApprovedOrders/OrderQuotation'),
+  loading: Loading,
+})
 const EditItem = Loadable({
   loader: () => import("./views/Item/EditItem"),
   loading: Loading
@@ -231,6 +259,10 @@ const EditItem = Loadable({
 
 const AddOrder = Loadable({
   loader: () => import("./views/Order/index"),
+  loading: Loading
+});
+const PlaceOrder = Loadable({
+  loader: () => import("./views/Order/components/PlaceOrder"),
   loading: Loading
 });
 
@@ -289,6 +321,12 @@ const routes = [
   { path: '/payment', exact: true,  name: 'Payment', component: Payment },
   { path: '/orders/details', exact: true,  name: 'OrderDetails', component: OrderDetails },
   { path: '/orders/SupplierRating', exact: true,  name: 'SupplierRating', component: SupplierRating },
+  { path: '/addSupplier', exact: true,  name: 'Add Supplier', component: AddSupplier },
+  { path: '/viewSupplier', exact: true,  name: 'View Supplier', component: ViewSupplier },
+  { path: '/updateSupplier/:supplierId', exact: true,  name: 'Update Supplier', component:UpdateSupplier },
+  { path: '/viewApprovedOrders', exact: true,  name: 'Approved Orders', component: ViewApprovedOrders },
+  { path: '/sendQuotation/:orderId', exact: true,  name: 'Approved Orders', component: OrderQuotation },
+
   {
     path: "/addItem",
     exact: true,
@@ -312,7 +350,14 @@ const routes = [
     exact: true,
     name: "AddOrder",
     component: AddOrder
-  }
+  },
+  {
+    path: "/placeOrder",
+    exact: true,
+    name: "PlaceOrder",
+    component: PlaceOrder
+  },
+  { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes }
 ];
 
 export default routes;

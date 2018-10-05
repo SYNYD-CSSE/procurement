@@ -23,6 +23,9 @@ router.get("/all", (req, res, next) => {
 router.post('/create', (req, res) => {
 	try {
         const pay = new payment({
+            orderid: req.body.orderid,
+            // paymethod: req.body.paymethod,
+            // payno: req.body.payno,
             amount: req.body.amount
         });
         pay.save((err, result) => {

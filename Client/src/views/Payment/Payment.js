@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import OrderItem from "./OrderItem";
+import PaymentItem from "./PaymentItem";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
@@ -13,6 +14,9 @@ class Payment extends React.Component {
     this.setModal = this.setModal.bind(this)
     this.setPayModal = this.setPayModal.bind(this)
     this.toggle = this.toggle.bind(this);
+    this.updateOrderToClosed = this.updateOrderToClosed.bind(this)
+    this.payNow = this.payNow.bind(this)
+    this.sendPayment = this.sendPayment.bind(this)
     
     this.state = {
       activeTab: '1',
@@ -20,7 +24,11 @@ class Payment extends React.Component {
       payOpen: false,
       items : [],
       count : 0,
-      amount : 0
+      amount : 0,
+      paymentItems : [],
+      orderId: '',
+      paymethod: '',
+      payno: ''
     };
     
   }
@@ -34,11 +42,12 @@ class Payment extends React.Component {
   setPayModal() {
     this.setState({
       payOpen: !this.state.payOpen
-    });
+    })    
   }
 
   componentDidMount(){
 		this.request();
+    this.paymentRequest();
   }
   
   // get placed orders data from database
@@ -49,8 +58,15 @@ class Payment extends React.Component {
 			console.log('orders fetched', items),
 			this.setState({count : Object.keys(items).length})
 		))
-		
-		// this.loadData();
+	}
+
+  // get payments data from database
+	paymentRequest = async () => {
+		const response = await fetch(`http://localhost:5000/payment/all`)
+		.then(result=>result.json())
+		.then(paymentItems=>this.setState({paymentItems}, () => 
+			console.log('payments fetched', paymentItems)
+		))
 	}
 
   toggle(tab) {
@@ -61,12 +77,24 @@ class Payment extends React.Component {
     }
   }
 
+  //Update the order state to closed
+  updateOrderToClosed(orderId){
+    fetch('http://localhost:5000/orders/closed/' + orderId, {
+        method: 'put',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        })
+        .then(res=>res.json())
+        .then(res => console.log(res))
+  }
  
   // post a payment
-  sendPayment(){
-    
+  sendPayment(){    
     this.setState({
-      amount : 782300,
+      paymethod : document.getElementById('paymethod'),
+      payno : document.getElementById('payno'), 
       payOpen: !this.state.payOpen
     }, () => {     
 
@@ -78,23 +106,40 @@ class Payment extends React.Component {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            "orderid" : this.state.orderId,
+            // "paymethod" : this.state.paymethod,
+            // "payno" : this.state.payno,           
             "amount" : this.state.amount
         })
-        }).then(res=>res.json())
-        .then(res => console.log(res));
-
+        })
+        .then(res=>res.json())
+        .then(res => console.log(res))
+        .then(this.updateOrderToClosed(this.state.orderId))
         alert('Payment Successful !');        
     });    
     
   }
 
+  payNow(oid, amo){
+    this.setPayModal()
+    this.setState({
+      orderId: oid,
+      amount: amo
+    })
+  }
 
 
   render() {
 
     var orders =this.state.items.map((al,i)=>{            
       return(
-          <OrderItem key={i} item={al} setModal = {this.setModal} setPayModal = {this.setPayModal}/>
+          <OrderItem key={i} item={al} setModal = {this.setModal} payNow = {this.payNow}/>
+        )
+    })
+
+    var payment =this.state.paymentItems.map((al,i)=>{            
+      return(
+          <PaymentItem key={i} item={al}/>
         )
     })
 
@@ -107,32 +152,34 @@ class Payment extends React.Component {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.setModal}>Do Something</Button>{' '}
+              <Button color="primary" onClick={this.setModal}>Ok</Button>{' '}
               <Button color="secondary" onClick={this.setModal}>Cancel</Button>
             </ModalFooter>
           </Modal>
 
 
 
-
+        
         <Modal isOpen={this.state.payOpen} toggle={this.setPayModal} className={this.props.className}>
         <ModalHeader toggle={this.setPayModal}>Payment Details</ModalHeader>
         <ModalBody>
           <FormGroup row>
-              <Label for="exampleEmail" sm={2}>Payment Method</Label>
+              <Label sm={2}>Payment Method</Label>
               <Col sm={10}>
-                <Input id="payType" placeholder="Card voucher etc" />
+              <form>
+                <Input id="paymethod" placeholder="Card voucher etc"/>
+                </form>
               </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for="examplePassword" sm={2}>Voucher No / Card No</Label>
+              <Label sm={2}>Voucher No / Card No</Label>
               <Col sm={10}>
-                <Input id="cardNo" placeholder="Enter the number" />
+                <Input id="payno" placeholder="Enter the number" />
               </Col>
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.sendPayment.bind(this)}>Pay</Button>{' '}
+          <Button color="primary" onClick={this.sendPayment}>Pay</Button>{' '}
           {/* ()=>{ this.sendPayment.bind(this); this.setPayModal()} */}
           <Button color="secondary" onClick={this.setPayModal}>Cancel</Button>{' '}
         </ModalFooter>
@@ -193,32 +240,19 @@ class Payment extends React.Component {
 
 
           <TabPane tabId="2">
-            <Row>
+          <Row>
               <Col sm="12">
-              <Table borderless hover responsive size="sm">
+                <Table borderless hover responsive size="sm">
                   <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Order ID</th>
-                      <th>Payment ID</th>
-                      <th>Amout</th>
-                      <th>Date</th>
-                      <th>Supplier ID</th>
-                      <th>Site Manager</th>
-                      <th>Payment Method</th>
+                    <tr>                      
+                      <th>PaymentID</th>
+                      <th>OrderID</th>
+                      <th>Amount</th>
                     </tr>
                   </thead>
+
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>120</td>
-                      <td>75</td>
-                      <td>12500</td>
-                      <td>2018/08/15</td>
-                      <td>Access</td>             
-                      <td>MAGA</td>   
-                      <td>Voucher</td>  
-                    </tr> 
+                  {payment}                   
                   </tbody>
                 </Table>
               </Col>

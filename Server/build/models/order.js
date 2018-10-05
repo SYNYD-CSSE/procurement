@@ -1,7 +1,7 @@
+"use strict";
 const mongoose = require("mongoose");
 const mongooseUniqueValidator = require("mongoose-unique-validator");
 var autoIncrement = require('mongoose-auto-increment');
-
 const orderSchema = new mongoose.Schema({
     orderId: {
         type: String,
@@ -25,23 +25,21 @@ const orderSchema = new mongoose.Schema({
     amount: {
         type: String
     },
-
     approvedDate: {
         type: Date,
-        default:null
+        default: null
         //    required: true
     },
     rejectedDate: {
         type: Date,
-        default:null
+        default: null
         //    required: true
     },
     items: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "OrderItem",
-        required: true
-    }],
-
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "OrderItem",
+            required: true
+        }],
     status: {
         type: String,
         //  required: true,
@@ -49,7 +47,6 @@ const orderSchema = new mongoose.Schema({
         default: 'Pending'
     },
 });
-
 autoIncrement.initialize(mongoose.connection);
 orderSchema.plugin(autoIncrement.plugin, {
     model: 'Order',
@@ -57,6 +54,5 @@ orderSchema.plugin(autoIncrement.plugin, {
     startAt: 1,
     incrementBy: 1
 });
-
-
 module.exports = mongoose.model("Order", orderSchema);
+//# sourceMappingURL=order.js.map

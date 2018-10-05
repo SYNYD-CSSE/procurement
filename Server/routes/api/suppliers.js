@@ -20,7 +20,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next)=> {
-    Supplier.findById( req.params.id, (err,Supplier)=>{
+    Supplier.findOne({supplierId : req.params.id}, (err,Supplier)=>{
         if(err){
             res.json(err);
         }
@@ -65,6 +65,19 @@ router.put('/supplier/update/:id', (req, res, next)=>{
             phone:req.body.phone,
             status:req.body.status,
             itemsList:req.body.itemsList,
+            rating:req.body.rating
+    }}, (err,result)=>{
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json({msg:'Successfully Updated',obj:result});
+        }
+    });
+});
+
+router.put('/supplier/update/rating/:id', (req, res, next)=>{
+    Supplier.findOneAndUpdate({supplierId:req.params.id},{$set:{
             rating:req.body.rating
     }}, (err,result)=>{
         if(err){

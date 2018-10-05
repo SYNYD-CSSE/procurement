@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Table, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 class OrderItem extends Component {
 
@@ -17,10 +16,10 @@ class OrderItem extends Component {
             <tr>
                 <td>{this.state.item.orderId}</td>
                 <td>{this.state.item.orderDate}</td>  
-                <td>45000</td>              
+                <td>{this.state.item.amount}</td>              
                 <td>
-                        <Button color="success" onClick={this.props.setModal}>View</Button>&nbsp;&nbsp;&nbsp;                            
-                        <Button color="danger" onClick={this.props.setPayModal}>Pay Now</Button>                            
+                        <Button color="success"  onClick={this.props.setModal}>View</Button>&nbsp;&nbsp;&nbsp;                            
+                        <Button color="danger" onClick={() => {this.props.payNow(this.state.item.orderId, this.state.item.amount)}}>Pay Now</Button>                            
                 </td>
             </tr>  
         )
