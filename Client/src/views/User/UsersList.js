@@ -134,7 +134,7 @@ class UsersList extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" lg="6">
+          <Col xs="12" lg="8">
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> Simple Table
