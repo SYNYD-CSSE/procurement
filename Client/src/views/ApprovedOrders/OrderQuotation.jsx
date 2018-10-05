@@ -11,9 +11,11 @@ import {
   FormGroup,
   Label,
   Input,
+  Table
 } from "reactstrap";
 
 import alertify from "alertifyjs";
+import SentQuatation from "./SentQuatation";
 
 class OrderQuotation extends Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class OrderQuotation extends Component {
       .get("http://localhost:5000/orders/order/" + this.props.match.params.orderId)
       .then(response => {
         this.setState({ approvedorder: response.data });
+        console.log(this.state.approvedorder.items);
       })
       .catch(function(error) {
         console.log(error);
@@ -67,7 +70,32 @@ class OrderQuotation extends Component {
   }
 
   render() {
+
+
+    var array = this.state.approvedorder.items;
+    var tabRow = "";
+
+    if (array) {
+      tabRow = array.map((order, i) => {
+        console.log(order);
+
+        return (
+          <SentQuatation
+            key={i}
+            name={order.name}
+            quantity={order.quantity}
+           
+          />
+        );
+      });
+    } else {
+      tabRow = " ";
+
+      return tabRow;
+    }
+    console.log(this.state.approvedorder.items);
     return (
+      
       <div className="container">
         <Row>
           <Col sm="10" xs="6">
@@ -148,8 +176,29 @@ class OrderQuotation extends Component {
             </form>
           </Col>
         </Row>
+
+
+      <div className="container">
+            <h4>ORDER ITEMS</h4>
+            <br />
+            <Table hover bordered striped responsive size="sm">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody> 
+                  {tabRow}
+              </tbody>
+            </Table>
+          </div>
+
       </div>
     );
+
+
+
   }
 }
 
