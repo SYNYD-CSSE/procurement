@@ -159,8 +159,23 @@ class Payment extends React.Component {
           <Modal isOpen={this.state.modal} toggle={this.setModal} className={this.props.className}>
             <ModalHeader toggle={this.setModal}>Order Details</ModalHeader>
             <ModalBody>
-              {this.state.amount}
-              {this.state.orderId}
+            
+              
+              <tr>
+                  <td>
+                    <i className="fa fa-drivers-license"></i>
+                  </td>
+                  <td><b>Employee ID</b></td>
+                  <td>  {this.state.amount}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <i className="fa fa-user"></i>
+                  </td>
+                  <td><b>First Name</b></td>
+                  <td>{this.state.orderId}</td>
+                </tr>
+                
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={this.setModal}>Ok</Button>{' '}
