@@ -90,7 +90,7 @@ class UsersList extends Component {
       this.props.history.push(`/employee/list`);
     }
     else{
-      this.props.history.push(`/suppliers/`);
+      this.props.history.push(`/viewSupplier`);
     }
 
   }

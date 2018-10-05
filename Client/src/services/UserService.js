@@ -1,11 +1,15 @@
 import axios from 'axios';
 import config from "../config/config";
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 
 class UserService {
 
     constructor () {
 
     }
+
 
      static getAllUsers(){
         return new Promise((resolve , reject)=>{
@@ -38,15 +42,47 @@ class UserService {
     static login(user){
         return new Promise((resolve , reject)=>{
 
-            axios.post(`${config.api}user/login/`,user).then((data)=>{
+            axios.post(`${config.api}user/login`,user).then((data)=>{
                 
-                 resolve(data.data);
+                let user = {
+                    id      :data.data.user.id,
+                    role    :data.data.user.role,
+                    username:data.data.user.username,
+                }
+
+                let token = data.data.token;
+                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('token', JSON.stringify(token));
+
+                resolve(data.data);
             
             }).catch((error)=>{
 
                 reject (error)
             });
         });
+    }
+
+    static logout(){
+        // return new Promise((resolve , reject)=>{
+
+        //     // axios.get(`${config.api}user/logout`).then((data)=>{
+
+        //     //     localStorage.removeItem('user');
+        //     //     localStorage.removeItem('token');
+
+        //     //     resolve(data.data);
+            
+        //     // }).catch((error)=>{
+
+        //     //     reject (error)
+        //     // });
+        // });
+
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+  
+        
     }
   
     static deleteUserByID(id){

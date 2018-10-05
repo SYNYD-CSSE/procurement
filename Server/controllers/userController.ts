@@ -9,13 +9,15 @@ import config from "../config/database";
 export default class employeeController {
 
 
-    // GET ALL USER 
+    // USER LOGIN
     public static login(req: Request, res: Response): void {
         try {
 
             const login = {
+                id: '',
                 username: req.body.username,
-                password: req.body.password
+                password: req.body.password,
+                role: ''
 
             };
 
@@ -30,6 +32,8 @@ export default class employeeController {
                     let message: string;
                     if (isMatch) {
                         message = "Login success !";
+                        login.role = (user as any).role;
+                        login.id = (user as any).id;
                         const token = jwt.sign(login, config.secretOrKey, {
                             expiresIn: 8640 // One day
                         });
@@ -54,6 +58,25 @@ export default class employeeController {
         } catch (error) {
 
             console.log(`New User Register function goes wrong: ${error}`);
+
+        }
+    }
+
+    // USER LOGOUT
+    public static logout(req: Request, res: Response): void {
+        try {
+
+            const status = res.statusCode;
+            const message = "Logout success !";
+            res.json({
+                status,
+                message,
+            });
+
+
+        } catch (error) {
+
+            console.log(`User Logout function goes wrong: ${error}`);
 
         }
     }

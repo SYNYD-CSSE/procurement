@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import Users from '../../services/UserService';
 
 const propTypes = {
   children: PropTypes.node,
@@ -13,6 +14,16 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultHeader extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
+  logout(){
+    Users.logout();
+    window.location.href = "http://localhost:3000/login";
+
+  }
   render() {
 
     // eslint-disable-next-line
@@ -38,7 +49,7 @@ class DefaultHeader extends Component {
               <img src={'assets/img/avatars/user.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
-              <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>

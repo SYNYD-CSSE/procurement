@@ -7,6 +7,10 @@ import { findDOMNode } from "react-dom";
 import axios from "axios";
 import alertify from "alertifyjs";
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 class Header extends Component {
   constructor(props) {
     super(props);
