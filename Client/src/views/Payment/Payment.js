@@ -98,12 +98,11 @@ class Payment extends React.Component {
   // post a payment
   sendPayment(){    
     this.setState({
-      paymethod : document.getElementById('paymethod'),
-      payno : document.getElementById('payno'), 
+      paymethod : document.getElementById('paymethod').value,
+      payno : document.getElementById('payno').value,       
       payOpen: !this.state.payOpen
-    }, () => {     
-
-      // create a new payment 
+    }, () => {
+      // create a new payment
       fetch('http://localhost:5000/payment/create/', {
         method: 'post',
         headers: {
@@ -112,8 +111,8 @@ class Payment extends React.Component {
         },
         body: JSON.stringify({
             "orderid" : this.state.orderId,
-            // "paymethod" : this.state.paymethod,
-            // "payno" : this.state.payno,           
+            "paymethod" : this.state.paymethod,
+            "payno" : this.state.payno,           
             "amount" : this.state.amount
         })
         })
@@ -122,7 +121,7 @@ class Payment extends React.Component {
         .then(this.updateOrderToClosed(this.state.orderId))
         alert('Payment Successful !');        
     });    
-    
+    window.location.reload();
   }
 
   payNow(oid, amo){
@@ -267,7 +266,7 @@ class Payment extends React.Component {
                   <thead>
                     <tr>                      
                       <th>Order ID</th>
-                      <th>Date</th>
+                      <th>Ordered Date</th>
                       <th>Amount</th>
                       <th>Supplier</th>
                       <th>Action</th>
@@ -291,6 +290,8 @@ class Payment extends React.Component {
                     <tr>                      
                       <th>PaymentID</th>
                       <th>OrderID</th>
+                      <th>Payment Type</th>
+                      <th>Card No</th>
                       <th>Amount</th>
                     </tr>
                   </thead>

@@ -15,6 +15,8 @@ class PaymentItem extends Component {
             <tr>
                 <td>{this.state.item.paymentid}</td>
                 <td>{this.state.item.orderid}</td>
+                <td>{this.state.item.paymethod}</td>
+                <td>{this.state.item.payno}</td>
                 <td>{this.state.item.amount}</td>   
             </tr>  
         )
