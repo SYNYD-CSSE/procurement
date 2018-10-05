@@ -32,7 +32,8 @@ class Payment extends React.Component {
       paymethod: '',
       payno: '',
 
-      constructor: ''
+      constructor: '',
+      gotorders: []
     };
     
   }
@@ -132,12 +133,13 @@ class Payment extends React.Component {
     })
   }
 
-  showDetails(oid, amo, cid){
+  showDetails(oid, amo, cid, gor){
     this.setModal()
     this.setState({
       orderId: oid,
       amount: amo,
-      constructor: cid
+      constructor: cid,
+      gotorders: gor
     })
   }
 
@@ -185,7 +187,7 @@ class Payment extends React.Component {
                 <tr>
                   
                   <td><b>Items</b></td>
-                  <td><b></b></td>
+                  <td><b>{this.state.gotorders[0]}</b></td>
                 </tr>                
                 
                 </tbody>
