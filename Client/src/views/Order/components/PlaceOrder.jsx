@@ -26,7 +26,7 @@ class PlaceOrder extends Component {
         this.state = {  }
 
         this.submitHandler =this.submitHandler.bind(this);
-
+        this.resetHandler =this.resetHandler.bind(this);
       
     }
 
@@ -50,6 +50,10 @@ class PlaceOrder extends Component {
         });
       this.props.history.push("/");
 
+    }
+
+    resetHandler(){
+      localStorage.clear();
     }
     render() { 
         return ( 
@@ -105,7 +109,7 @@ class PlaceOrder extends Component {
                           color="danger"
                           onClick={this.resetHandler}
                         >
-                          <i className="fa fa-ban" /> Reset
+                          <i className="fa fa-ban" /> Cancel Order
                         </Button>
                       </div>
                     </CardFooter>

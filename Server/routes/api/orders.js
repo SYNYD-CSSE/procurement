@@ -104,7 +104,9 @@ router.put('/:id', (req, res, next) => {
 
 router.put('/abc/:id', (req, res, next)=>{
     Order.findOneAndUpdate({orderId:req.params.id},{$set:{
-        status:req.body.status
+        status:req.body.status,
+        approvedDate:new Date()
+
     }}, (err,result)=>{
         if(err){
             res.json(err);

@@ -23,7 +23,6 @@ class OrderDetails extends Component {
           activeTab: '1',
           orders:[],
           OrderId:null
-
         }
         this.sucess=this.sucess.bind(this)
         this.reject=this.reject.bind(this)
@@ -46,12 +45,12 @@ class OrderDetails extends Component {
 
      rowId=(dataFromChild)=>{
         this.setState({OrderId:dataFromChild})
+        console.log(this.state.OrderId);
      }
      sucess(){
       var ApprovedDate=new Date();
       const state={
-        status:'Approved',
-        approvedDate:ApprovedDate
+        status:'Approved'
           }
  
               fetch(`/orders/abc/${this.state.OrderId}`,{
@@ -67,38 +66,43 @@ class OrderDetails extends Component {
                   })
                 
 
-                       .then((res)=>res.json())
-                        .then(this.forceUpdate())
+                      
+
 
      }
 
      reject(){
       
-      const state={
+      const ostate={
         status:'Declined'
           }
  
-              fetch(`/orders/abc/${this.state.orderId}`,{
+              fetch(`/orders/abc/${this.state.OrderId}`,{
                       method:'PUT',
                       headers:{
                           'Accept':'application/json,text/plain,*/*',
                           'Content-Type': 'application/json',
                           'Authorization': token
                       },
-                          body: JSON.stringify(state)
+                          body: JSON.stringify(ostate)
   
                   })
 
-                       .then((res)=>res.json())
-                         .then(this.forceUpdate())
-
+                      
      }
     
       toggle(tab) {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab:tab,
+            orders:[]
           });
+    
+            fetch(`/orders`)
+               .then(res=>res.json())
+                .then(orders=> this.setState({orders},()=> console.log(orders)));
+       
+     
         }
       }
         
@@ -223,8 +227,8 @@ class OrderDetails extends Component {
                     <th>Order ID</th>
                     <th>Constructor ID</th>
                     <th>Date Added</th>
-                    <th>Date Approved</th>
-                    <th>Date Rejected</th>
+                    {/* <th>Date Approved</th>
+                    <th>Date Rejected</th> */}
                     <th>Status</th>
                   </tr>
                   </thead>

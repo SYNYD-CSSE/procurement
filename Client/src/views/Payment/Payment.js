@@ -20,6 +20,7 @@ class Payment extends React.Component {
     this.updateOrderToClosed = this.updateOrderToClosed.bind(this)
     this.payNow = this.payNow.bind(this)
     this.sendPayment = this.sendPayment.bind(this)
+    this.showDetails = this.showDetails.bind(this)
     
     this.state = {
       activeTab: '1',
@@ -29,9 +30,13 @@ class Payment extends React.Component {
       count : 0,
       amount : 0,
       paymentItems : [],
+
       orderId: '',
       paymethod: '',
-      payno: ''
+      payno: '',
+
+      constructor: '',
+      gotorders: []
     };
     
   }
@@ -141,12 +146,22 @@ class Payment extends React.Component {
     })
   }
 
+  showDetails(oid, amo, cid, gor){
+    this.setModal()
+    this.setState({
+      orderId: oid,
+      amount: amo,
+      constructor: cid,
+      gotorders: gor
+    })
+  }
+
 
   render() {
 
     var orders =this.state.items.map((al,i)=>{            
       return(
-          <OrderItem key={i} item={al} setModal = {this.setModal} payNow = {this.payNow}/>
+          <OrderItem key={i} item={al} showDetails = {this.showDetails} payNow = {this.payNow}/>
         )
     })
 
@@ -162,10 +177,37 @@ class Payment extends React.Component {
           <Modal isOpen={this.state.modal} toggle={this.setModal} className={this.props.className}>
             <ModalHeader toggle={this.setModal}>Order Details</ModalHeader>
             <ModalBody>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <Table hover>
+              <tbody>
+              <tr>
+                                   
+                  <td><b>Order ID</b></td>
+                  <td><b>{this.state.orderId}</b></td>
+                </tr>
+
+                <tr>
+                  
+                  <td><b>Amount</b></td>
+                  <td><b>{this.state.amount}</b></td>
+                </tr>
+
+                <tr>
+                  
+                  <td><b>Constructor ID</b></td>
+                  <td><b>{this.state.constructor}</b></td>
+                </tr>
+
+                <tr>
+                  
+                  <td><b>Items</b></td>
+                  <td><b>{this.state.gotorders[0]}</b></td>
+                </tr>                
+                
+                </tbody>
+            </Table>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.setModal}>Ok</Button>{' '}
+              <Button color="primary" onClick={this.setModal}>OK</Button>{' '}
               <Button color="secondary" onClick={this.setModal}>Cancel</Button>
             </ModalFooter>
           </Modal>

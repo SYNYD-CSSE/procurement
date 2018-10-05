@@ -81,8 +81,8 @@ let NavigationBar = {
 
     {
       name: 'Categories',
-      url: '/category',
-      icon: 'icon-people',
+      url: '/items',
+      icon: 'icon-list',
       children: [
 
         {
@@ -96,14 +96,13 @@ let NavigationBar = {
           url: '/itemList',
           icon: 'icon-briefcase',
         },
-
       ]
     },
 
     {
       name: 'Orders',
       url: '/order',
-      icon: 'icon-people',
+      icon: 'icon-list',
       children: [
         {
           name: 'Add Order',
