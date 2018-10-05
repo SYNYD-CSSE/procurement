@@ -241,10 +241,11 @@ const routes = [
 
   
   { path: '/employee/list', name: 'Employees List', component: EmployeesList },
-  { path: '/employee/:id', name: 'New Employee', component: NewEmployee },
+  { path: '/employee/', name: 'New Employee', component: NewEmployee },
 
-  { path: '/user/new', name: 'New User', component: NewUser },
+ 
   { path: '/user/list', name: 'Users List', component: UsersList },
+  { path: '/user/:id', name: 'New User', component: NewUser },
  
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
