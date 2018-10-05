@@ -29,8 +29,6 @@ getId(){
                     <td>{this.state.item.orderId}</td>
                     <td>{this.state.item.constructorId}</td>
                     <td>{this.state.item.orderDate}</td>
-                    <td></td>
-                    <td></td>
                     <td> 
                     <Badge color="warning">{this.state.item.status}</Badge>
                     </td>

@@ -38,7 +38,11 @@ class SupplierRating extends Component {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab: tab,
+            suppliers:[]
           });
+          fetch(`/suppliers`)
+          .then(res=>res.json())
+           .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));    
           
         }
       }

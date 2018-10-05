@@ -39,12 +39,13 @@ class OrderDetails extends Component {
 
      rowId=(dataFromChild)=>{
         this.setState({OrderId:dataFromChild})
+        console.log(this.state.OrderId);
      }
      sucess(){
-      var ApprovedDate=new Date();
-      const state={
-        status:'Approved',
-        approvedDate:ApprovedDate
+     
+      const ostate={
+        status:'Approved'
+        
           }
  
               fetch(`/orders/abc/${this.state.OrderId}`,{
@@ -54,19 +55,19 @@ class OrderDetails extends Component {
                           'Content-Type': 'application/json'
   
                       },
-                          body: JSON.stringify(state)
+                          body: JSON.stringify(ostate)
   
                   })
                 
 
-                       .then((res)=>res.json())
-                        .then(this.forceUpdate())
+                      
+
 
      }
 
      reject(){
       
-      const state={
+      const ostate={
         status:'Declined'
           }
  
@@ -77,12 +78,12 @@ class OrderDetails extends Component {
                           'Content-Type': 'application/json'
   
                       },
-                          body: JSON.stringify(state)
+                          body: JSON.stringify(ostate)
   
                   })
 
-                       .then((res)=>res.json())
-                         .then(this.forceUpdate())
+                    console.log('Reject is called');
+                      
 
      }
     
@@ -90,7 +91,13 @@ class OrderDetails extends Component {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab:tab,
+            orders:[]
           });
+          fetch(`/orders`)
+   
+          .then(res=>res.json())
+           .then(orders=> this.setState({orders},()=> console.log(orders)));
+  
         }
       }
         

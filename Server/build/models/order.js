@@ -24,13 +24,9 @@ const orderSchema = new mongoose.Schema({
     },
     approvedDate: {
         type: Date,
-        default: null
-        //    required: true
     },
     rejectedDate: {
         type: Date,
-        default: null
-        //    required: true
     },
     items: [{
             type: mongoose.Schema.Types.ObjectId,
