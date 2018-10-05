@@ -50,16 +50,19 @@ router.get("/", (req, res, next) => {
 //ORDER FIND BY ID
 
 router.get("/order/:id", (req, res, next) => {
-    try {
+    
         Order.findOne({
             orderId: req.params.id
-        }, (err, result) => {
-            if (err) return next(err);
-            res.json(result);
-        });
-    } catch (error) {
-        console.log(error)
-    }
+        }).populate('items', 'id name quantity unit -_id')
+        .then(result => {
+            res.status(200)
+                .json(result);
+        })
+
+        .catch(error => {
+            console.log(error);
+        })
+    
 });
 
 //ORDER FIND BY status

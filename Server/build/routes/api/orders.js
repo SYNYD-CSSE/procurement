@@ -43,9 +43,22 @@ router.get("/", (req, res, next) => {
 });
 //ORDER FIND BY ID
 router.get("/order/:id", (req, res, next) => {
+    Order.findOne({
+        orderId: req.params.id
+    }).populate('items', 'id name quantity unit -_id')
+        .then(result => {
+        res.status(200)
+            .json(result);
+    })
+        .catch(error => {
+        console.log(error);
+    });
+});
+//ORDER FIND BY status
+router.get("/status/:status", (req, res, next) => {
     try {
-        Order.findOne({
-            orderId: req.params.id
+        Order.find({
+            status: req.params.status
         }, (err, result) => {
             if (err)
                 return next(err);
@@ -64,6 +77,27 @@ router.put('/:id', (req, res, next) => {
         $set: {
             status: req.body.status,
             items: req.body.ItemId
+        }
+    }, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                title: "An error occured",
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: "Order Updated",
+            result
+        });
+    });
+});
+//Update the order state to closed
+router.put('/closed/:id', (req, res, next) => {
+    Order.findOneAndUpdate({
+        orderId: req.params.id
+    }, {
+        $set: {
+            status: 'Closed'
         }
     }, (err, result) => {
         if (err) {
