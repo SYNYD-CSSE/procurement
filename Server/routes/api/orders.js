@@ -49,19 +49,11 @@ router.get("/", (req, res, next) => {
 
 //ORDER FIND BY ID
 
-<<<<<<< HEAD
-router.get("/order/:id", (req, res, next) => {
-    try {
-        Order.findOne({
-            orderId: req.params.id
-        }, (err, result) => {
-=======
 router.get("/:id", (req, res, next) => {
    
         Order.findOne({orderId: req.params.id}).
         populate('items').
         exec((err, result) => {
->>>>>>> yasiru
             if (err) return next(err);
             res.json(result);
         })

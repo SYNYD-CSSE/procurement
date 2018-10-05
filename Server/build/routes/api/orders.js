@@ -42,11 +42,20 @@ router.get("/", (req, res, next) => {
     });
 });
 //ORDER FIND BY ID
-<<<<<<< HEAD
-router.get("/order/:id", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
+    Order.findOne({ orderId: req.params.id }).
+        populate('items').
+        exec((err, result) => {
+        if (err)
+            return next(err);
+        res.json(result);
+    });
+});
+//ORDER FIND BY status
+router.get("/status/:status", (req, res, next) => {
     try {
-        Order.findOne({
-            orderId: req.params.id
+        Order.find({
+            status: req.params.status
         }, (err, result) => {
             if (err)
                 return next(err);
@@ -56,16 +65,6 @@ router.get("/order/:id", (req, res, next) => {
     catch (error) {
         console.log(error);
     }
-=======
-router.get("/:id", (req, res, next) => {
-    Order.findOne({ orderId: req.params.id }).
-        populate('items').
-        exec((err, result) => {
-        if (err)
-            return next(err);
-        res.json(result);
-    });
->>>>>>> yasiru
 });
 //Update ORDER
 router.put('/:id', (req, res, next) => {
@@ -99,6 +98,27 @@ router.put('/abc/:id', (req, res, next) => {
         else {
             res.json({ msg: 'Successfully Updated', obj: result });
         }
+    });
+});
+//Update the order state to closed
+router.put('/closed/:id', (req, res, next) => {
+    Order.findOneAndUpdate({
+        orderId: req.params.id
+    }, {
+        $set: {
+            status: 'Closed'
+        }
+    }, (err, result) => {
+        if (err) {
+            return res.status(500).json({
+                title: "An error occured",
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: "Order Updated",
+            result
+        });
     });
 });
 //REMOVE ORDER
