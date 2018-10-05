@@ -30,7 +30,9 @@ class Payment extends React.Component {
 
       orderId: '',
       paymethod: '',
-      payno: ''
+      payno: '',
+
+      constructor: ''
     };
     
   }
@@ -130,11 +132,12 @@ class Payment extends React.Component {
     })
   }
 
-  showDetails(oid, amo){
+  showDetails(oid, amo, cid){
     this.setModal()
     this.setState({
       orderId: oid,
-      amount: amo
+      amount: amo,
+      constructor: cid
     })
   }
 
@@ -159,23 +162,31 @@ class Payment extends React.Component {
           <Modal isOpen={this.state.modal} toggle={this.setModal} className={this.props.className}>
             <ModalHeader toggle={this.setModal}>Order Details</ModalHeader>
             <ModalBody>
-            <Table hover borderless>
+            <Table hover>
               <tbody>
               <tr>
-                  <td>
-                    <i className="fa fa-drivers-license"></i>
-                  </td>                  
+                                   
                   <td><b>Order ID</b></td>
-                  <td>  {this.state.orderId}</td>
+                  <td><b>{this.state.orderId}</b></td>
                 </tr>
 
                 <tr>
-                  <td>
-                    <i className="fa fa-user"></i>
-                  </td>
+                  
                   <td><b>Amount</b></td>
-                  <td>{this.state.amount}</td>
+                  <td><b>{this.state.amount}</b></td>
                 </tr>
+
+                <tr>
+                  
+                  <td><b>Constructor ID</b></td>
+                  <td><b>{this.state.constructor}</b></td>
+                </tr>
+
+                <tr>
+                  
+                  <td><b>Items</b></td>
+                  <td><b></b></td>
+                </tr>                
                 
                 </tbody>
             </Table>
