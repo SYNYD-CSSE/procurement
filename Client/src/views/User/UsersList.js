@@ -86,11 +86,12 @@ class UsersList extends Component {
   }
 
   onInfo(id){
-      let user = this.state.users.filter(e => {
-        return e.id == id;
-      })[0];
-      this.setState({user : user});
-      this.toggle();
+    if (id.length===4){
+      this.props.history.push(`/employee/list`);
+    }
+    else{
+      this.props.history.push(`/suppliers/`);
+    }
 
   }
 
@@ -176,6 +177,7 @@ class UsersList extends Component {
               </Card>
             </Col>
         </Row>
+
       </div>
     );
   }

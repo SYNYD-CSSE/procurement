@@ -169,9 +169,10 @@ class NewUser extends Component {
     let role = this.state.employees.filter(e=> e.id == value).map(o=>o.role)[0];
     let user = this.state.user;
     user.id = value;
-    user.role = role ;
+    user.role = (this.state.employee)? role : 'Supplier' ;
 
-    
+    console.log(this.state.user);
+
     this.setState({
       user  : user
     });
@@ -189,13 +190,13 @@ class NewUser extends Component {
     if(this.state.employee){
       options = this.state.employees.map(employee =>{
           return (
-            <option key={employee.id} value={employee.id}>{employee.id}</option>
+            <option key={employee.id} value={employee.id}>{employee.id} - {employee.firstName + ' ' + employee.lastName}</option>
           );
       })
     } else {
       options = this.state.suppliers.map(supplier =>{
         return (
-          <option key={supplier.supplierId} value={supplier.supplierId}>{supplier.supplierId}</option>
+          <option key={supplier.supplierId} value={supplier.supplierId}>{supplier.supplierId} - {supplier.name}</option>
         );
     })
     }
@@ -271,6 +272,8 @@ class NewUser extends Component {
             </Form>
           </Col>
         </Row>
+
+        
       </div>
     );
   }
