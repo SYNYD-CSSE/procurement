@@ -40,16 +40,10 @@ class SupplierRating extends Component {
             activeTab: tab,
             suppliers:[]
           });
-<<<<<<< HEAD
-          fetch(`/suppliers`)
-          .then(res=>res.json())
-           .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));    
-=======
 
           fetch(`/suppliers`)
           .then(res=>res.json())
            .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));
->>>>>>> dev
           
         }
       }
