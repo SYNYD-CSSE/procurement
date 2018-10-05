@@ -19,7 +19,6 @@ constructor(props){
 
 getId(){
     this.props.orderId(this.state.item.orderId)
-    console.log('Hello form the items {this.state.item.orderId})');
 }
 
   render() {

@@ -20,7 +20,6 @@ class OrderDetails extends Component {
           activeTab: '1',
           orders:[],
           OrderId:null
-
         }
         this.sucess=this.sucess.bind(this)
         this.reject=this.reject.bind(this)
@@ -71,7 +70,7 @@ class OrderDetails extends Component {
         status:'Declined'
           }
  
-              fetch(`/orders/abc/${this.state.orderId}`,{
+              fetch(`/orders/abc/${this.state.OrderId}`,{
                       method:'PUT',
                       headers:{
                           'Accept':'application/json,text/plain,*/*',
@@ -82,9 +81,7 @@ class OrderDetails extends Component {
   
                   })
 
-                    console.log('Reject is called');
                       
-
      }
     
       toggle(tab) {
@@ -222,8 +219,8 @@ class OrderDetails extends Component {
                     <th>Order ID</th>
                     <th>Constructor ID</th>
                     <th>Date Added</th>
-                    <th>Date Approved</th>
-                    <th>Date Rejected</th>
+                    {/* <th>Date Approved</th>
+                    <th>Date Rejected</th> */}
                     <th>Status</th>
                   </tr>
                   </thead>
