@@ -22,12 +22,10 @@ const orderSchema = new mongoose.Schema({
         default: Date.now
         //    required: true
     },
-<<<<<<< HEAD
     amount: {
         type: String
     },
 
-=======
     approvedDate: {
         type: Date,
         default:null
@@ -38,7 +36,6 @@ const orderSchema = new mongoose.Schema({
         default:null
         //    required: true
     },
->>>>>>> yasiru
     items: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "OrderItem",
