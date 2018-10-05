@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import CartScrollBar from "./CartScrollBar";
 import Counter from "./Counter";
 import EmptyCart from "../empty-states/EmptyCart";
-<<<<<<< HEAD
-import {CSSTransitionGroup }from "react-transition-group";
-=======
 import { CSSTransitionGroup } from 'react-transition-group';
->>>>>>> dev
 import { findDOMNode } from "react-dom";
 import axios from "axios";
 import alertify from "alertifyjs";

@@ -18,6 +18,40 @@ let NavigationBar = {
       class: '' // optional class names space delimited list for title item ex: "text-center"
     },
     {
+      name: 'Employee',
+      url: '/employee',
+      icon: 'icon-people',
+      children: [
+        {
+          name: 'New Employee',
+          url: '/employee/new',
+          icon: 'icon-plus',
+        },
+        {
+          name: 'Employee List',
+          url: '/employee/list',
+          icon: 'icon-list',
+        }
+      ]
+    },
+    {
+      name: 'User',
+      url: '/user',
+      icon: 'icon-user',
+      children: [
+        {
+          name: 'New User',
+          url: '/user/new',
+          icon: 'icon-plus',
+        },
+        {
+          name: 'User List',
+          url: '/user/list',
+          icon: 'icon-list',
+        }
+      ]
+    },
+    {
       name: 'Payment',
       url: '/payment',
       icon: 'icon-basket',
@@ -33,14 +67,14 @@ let NavigationBar = {
       url: '/viewSupplier',
       icon: 'icon-basket',
     },
-  {
-    name: 'Approved Orders',
-    url: '/viewApprovedOrders',
-    icon: 'icon-basket',
-  },
-    
-      {
-                // optional class names space delimited list for title item ex: "text-center"
+    {
+      name: 'Approved Orders',
+      url: '/viewApprovedOrders',
+      icon: 'icon-basket',
+    },
+
+    {
+      // optional class names space delimited list for title item ex: "text-center"
       name: 'Add Item',
       url: '/addItem',
       icon: 'icon-briefcase',
@@ -55,16 +89,12 @@ let NavigationBar = {
       url: '/addOrder',
       icon: 'icon-briefcase',
     },
-<<<<<<< HEAD
-
-=======
     {
       name: 'Place Order',
       url: '/placeOrder',
       icon: 'icon-briefcase',
     },
-    
->>>>>>> dev
+
     // Samith's Functions Navigation Items
     {
       name: 'Order Details',
@@ -104,43 +134,6 @@ let NavigationBar = {
         element: '',
         attributes: {},
       },
-    },
-    {
-      name: 'Base',
-      url: '/base',
-      icon: 'icon-puzzle',
-      name: 'Employee',
-      url: '/employee',
-      icon: 'icon-people',
-      children: [
-        {
-          name: 'New Employee',
-          url: '/employee/new',
-          icon: 'icon-plus',
-        },
-        {
-          name: 'Employee List',
-          url: '/employee/list',
-          icon: 'icon-list',
-        }
-      ]
-    },
-    {
-      name: 'User',
-      url: '/user',
-      icon: 'icon-user',
-      children: [
-        {
-          name: 'New User',
-          url: '/user/new',
-          icon: 'icon-plus',
-        },
-        {
-          name: 'User List',
-          url: '/user/list',
-          icon: 'icon-list',
-        }
-      ]
     },
     {
       name: 'Buttons',
