@@ -43,8 +43,7 @@ class OrderDetails extends Component {
      sucess(){
       var ApprovedDate=new Date();
       const state={
-        status:'Approved',
-        approvedDate:ApprovedDate
+        status:'Approved'
           }
  
               fetch(`/orders/abc/${this.state.OrderId}`,{
@@ -90,7 +89,14 @@ class OrderDetails extends Component {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab:tab,
+            orders:[]
           });
+    
+            fetch(`/orders`)
+               .then(res=>res.json())
+                .then(orders=> this.setState({orders},()=> console.log(orders)));
+       
+     
         }
       }
         
