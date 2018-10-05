@@ -34,6 +34,7 @@ app.use(body_parser_1.default.json());
 app.use(cors_1.default());
 app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
 const port = 5000;
+<<<<<<< HEAD
 // Authorization
 const access = {
     'Management': ['/items', '/orderItems', '/orders', '/payment', '/employees', '/user', '/suppliers', '/quotations'],
@@ -69,6 +70,19 @@ app.use((req, res, next) => {
             }
         });
     }
+=======
+app.use("/items", Item);
+app.use("/orderItems", OrderItem);
+app.use("/orders", Order);
+app.use("/payment", payment_1.default);
+app.use("/employees", EmployeeRoutes_1.default);
+app.use("/user", userRoutes_1.default);
+app.use("/suppliers", suppliers_1.default);
+app.use("/quotations", sentQuotations_1.default);
+generate_1.default.initilize();
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + './../public/index.html'));
+>>>>>>> bimali
 });
 app.use("/items", items_1.default); // Constructor Only
 app.use("/orderItems", orderItems_1.default); // SiteManager Constructor Accountant Supplier

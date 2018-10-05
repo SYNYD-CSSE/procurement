@@ -39,6 +39,7 @@ class ViewApprovedOrders extends Component {
         return (
           <ApprovedOrder
             key={i}
+            refId={order._id}
             orderId={order.orderId}
             constructor={order.constructorId}
             orderDate={order.orderDate}
