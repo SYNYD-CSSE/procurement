@@ -17,6 +17,26 @@ class SentQuatation extends Component {
             {this.props.quantity}
               
             </td>
+            <td>
+                <div className="form-group">
+                    <input type="text" className="form-control" id="usr"/>
+                </div>
+            </td>
+            <td>
+            <div className="form-group">
+                    <input type="text" className="form-control" id="usr"/>
+                </div>
+            </td>
+            <td>
+            <div className="form-group">
+                    <input type="text" className="form-control" id="usr"/>
+                </div>
+            </td>
+            <td>
+            <div className="form-group">
+                    <input type="text" className="form-control" id="usr"/>
+                </div>
+            </td>
             </tr>
           );
         
@@ -24,3 +44,4 @@ class SentQuatation extends Component {
 }
  
 export default SentQuatation;
+

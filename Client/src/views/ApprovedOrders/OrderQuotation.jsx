@@ -186,6 +186,10 @@ class OrderQuotation extends Component {
                 <tr>
                   <th>Name</th>
                   <th>Quantity</th>
+                  <th>Manufacturer</th>
+                  <th>Category</th>
+                  <th>Unit Price</th>
+                  <th>Total Price</th>
                 </tr>
               </thead>
               <tbody> 
