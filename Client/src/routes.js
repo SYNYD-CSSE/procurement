@@ -357,11 +357,7 @@ const routes = [
     name: "PlaceOrder",
     component: PlaceOrder
   },
-<<<<<<< HEAD
   { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes },
-=======
-  { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes }
->>>>>>> 58712b0d57ba1863c431c082e7f15e64ee4bf937
 ];
 
 export default routes;
