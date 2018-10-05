@@ -19,22 +19,22 @@ class SentQuatation extends Component {
             </td>
             <td>
                 <div className="form-group">
-                    <input type="text" className="form-control" id="usr"/>
+                    <input type="text" className="form-control" name="manufacturer"/>
                 </div>
             </td>
             <td>
-            <div className="form-group">
-                    <input type="text" className="form-control" id="usr"/>
+                <div className="form-group">
+                    <input type="text" className="form-control" name="category"/>
                 </div>
             </td>
             <td>
-            <div className="form-group">
-                    <input type="text" className="form-control" id="usr"/>
+                <div className="form-group">
+                    <input type="number" className="form-control" name="uprice"/>
                 </div>
             </td>
             <td>
-            <div className="form-group">
-                    <input type="text" className="form-control" id="usr"/>
+                <div className="form-group">
+                    <input type="number" className="form-control" name="tprice"/>
                 </div>
             </td>
             </tr>
