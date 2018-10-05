@@ -5,6 +5,10 @@ import Header from "./components/Header";
 import Products from "./components/Products";
 import "../../scss/style.scss";
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 class AddOrder extends Component {
   constructor() {
     super();

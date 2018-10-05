@@ -6,6 +6,8 @@ import SupplierItems from './SupplierItems';
 import NewSupplierRating from './NewSupplierRating';
 import BlacklistedSuppliers from './BlacklistedSuppliers';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 
 
 class SupplierRating extends Component {
@@ -26,7 +28,11 @@ class SupplierRating extends Component {
 
         // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
    
-        fetch(`/suppliers`)
+        fetch(`/suppliers`,{
+          headers: {
+            'Authorization': token
+          }
+        })
    
            .then(res=>res.json())
             .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));

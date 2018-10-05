@@ -6,6 +6,9 @@ import PaymentItem from "./PaymentItem";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+
 
 class Payment extends React.Component {
 
@@ -52,7 +55,11 @@ class Payment extends React.Component {
   
   // get placed orders data from database
 	request = async () => {
-		const response = await fetch(`http://localhost:5000/orders/status/Placed`)
+		const response = await fetch(`http://localhost:5000/orders/status/Placed`,{
+      headers: {
+        'Authorization': token
+      }
+    })
 		.then(result=>result.json())
 		.then(items=>this.setState({items}, () => 
 			console.log('orders fetched', items),
@@ -62,7 +69,11 @@ class Payment extends React.Component {
 
   // get payments data from database
 	paymentRequest = async () => {
-		const response = await fetch(`http://localhost:5000/payment/all`)
+		const response = await fetch(`http://localhost:5000/payment/all`,{
+      headers: {
+        'Authorization': token
+      }
+    })
 		.then(result=>result.json())
 		.then(paymentItems=>this.setState({paymentItems}, () => 
 			console.log('payments fetched', paymentItems)
@@ -83,7 +94,8 @@ class Payment extends React.Component {
         method: 'put',
         headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token
         },
         })
         .then(res=>res.json())
@@ -103,7 +115,8 @@ class Payment extends React.Component {
         method: 'post',
         headers: {
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': token
         },
         body: JSON.stringify({
             "orderid" : this.state.orderId,

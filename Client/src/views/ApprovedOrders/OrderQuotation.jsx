@@ -15,6 +15,10 @@ import {
 
 import alertify from "alertifyjs";
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 class OrderQuotation extends Component {
   constructor(props) {
     super(props);

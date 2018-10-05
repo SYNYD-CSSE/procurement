@@ -18,6 +18,10 @@ const isLocalhost = Boolean(
     )
 );
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+
+
 export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -83,7 +87,11 @@ function registerValidSW(swUrl) {
 
 function checkValidServiceWorker(swUrl) {
   // Check if the service worker can be found. If it can't reload the page.
-  fetch(swUrl)
+  fetch(swUrl,{
+    headers: {
+      'Authorization': token
+    }
+  })
     .then(response => {
       // Ensure service worker exists, and that we really are getting a JS file.
       if (

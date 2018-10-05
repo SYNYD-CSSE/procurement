@@ -8,6 +8,9 @@ import RejectedItems from './RejectedItems';
 import PendingItems from './PendingItems';
 import ApprovedItems from './ApprovedItems';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+
 
 class OrderDetails extends Component {
 
@@ -30,7 +33,11 @@ class OrderDetails extends Component {
 
         // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
    
-        fetch(`/orders`)
+        fetch(`/orders`,{
+          headers: {
+            'Authorization': token
+          }
+        })
    
            .then(res=>res.json())
             .then(orders=> this.setState({orders},()=> console.log(orders)));
@@ -51,7 +58,8 @@ class OrderDetails extends Component {
                       method:'PUT',
                       headers:{
                           'Accept':'application/json,text/plain,*/*',
-                          'Content-Type': 'application/json'
+                          'Content-Type': 'application/json',
+                          'Authorization': token
   
                       },
                           body: JSON.stringify(state)
@@ -74,8 +82,8 @@ class OrderDetails extends Component {
                       method:'PUT',
                       headers:{
                           'Accept':'application/json,text/plain,*/*',
-                          'Content-Type': 'application/json'
-  
+                          'Content-Type': 'application/json',
+                          'Authorization': token
                       },
                           body: JSON.stringify(state)
   
