@@ -275,8 +275,9 @@ const routes = [
   { path: '/employee/list', name: 'Employees List', component: EmployeesList },
   { path: '/employee/:id', name: 'New Employee', component: NewEmployee },
 
-  { path: '/user/new', name: 'New User', component: NewUser },
+ 
   { path: '/user/list', name: 'Users List', component: UsersList },
+  { path: '/user/:id', name: 'New User', component: NewUser },
  
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
@@ -356,7 +357,11 @@ const routes = [
     name: "PlaceOrder",
     component: PlaceOrder
   },
+<<<<<<< HEAD
   { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes },
+=======
+  { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes }
+>>>>>>> 58712b0d57ba1863c431c082e7f15e64ee4bf937
 ];
 
 export default routes;

@@ -18,28 +18,33 @@ constructor(props){
 
 }
 
-componentWillMount(){
+// componentWillMount(){
 
-    this.setState({rating:this.state.item.rating})
+//     this.setState({item:this.props.item})
 
-}
-componentDidUpdate(prevProps){
+// }
+// componentDidUpdate(prevProps){
 
-    if(this.props.rating!=prevProps.rating){
-        this.setState({rating:this.state.item.rating})
-    }
- }
+//     if(this.props.rating!=prevProps.rating){
+//         this.setState({rating:this.state.item.rating})
+//     }
+//  }
+
+// componentWillReceiveProps(nextProps) {
+//     const items = nextProps.item;
+//     this.setState(() => ({item:items}));
+//   }
 
   render() {
 
-    if(this.state.rating < 3){
+    if(this.state.item.rating < 3){
     return (
         <tr>
                     <td>{this.state.item.supplierId}</td>
                     <td>{this.state.item.name}</td>
                     <td>{this.state.item.address}</td>
                     <td> <StarRatings
-          rating={this.state.rating}
+          rating={this.state.item.rating}
           starRatedColor="red"
           numberOfStars={5}
           starDimension="30px"

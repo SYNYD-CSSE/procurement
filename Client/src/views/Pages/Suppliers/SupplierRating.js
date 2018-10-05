@@ -6,6 +6,8 @@ import SupplierItems from './SupplierItems';
 import NewSupplierRating from './NewSupplierRating';
 import BlacklistedSuppliers from './BlacklistedSuppliers';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 
 
 class SupplierRating extends Component {
@@ -26,7 +28,11 @@ class SupplierRating extends Component {
 
         // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
    
-        fetch(`/suppliers`)
+        fetch(`/suppliers`,{
+          headers: {
+            'Authorization': token
+          }
+        })
    
            .then(res=>res.json())
             .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));
@@ -38,7 +44,12 @@ class SupplierRating extends Component {
         if (this.state.activeTab !== tab) {
           this.setState({
             activeTab: tab,
+            suppliers:[]
           });
+
+          fetch(`/suppliers`)
+          .then(res=>res.json())
+           .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));
           
         }
       }
@@ -49,21 +60,21 @@ class SupplierRating extends Component {
       var supplierItems = this.state.suppliers.map((suppliers,i)=>{
 
         return(
-          <SupplierItems key={suppliers.id} item={suppliers}/>
+          <SupplierItems key={suppliers.rating} item={suppliers}/>
         )
       });
 
       var ratesupplierItems = this.state.suppliers.map((suppliers,i)=>{
 
         return(
-          <NewSupplierRating key={suppliers.id} item={suppliers}/>
+          <NewSupplierRating key={suppliers._id} item={suppliers}/>
         )
       });
 
       var blacklistedsupplierItems = this.state.suppliers.map((suppliers,i)=>{
 
         return(
-          <BlacklistedSuppliers key={suppliers.id} item={suppliers}/>
+          <BlacklistedSuppliers key={suppliers.rating} item={suppliers}/>
         )
       });
       

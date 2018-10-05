@@ -3,6 +3,10 @@ import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane ,Card ,Tabl
 import { Link } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+
+
 class NewSupplierRating extends Component {
 
 constructor(props){
@@ -36,8 +40,9 @@ changeRating( newRating, name ) {
                       method:'PUT',
                       headers:{
                           'Accept':'application/json,text/plain,*/*',
-                          'Content-Type': 'application/json'
-  
+                          'Content-Type': 'application/json',
+                          'Authorization': token
+                        
                       },
                           body: JSON.stringify(updateRating)
   

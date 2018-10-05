@@ -1,5 +1,5 @@
 
-import express from "express";
+import express, { NextFunction } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -10,15 +10,15 @@ import UserRoutes from "./routes/userRoutes";
 import Payment from "./routes/api/payment";
 import Supplier from "./routes/api/suppliers";
 import Quotations from "./routes/api/sentQuotations";
+import config from "./config/database";
+import jwt from "jsonwebtoken";
 
-const path = require("path");
-//const passport = require("passport");
-const config = require("./config/database");
-const Order = require("./routes/api/orders");
-const Item = require("./routes/api/items");
-const OrderItem = require("./routes/api/orderItems");
+import path from "path";
+import Order from "./routes/api/orders";
+import Item from "./routes/api/items";
+import OrderItem from "./routes/api/orderItems";
 
-mongoose.connect(config.database,{useNewUrlParser: true});
+mongoose.connect(config.database, { useNewUrlParser: true });
 
 mongoose.connection.on("connected", () => {
   console.log(`connected to database ${config.database}`);
@@ -29,11 +29,8 @@ mongoose.connection.on("error", err => {
 
 const app = express();
 
-//passport middleware
-//app.use(passport.initialize());
 
-//passport config
-//
+
 
 app.use(
   bodyParser.urlencoded({
@@ -43,21 +40,62 @@ app.use(
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
-
 const port = 5000;
-app.use("/items", Item);
-app.use("/orderItems", OrderItem);
-app.use("/orders", Order);
-app.use("/payment", Payment);
-app.use("/employees",EmployeeRoutes);
-app.use("/user",UserRoutes);
-app.use("/suppliers", Supplier);
-app.use("/quotations",Quotations);
+
+// Authorization
+
+const access = {
+  'Management'  : ['/items','/orderItems','/orders','/payment','/employees','/user','/suppliers','/quotations'],
+  'Accountant'  : ['/orders','/payment'],
+  'Constructor' : ['/orders','/items','/orderItems'],
+  'SiteManager' : ['/orders','/orderItems','/suppliers'],
+  'Supplier'    : ['/orders','/orderItems','/quotations'],
+  'Regular'     : []
+}
+
+app.use((req, res, next) => {
+
+  let path = req.path;
+  if ( path === '/user/login') next();
+  else {
+    let token = (req.headers.authorization) ? req.headers.authorization : '';
+    token = token.split(' ')[1];
+
+    jwt.verify(token, config.secretOrKey, (err, decode ) => {
+      if (err) {
+        res.status(403).send("Invalid Accesspoint");
+      }
+
+      else{
+        let role :String = (decode as any).role ;
+        let accessbility = false;
+
+        (access[role] as string[] ).forEach(e => {
+            if(path.includes(e)) {
+              accessbility= true;
+            }
+          });
+
+        if(accessbility) next();
+        else res.status(403).send("Invalid Accesspoint");
+      }
+ 
+    });
+  }
+});
+
+
+app.use("/items", Item ); // Constructor Only
+app.use("/orderItems", OrderItem); // SiteManager Constructor Accountant Supplier
+app.use("/orders", Order);    // SiteManager Constructor Accountant Supplier
+app.use("/payment", Payment); // Accountact Only
+app.use("/employees", EmployeeRoutes); //Management Only
+app.use("/user", UserRoutes); //Management Only Except Login
+app.use("/suppliers", Supplier); // Management Only
+app.use("/quotations", Quotations); //Supplier Only
 generate.initilize();
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + './../public/index.html'));
-});
+
 
 
 app.listen(port, () => {

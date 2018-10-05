@@ -3,6 +3,10 @@ import axios from "axios";
 import Supplier from "./Supplier";
 import { Table } from "reactstrap";
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 class ViewSuppliers extends Component {
   constructor(props) {
     super(props);

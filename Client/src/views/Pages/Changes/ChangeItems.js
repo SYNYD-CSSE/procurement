@@ -31,8 +31,8 @@ constructor(props){
                     <td>{this.state.item.name}</td>
                     <td>{this.state.item.unit}</td>
                     <td>{this.state.item.quantity}</td>  
-                    <td>  <i className="cui-pencil icons font-2xl d-block mt-4" onClick={()=>handleEdit()}></i></td>
-                    <td> <i className="cui-trash icons font-2xl d-block mt-4" onClick={()=>handleDelete()}></i></td>  
+                    <td>  <i className="cui-pencil icons font-2xl d-block mt-4" ></i></td>
+                    <td> <i className="cui-trash icons font-2xl d-block mt-4" ></i></td>  
                
         </tr>
     )

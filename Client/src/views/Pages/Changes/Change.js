@@ -4,6 +4,9 @@ import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane ,Card ,Tabl
 import classnames from 'classnames';
 import ChangeItems from './ChangeItems';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+
 
 
 class Changes extends Component {
@@ -24,7 +27,11 @@ class Changes extends Component {
 
         const {orderId} =this.props.match.params;
    
-        fetch(`/orders/${orderId}`)
+        fetch(`/orders/${orderId}`,{
+          headers: {
+            'Authorization': token
+          }
+        })
            .then(res=>res.json())
             .then(orders=> this.setState({items:orders.items},()=> console.log(orders)));
             

@@ -24,7 +24,7 @@ constructor(props){
             <td>{this.state.item.orderId}</td>
             <td>{this.state.item.constructorId}</td>
             <td>{this.state.item.orderDate}</td>
-            <td>{this.state.item.rejectedDate}</td>
+            <td>{this.state.item.approvedDate}</td>
             <td> 
             <Badge color="danger">{this.state.item.status}</Badge>
             </td>

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {
+import {Table } from "reactstrap";
+import OrderItem from "./OrderItem"
 
-    Table
-  } from "reactstrap";
-
-
-  import OrderItem from "./OrderItem"
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
 
 class ViewOrderItems extends Component {
     constructor(props) {
