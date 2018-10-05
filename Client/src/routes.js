@@ -273,7 +273,7 @@ const routes = [
 
   
   { path: '/employee/list', name: 'Employees List', component: EmployeesList },
-  { path: '/employee/', name: 'New Employee', component: NewEmployee },
+  { path: '/employee/:id', name: 'New Employee', component: NewEmployee },
 
  
   { path: '/user/list', name: 'Users List', component: UsersList },
