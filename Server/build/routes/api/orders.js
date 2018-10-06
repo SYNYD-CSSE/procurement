@@ -28,6 +28,20 @@ router.post("/", (req, res, next) => {
         console.log(error);
     }
 });
+router.get("/approvedOrders", (req, res, next) => {
+    Order
+        .find({
+        status: 'Approved'
+    })
+        .populate('items', 'id name quantity unit -_id')
+        .then(result => {
+        res.status(200)
+            .json(result);
+    })
+        .catch(error => {
+        console.log(error);
+    });
+});
 //GET ALL ORDERS
 router.get("/", (req, res, next) => {
     Order
@@ -158,19 +172,5 @@ router.delete('/:oid', (req, res, next) => {
     });
 });
 //get approved orders
-router.get("/approvedOrders", (req, res, next) => {
-    Order
-        .find({
-        status: 'Approved'
-    })
-        .populate('items', 'id name quantity unit -_id')
-        .then(result => {
-        res.status(200)
-            .json(result);
-    })
-        .catch(error => {
-        console.log(error);
-    });
-});
 module.exports = router;
 //# sourceMappingURL=orders.js.map
