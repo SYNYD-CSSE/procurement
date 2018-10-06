@@ -28,6 +28,7 @@ class Login extends Component {
 
       Users.login(this.state.user).then(data =>{
         console.log(data);
+        //this.props.history.push("/");
         this.props.history.push("/");
       }).catch(err =>{
         console.log(`Login user get some errors ${err}`);

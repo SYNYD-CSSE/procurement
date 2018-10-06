@@ -42,7 +42,6 @@ router.get("/", (req, res, next) => {
     });
 });
 //ORDER FIND BY ID
-<<<<<<< HEAD
 router.get("/:id", (req, res, next) => {
     Order.findOne({ orderId: req.params.id }).
         populate('items').
@@ -50,19 +49,19 @@ router.get("/:id", (req, res, next) => {
         if (err)
             return next(err);
         res.json(result);
-=======
-// router.get("/order/:id", (req, res, next) => {
-//         Order.findOne({
-//             orderId: req.params.id
-//         }).populate('items', 'id name quantity unit -_id')
-//         .then(result => {
-//             res.status(200)
-//                 .json(result);
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         })
-// });
+    });
+    // router.get("/order/:id", (req, res, next) => {
+    //         Order.findOne({
+    //             orderId: req.params.id
+    //         }).populate('items', 'id name quantity unit -_id')
+    //         .then(result => {
+    //             res.status(200)
+    //                 .json(result);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+});
 router.get("/order/:id", (req, res, next) => {
     Order.findOne({
         orderId: req.params.id
@@ -73,7 +72,6 @@ router.get("/order/:id", (req, res, next) => {
     })
         .catch(error => {
         console.log(error);
->>>>>>> bimali
     });
 });
 //ORDER FIND BY status
@@ -113,7 +111,6 @@ router.put('/:id', (req, res, next) => {
         });
     });
 });
-<<<<<<< HEAD
 router.put('/abc/:id', (req, res, next) => {
     Order.findOneAndUpdate({ orderId: req.params.id }, { $set: {
             status: req.body.status,
@@ -127,8 +124,6 @@ router.put('/abc/:id', (req, res, next) => {
         }
     });
 });
-=======
->>>>>>> bimali
 //Update the order state to closed
 router.put('/closed/:id', (req, res, next) => {
     Order.findOneAndUpdate({
