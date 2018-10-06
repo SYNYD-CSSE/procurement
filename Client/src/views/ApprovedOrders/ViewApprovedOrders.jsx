@@ -54,7 +54,7 @@ class ViewApprovedOrders extends Component {
     }
     return (
       <div className="container">
-        <h4>Suppliers</h4>
+        <h4>Approved Orders</h4>
         <br />
         <Table hover bordered striped responsive size="sm">
           <thead className="thead-dark">

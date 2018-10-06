@@ -213,7 +213,7 @@ console.log(itemList);
                 <CardFooter>
                   <div className="float-right">
                     <Button type="submit" size="sm" color="primary">
-                      <i className="fa fa-dot-circle-o" /> Update
+                      <i className="fa fa-dot-circle-o" /> Submit
                     </Button>
                     <Button
                       type="reset"
