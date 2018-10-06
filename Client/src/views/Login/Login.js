@@ -28,7 +28,8 @@ class Login extends Component {
 
       Users.login(this.state.user).then(data =>{
         console.log(data);
-        this.props.history.push("/");
+        //this.props.history.push("/");
+        window.location.href = "http://localhost:3000/";
       }).catch(err =>{
         console.log(`Login user get some errors ${err}`);
       });
