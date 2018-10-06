@@ -40,6 +40,9 @@
     "validator": "^10.1.0"
   },
   "devDependencies": {
-    "nodemon": "^1.17.3"
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.3",
+    "supertest": "^3.3.0"
   }
 }
