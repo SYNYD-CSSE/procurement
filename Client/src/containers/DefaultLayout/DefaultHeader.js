@@ -46,7 +46,7 @@ class DefaultHeader extends Component {
         <Nav className="ml-auto" navbar>
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
-              <img src={'assets/img/avatars/user.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+              <img src={'assets/img/avatars/user.jpg'} className="img-avatar" alt="User" />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
