@@ -22,13 +22,13 @@ class ApproverOrder extends Component {
         <td>{this.props.constructor}</td>
         <td>{this.props.orderDate}</td>
         <td>{this.props.orderStatus}</td>
-        <td>
+        {/* <td>
         <Link
             to={"/viewOrder/" + this.props.orderId}
             className="btn btn-primary">
             View Order
           </Link>
-        </td>
+        </td> */}
         <td>
           <Link
             to={"/sendQuotation/" + this.props.orderId}
