@@ -7,6 +7,10 @@ import { findDOMNode } from "react-dom";
 import axios from "axios";
 import alertify from "alertifyjs";
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -94,8 +98,11 @@ class Header extends Component {
         console.log(orderitemarr);
         localStorage.setItem("orderitemarr",JSON.stringify(orderitemarr));
        // this.props.history.push("/placeOrder");
+       this.setState({
+        showCart: false
       });
-     
+      });
+    
     })
     alertify.notify("New Item Added!", "success", 5, function() {
       console.log("dismissed");

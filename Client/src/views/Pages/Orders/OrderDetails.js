@@ -1,8 +1,15 @@
 import React,{Component} from 'react';
-import { Link } from "react-router-dom";
+import {Route } from "react-router-dom";
+
 import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane ,Card ,Table , CardBody , CardHeader} from 'reactstrap';
 import classnames from 'classnames';
+import OrderItems from './OrderItems';
+import RejectedItems from './RejectedItems';
+import PendingItems from './PendingItems';
+import ApprovedItems from './ApprovedItems';
 
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 
 
 class OrderDetails extends Component {
@@ -14,34 +21,127 @@ class OrderDetails extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
           activeTab: '1',
-          orders:[]
-        };
+          orders:[],
+          OrderId:null
+        }
+        this.sucess=this.sucess.bind(this)
+        this.reject=this.reject.bind(this)
       }
 
       componentWillMount(){
 
         // fetch(`/api/prescriptions/${this.state.user.pid}/${this.state.user.bht}`)
    
-        fetch(`/orders`)
+        fetch(`/orders`,{
+          headers: {
+            'Authorization': token
+          }
+        })
    
            .then(res=>res.json())
             .then(orders=> this.setState({orders},()=> console.log(orders)));
    
      }
+
+     rowId=(dataFromChild)=>{
+        this.setState({OrderId:dataFromChild})
+        console.log(this.state.OrderId);
+     }
+     sucess(){
+      var ApprovedDate=new Date();
+      const state={
+        status:'Approved'
+          }
+ 
+              fetch(`/orders/abc/${this.state.OrderId}`,{
+                      method:'PUT',
+                      headers:{
+                          'Accept':'application/json,text/plain,*/*',
+                          'Content-Type': 'application/json',
+                          'Authorization': token
+  
+                      },
+                          body: JSON.stringify(state)
+  
+                  })
+                
+
+                      
+
+
+     }
+
+     reject(){
+      
+      const ostate={
+        status:'Declined'
+          }
+ 
+              fetch(`/orders/abc/${this.state.OrderId}`,{
+                      method:'PUT',
+                      headers:{
+                          'Accept':'application/json,text/plain,*/*',
+                          'Content-Type': 'application/json',
+                          'Authorization': token
+                      },
+                          body: JSON.stringify(ostate)
+  
+                  })
+
+                      
+     }
     
       toggle(tab) {
         if (this.state.activeTab !== tab) {
           this.setState({
-            activeTab: tab,
+            activeTab:tab,
+            orders:[]
           });
+    
+            fetch(`/orders`)
+               .then(res=>res.json())
+                .then(orders=> this.setState({orders},()=> console.log(orders)));
+       
+     
         }
       }
         
   
     render(){
   
-  
+      var orderItems = this.state.orders.map((orders,i)=>{
+
         return(
+          <OrderItems key={i} item={orders}/>
+        )
+      });
+
+
+  
+      var rejectedItems =this.state.orders.map((orders,i)=>{
+
+        return(
+          <RejectedItems key={i} item={orders}/>
+        )
+      });
+
+
+      var pendingItems =this.state.orders.map((orders,i)=>{
+
+        return(
+          <PendingItems key={i} item={orders} orderId={this.rowId}/>
+        )
+      });
+
+
+      var approvedItems =this.state.orders.map((orders,i)=>{
+
+        return(
+          <ApprovedItems key={i} item={orders}/>
+        )
+      });
+
+            return(
   
             <div className='main_orderdetails'>
      
@@ -80,83 +180,119 @@ class OrderDetails extends Component {
                 <i className="fa fa-align-justify"></i> Simple Table
               </CardHeader> */}
               <CardBody>
-                <Table responsive>
+        
+                <Table hover responsive size="sm">
                   <thead>
                   <tr>
                     <th>Order ID</th>
                     <th>Constructor ID</th>
                     <th>Date Added</th>
                     <th>Date Approved</th>
-                    <th>Date Placed</th>
+                    <th>Date Rejected</th>
                     <th>Status</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Samppa Nori</td>
-                    <td>2012/01/01</td>
-                    <td>Member</td>
-                    <td>
-                      <Badge color="success">Active</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Estavan Lykos</td>
-                    <td>2012/02/01</td>
-                    <td>Staff</td>
-                    <td>
-                      <Badge color="danger">Banned</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Chetan Mohamed</td>
-                    <td>2012/02/01</td>
-                    <td>Admin</td>
-                    <td>
-                      <Badge color="secondary">Inactive</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Derick Maximinus</td>
-                    <td>2012/03/01</td>
-                    <td>Member</td>
-                    <td>
-                      <Badge color="warning">Pending</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Friderik Dávid</td>
-                    <td>2012/01/21</td>
-                    <td>Staff</td>
-                    <td>
-                      <Badge color="success">Active</Badge>
-                    </td>
-                  </tr>
+                    {orderItems}
                   </tbody>
                 </Table>
                 </CardBody>
                 </Card>
               </TabPane>
+
+
               <TabPane tabId="2">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
+              <Card>
+              {/* <CardHeader>
+                <i className="fa fa-align-justify"></i> Simple Table
+              </CardHeader> */}
+              <CardBody>
+                <nav>
+                <Route render={({ history}) => (
+                          <button
+                            type='button'
+                            className="btn btn-lg btn-primary m-3"
+                            onClick={() => { history.push(`/orders/items/${this.state.OrderId}`) }}
+                          >
+                            Go To Details
+                          </button>
+                        )} />
+                <button   className="btn btn-lg btn-success m-3" onClick={this.sucess} >Approve Order</button>
+                <button   className="btn btn-lg btn-danger m-1" onClick={this.reject}>Reject Order</button>
+                <h3>Order No : {this.state.OrderId}</h3>
+                  </nav>
+                <Table hover responsive size="sm">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Constructor ID</th>
+                    <th>Date Added</th>
+                    {/* <th>Date Approved</th>
+                    <th>Date Rejected</th> */}
+                    <th>Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {pendingItems}
+                  </tbody>
+                </Table>
+                </CardBody>
+                </Card>
+
               </TabPane>
+
+
+
               <TabPane tabId="3">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
+              
+              <Card>
+              {/* <CardHeader>
+                <i className="fa fa-align-justify"></i> Simple Table
+              </CardHeader> */}
+              <CardBody>
+                <Table hover responsive size="sm">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Constructor ID</th>
+                    <th>Date Added</th>
+                    <th>Date Approved</th>
+                    <th>Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {approvedItems}
+                  </tbody>
+                </Table>
+                </CardBody>
+                </Card>
+
+
               </TabPane>
               <TabPane tabId="4">
-                2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim id est laborum.
+
+                    <Card>
+              {/* <CardHeader>
+                <i className="fa fa-align-justify"></i> Simple Table
+              </CardHeader> */}
+              <CardBody>
+                <Table hover responsive size="sm">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Constructor ID</th>
+                    <th>Date Added</th>
+                    <th>Date Rejected</th>
+                    <th>Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {rejectedItems}
+                  </tbody>
+                </Table>
+                </CardBody>
+                </Card>
+
               </TabPane>
             </TabContent>
 

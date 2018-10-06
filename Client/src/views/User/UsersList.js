@@ -10,15 +10,21 @@ import {
   Table,
   Pagination,
   Row,
+  ButtonGroup,
+  Button,
 } from 'reactstrap';
+
+import  Users  from "../../services/UserService";
 
 class UsersList extends Component {
   constructor(props) {
     super(props);
+    this.users;
 
     this.toggle = this.toggle.bind(this);
-    this.toggleFade = this.toggleFade.bind(this);
     this.state = {
+      user : {},
+      users: [],
       collapse: true,
       fadeIn: true,
       timeout: 300
@@ -26,18 +32,109 @@ class UsersList extends Component {
   }
 
   toggle() {
-    this.setState({ collapse: !this.state.collapse });
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
-  toggleFade() {
-    this.setState((prevState) => { return { fadeIn: !prevState }});
+  loadAllUsers(){
+    Users.getAllUsers().then(data =>{
+      this.setState({users:data.data});
+      console.log(this.state.users);
+
+    }).catch(err =>{
+      console.log(`Loading Users get some errors ${err}`);
+    });
+
+  }
+
+  returnRoleColor(role){
+    switch (role) {
+      case 'Regular' : return 'secondary';
+      case 'Management' : return 'success';
+      case 'SiteManager' : return 'info';
+      case 'Constructor' : return 'warning';
+      case 'Accountant' : return 'danger';
+      default :  return 'primary';
+    }
+  }
+
+  deleteUser(id){
+
+    Users.deleteUserByID(id).then(data =>{
+      if(data){
+
+        let users = this.state.users;
+        let index = users.findIndex(x=> x.id==id);
+        users.splice(index,1);
+        this.setState({users:users});
+
+        alert(`${data.data.id} User Deleted Successfully!`);
+      }
+
+    }).catch(err =>{
+      console.log(`Deleting Users get some errors ${err}`);
+    });
+  }
+
+  onDelete(id){
+    this.deleteUser(id);
+  }
+
+  onUpdate(id){
+    this.props.history.push(`/user/${id}`);
+  }
+
+  onInfo(id){
+    if (id.length===4){
+      this.props.history.push(`/employee/list`);
+    }
+    else{
+      this.props.history.push(`/viewSupplier`);
+    }
+
+  }
+
+  componentWillUnmount() {
+    this.loadAllUsers();
+  }
+
+  componentDidMount() {
+    this.loadAllUsers();
   }
 
   render() {
+    let users
+    if(this.state.users.length > 0 ){
+      users = this.state.users.map(user =>{
+          return (
+            <tr key={user.id} onClick={this.onInfo.bind(this,user.id)}>
+              <td>{user.id}</td>
+              <td>{user.username}</td>
+              <td>
+                <Badge color={this.returnRoleColor(user.role)}>{user.role}</Badge>
+              </td>
+              <td>
+                <ButtonGroup>
+                  <Button color="success" size="sm" onClick={this.onInfo.bind(this,user.id)} >
+                    <i className="cui-info"></i> Info
+                  </Button>
+                  <Button color="warning" size="sm" onClick={this.onUpdate.bind(this,user.id)}>
+                    <i className="cui-note"></i> Edit
+                  </Button>
+                  <Button color="danger" size="sm" onClick={this.onDelete.bind(this,user.id)}>
+                    <i className="cui-trash"></i> Delete
+                  </Button>
+                </ButtonGroup>
+              </td>
+            </tr>
+          );
+      })
+    }
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" lg="6">
+          <Col xs="12" lg="8">
               <Card>
                 <CardHeader>
                   <i className="fa fa-align-justify"></i> Simple Table
@@ -46,53 +143,14 @@ class UsersList extends Component {
                   <Table responsive hover>
                     <thead>
                     <tr>
+                      <th>Employee ID</th>
                       <th>Username</th>
-                      <th>Date registered</th>
                       <th>Role</th>
-                      <th>Status</th>
+                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>Samppa Nori</td>
-                      <td>2012/01/01</td>
-                      <td>Member</td>
-                      <td>
-                        <Badge color="success">Active</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Estavan Lykos</td>
-                      <td>2012/02/01</td>
-                      <td>Staff</td>
-                      <td>
-                        <Badge color="danger">Banned</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Chetan Mohamed</td>
-                      <td>2012/02/01</td>
-                      <td>Admin</td>
-                      <td>
-                        <Badge color="secondary">Inactive</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Derick Maximinus</td>
-                      <td>2012/03/01</td>
-                      <td>Member</td>
-                      <td>
-                        <Badge color="warning">Pending</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Friderik Dávid</td>
-                      <td>2012/01/21</td>
-                      <td>Staff</td>
-                      <td>
-                        <Badge color="success">Active</Badge>
-                      </td>
-                    </tr>
+                    {users}
                     </tbody>
                   </Table>
                   <Pagination>
@@ -119,6 +177,7 @@ class UsersList extends Component {
               </Card>
             </Col>
         </Row>
+
       </div>
     );
   }

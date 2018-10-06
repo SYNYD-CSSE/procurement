@@ -1,5 +1,7 @@
 import axios from 'axios';
 import config from "../config/config";
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
 
 class EmployeeService {
 

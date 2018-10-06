@@ -70,6 +70,18 @@ router.put('/supplier/update/:id', (req, res, next) => {
         }
     });
 });
+router.put('/supplier/update/rating/:id', (req, res, next) => {
+    Supplier.findOneAndUpdate({ supplierId: req.params.id }, { $set: {
+            rating: req.body.rating
+        } }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json({ msg: 'Successfully Updated', obj: result });
+        }
+    });
+});
 router.put('/supplier/status/:id', (req, res, next) => {
     Supplier.findOneAndUpdate({ supplierId: req.params.id }, { $set: {
             status: req.body.status,

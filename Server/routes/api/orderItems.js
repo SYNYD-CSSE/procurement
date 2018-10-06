@@ -18,9 +18,9 @@ router.get("/", (req, res, next) => {
 
 //ITEM FIND BY ID
 
-router.get("/:id", (req, res, next) => {
+router.get("/:id",async (req, res, next) => {
     try {
-        OrderItem.findOne({
+        await OrderItem.findOne({
             _id: req.params.id
         }, (err, result) => {
             if (err) return next(err);

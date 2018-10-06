@@ -13,6 +13,12 @@ import {
   Input
 } from "reactstrap";
 import alertify from "alertifyjs";
+
+
+const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
+axios.defaults.headers.common['Authorization'] = token;
+
 class AddItem extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +44,7 @@ class AddItem extends Component {
         unit
       })
       .then(result => {
+        
         console.log(result);
         alertify.notify("New Item Added!", "success", 5, function() {
           console.log("dismissed");

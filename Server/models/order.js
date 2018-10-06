@@ -12,6 +12,11 @@ const orderSchema = new mongoose.Schema({
         default: 1
         // required: true
     },
+    siteManagerId: {
+        type: Number,
+        default: null
+        // required: true
+    },
     orderDate: {
         type: Date,
         default: Date.now
@@ -21,6 +26,16 @@ const orderSchema = new mongoose.Schema({
         type: String
     },
 
+    approvedDate: {
+        type: Date,
+        default:null
+        //    required: true
+    },
+    rejectedDate: {
+        type: Date,
+        default:null
+        //    required: true
+    },
     items: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "OrderItem",
