@@ -42,10 +42,22 @@ router.get("/", (req, res, next) => {
     });
 });
 //ORDER FIND BY ID
+// router.get("/order/:id", (req, res, next) => {
+//         Order.findOne({
+//             orderId: req.params.id
+//         }).populate('items', 'id name quantity unit -_id')
+//         .then(result => {
+//             res.status(200)
+//                 .json(result);
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         })
+// });
 router.get("/order/:id", (req, res, next) => {
     Order.findOne({
         orderId: req.params.id
-    }).populate('items', 'id name quantity unit -_id')
+    }).populate('items', '_id name quantity unit')
         .then(result => {
         res.status(200)
             .json(result);
