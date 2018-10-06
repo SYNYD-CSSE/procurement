@@ -325,7 +325,7 @@ const routes = [
   { path: '/viewSupplier', exact: true,  name: 'View Supplier', component: ViewSupplier },
   { path: '/updateSupplier/:supplierId', exact: true,  name: 'Update Supplier', component:UpdateSupplier },
   { path: '/viewApprovedOrders', exact: true,  name: 'Approved Orders', component: ViewApprovedOrders },
-  { path: '/sendQuotation/:orderId', exact: true,  name: 'Approved Orders', component: OrderQuotation },
+  { path: '/sendQuotation/:orderId/:refId', exact: true,  name: 'Approved Orders', component: OrderQuotation },
 
   {
     path: "/addItem",
@@ -357,7 +357,7 @@ const routes = [
     name: "PlaceOrder",
     component: PlaceOrder
   },
-  { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes }
+  { path: '/orders/items/:orderId', exact: true,  name: 'Changes', component: Changes },
 ];
 
 export default routes;
