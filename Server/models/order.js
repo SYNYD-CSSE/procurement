@@ -41,7 +41,9 @@ const orderSchema = new mongoose.Schema({
         ref: "OrderItem",
         required: true
     }],
-
+    supplier: {
+        type: String
+    },
     status: {
         type: String,
         //  required: true,
