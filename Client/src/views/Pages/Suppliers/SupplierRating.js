@@ -47,7 +47,11 @@ class SupplierRating extends Component {
             suppliers:[]
           });
 
-          fetch(`/suppliers`)
+          fetch(`/suppliers`,{
+            headers: {
+              'Authorization': token
+            }
+          })
           .then(res=>res.json())
            .then(suppliers=> this.setState({suppliers},()=> console.log(suppliers)));
           

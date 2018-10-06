@@ -98,7 +98,11 @@ class OrderDetails extends Component {
             orders:[]
           });
     
-            fetch(`/orders`)
+            fetch(`/orders`,{
+              headers: {
+                'Authorization': token
+              }
+            })
                .then(res=>res.json())
                 .then(orders=> this.setState({orders},()=> console.log(orders)));
        
