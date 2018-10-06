@@ -1,5 +1,8 @@
 
 const generate = require("../build/config/generate");
+const app = require('../build/server');
+const request = require('supertest');
+
 describe('Testing the Generator.', function() {
 
     // This is the name of the test
@@ -25,4 +28,30 @@ describe('Testing the Generator.', function() {
     });
   
   });
+
+
+  /**
+ * Testing get all user endpoint
+ */
+describe('GET /user/E001', function () {
+  it('respond with json containing a user', function (done) {
+      request(app)
+          .get('/users')
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200, done);
+  });
+});
+
+  /**
+ * Testing get all user endpoint
+ */
+describe('GET /users', function () {
+  it('respond with json containing a user', function (done) {
+      request(app)
+          .get('/users')
+          .expect(403, done);
+  });
+});
+  
   
